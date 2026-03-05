@@ -26,8 +26,12 @@ Avatar, Badge, Button, Checkbox, DropdownMenu, InfoMessage, InputLabel, Link, Se
 
 - **ALWAYS use lemDS components** instead of raw HTML elements. Never create custom buttons, inputs, selects, toasts, etc. — use `@peteryaz/ui`.
 - **ALWAYS use lemDS tokens** for spacing, colors, radius, and typography via Tailwind utilities (`p-md`, `gap-sm`, `rounded-base`) or CSS variables (`var(--spacing-md)`).
+- **ALWAYS use lemDS typography tokens** — never hardcode font sizes, weights, or line heights. Use the DS values:
+  - Font sizes: `text-xxs` (10px), `text-xs` (12px), `text-sm` (14px), `text-base` (16px), `text-md` (18px), `text-lg` (20px), `text-xl` (24px)
+  - Font weights: `font-regular` (400), `font-medium` (500), `font-bold` (700)
+  - Line heights: `leading-2xs` (14px), `leading-xs` (16px), `leading-sm` (20px), `leading-base` (24px), `leading-md` (28px), `leading-lg` (32px)
 - **ALWAYS use `@peteryaz/icons`** for icons — never import FontAwesome directly.
-- **NEVER hardcode colors** — use semantic token classes or CSS variables from the design system.
+- **NEVER hardcode colors, font sizes, or spacing** — use semantic token classes or CSS variables from the design system.
 
 ### Usage Patterns
 
@@ -62,9 +66,11 @@ All design tokens are available as CSS custom properties:
 - Semantic tokens: `var(--core-bg-main-primary)`, `var(--core-text-main-primary)`
 - Spacing: `var(--spacing-md)` (16px)
 - Radius: `var(--radius-base)` (8px)
-- Typography: `var(--font-size-size-sm)` (14px), `var(--font-weight-medium)` (500)
+- Typography sizes: `var(--font-size-size-xxs)` (10px) → `var(--font-size-size-xl)` (24px)
+- Font weights: `var(--font-weight-regular)` (400), `var(--font-weight-medium)` (500), `var(--font-weight-bold)` (700)
+- Line heights: `var(--font-line-height-line-height-2xs)` (14px) → `var(--font-line-height-line-height-lg)` (32px)
 
-Tailwind utility classes are registered: `p-md`, `gap-sm`, `rounded-base`, `text-sm`, `font-medium`
+Tailwind utility classes are registered: `p-md`, `gap-sm`, `rounded-base`, `text-sm`, `text-lg`, `font-medium`, `font-bold`, `leading-sm`, `leading-base`
 
 ### Dark Mode
 

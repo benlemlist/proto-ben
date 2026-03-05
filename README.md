@@ -113,6 +113,34 @@ function MyPrototype() {
 }
 ```
 
+## Typography
+
+All typography uses lemDS tokens. Never hardcode font values — use these Tailwind classes:
+
+| Class | Value |
+|-------|-------|
+| `text-xxs` | 10px |
+| `text-xs` | 12px |
+| `text-sm` | 14px |
+| `text-base` | 16px |
+| `text-md` | 18px |
+| `text-lg` | 20px |
+| `text-xl` | 24px |
+| `font-regular` | 400 |
+| `font-medium` | 500 |
+| `font-bold` | 700 |
+| `leading-2xs` | 14px |
+| `leading-xs` | 16px |
+| `leading-sm` | 20px |
+| `leading-base` | 24px |
+| `leading-md` | 28px |
+| `leading-lg` | 32px |
+
+```tsx
+<h1 className="text-xl font-bold leading-lg">Dashboard</h1>
+<p className="text-sm font-regular leading-sm">Campaign overview</p>
+```
+
 ## Dark Mode
 
 Add `data-theme="dark"` to the `<html>` element in `index.html`:
