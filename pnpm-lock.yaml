@@ -15,8 +15,8 @@ importers:
         specifier: ^0.1.0
         version: 0.1.0
       '@peteryaz/ui':
-        specifier: ^1.0.0
-        version: 1.0.0(@peteryaz/icons@0.1.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        specifier: ^1.1.0
+        version: 1.1.0(@peteryaz/icons@0.1.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@tailwindcss/vite':
         specifier: ^4.2.1
         version: 4.2.1(vite@7.3.1(@types/node@24.11.0)(jiti@2.6.1)(lightningcss@1.31.1))
@@ -432,8 +432,8 @@ packages:
   '@peteryaz/tokens@0.1.0':
     resolution: {integrity: sha512-4t5EWoWJMQj5QvYEajfy2KOeuUvdqP2E6whSCgp0HKTJGkozfnYoOaig7GsX1ozpEhWv6eHmkVj0yBDPe6tfig==, tarball: https://npm.pkg.github.com/download/@peteryaz/tokens/0.1.0/f87825665373a06721c6c44c1da9184c6fb6843a}
 
-  '@peteryaz/ui@1.0.0':
-    resolution: {integrity: sha512-a9aUfDfN79GQcpYR1s6C39ZJVU+Ya1DrkDq4zTFYhPjXNlyALecCCy/Qlk/g9PkWapiUpnzHm7IGPNY0XIiw9g==, tarball: https://npm.pkg.github.com/download/@peteryaz/ui/1.0.0/f7ce6e2e09f13b42591653462d42f8691f7367f6}
+  '@peteryaz/ui@1.1.0':
+    resolution: {integrity: sha512-AlEzir46+6zU+GVaZq9dTtJmLpnkZtUmSBVlLe2yDZ7oBla82HfH+rzkKrlnF6oKe5Txnvh33OhzSNsQbS0a6w==, tarball: https://npm.pkg.github.com/download/@peteryaz/ui/1.1.0/640c7151d6d7e296cb0ea7479607d3f59ae83d3f}
     peerDependencies:
       '@peteryaz/icons': 0.1.0
       react: '>=18'
@@ -1977,7 +1977,7 @@ snapshots:
 
   '@peteryaz/tokens@0.1.0': {}
 
-  '@peteryaz/ui@1.0.0(@peteryaz/icons@0.1.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+  '@peteryaz/ui@1.1.0(@peteryaz/icons@0.1.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:
       '@peteryaz/icons': 0.1.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@peteryaz/tokens': 0.1.0
