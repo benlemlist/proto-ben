@@ -1,0 +1,153 @@
+# Lemlist Proto
+
+Boilerplate for quickly prototyping Lemlist features and UI flows.
+
+## Stack
+
+- **React 19** + **TypeScript**
+- **Vite 7** — dev server + bundler
+- **Tailwind CSS v4** — utility-first styling
+- **React Router** — multi-page prototypes
+- **lemDS** — Lemlist's design system (`@peteryaz/tokens`, `@peteryaz/icons`, `@peteryaz/ui`)
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js >= 22.12
+- pnpm 9+
+- GitHub token with `read:packages` scope
+
+### Setup
+
+1. **Add the `read:packages` scope** to your GitHub CLI token:
+
+   ```bash
+   gh auth refresh --hostname github.com --scopes read:packages
+   ```
+
+2. **Install dependencies:**
+
+   ```bash
+   GITHUB_TOKEN=$(gh auth token) pnpm install
+   ```
+
+3. **Start the dev server:**
+
+   ```bash
+   pnpm dev
+   ```
+
+   Open http://localhost:5173
+
+## Start a New Prototype
+
+This repo is a **starter template**. To create a new prototype from it:
+
+```bash
+# 1. Clone the boilerplate
+git clone https://github.com/PeterYaz/Boilerplate.git my-prototype
+
+# 2. Detach from the boilerplate repo
+cd my-prototype
+rm -rf .git
+git init
+
+# 3. Install dependencies
+gh auth refresh --hostname github.com --scopes read:packages  # first time only
+GITHUB_TOKEN=$(gh auth token) pnpm install
+
+# 4. Start prototyping
+pnpm dev
+```
+
+To **sync with the latest lemDS** updates:
+
+```bash
+pnpm sync-ds
+```
+
+## Available Components
+
+All components from lemDS are ready to use:
+
+| Component | Description |
+|-----------|-------------|
+| `Avatar` | User profile image with fallback |
+| `Badge` | Inline label (solid / light / outlined) |
+| `Button` | Primary action (solid / outlined / ghost) |
+| `Checkbox` | Form checkbox with label |
+| `DropdownMenu` | Menu with items, headings, sections |
+| `InfoMessage` | Alert / notification banner |
+| `InputLabel` | Form label with optional/mandatory indicator |
+| `Link` | Text link (brand / neutral) |
+| `SearchBar` | Search input with icon |
+| `Select` | Custom dropdown select |
+| `Switch` | Toggle switch with label |
+| `Tag` | Inline tag (brand / neutral) |
+| `TextArea` | Multi-line text input with character limit |
+| `TextInput` | Form input with icon and validation |
+| `Toast` | Notification toast (info / success / alert / warning) |
+| `Tooltip` | Hover tooltip (default / invert) |
+| `UserMenu` | User profile menu with sections |
+
+### Quick Example
+
+```tsx
+import { Button, InfoMessage } from "@peteryaz/ui";
+import { Icon, faMagnifyingGlass } from "@peteryaz/icons";
+
+function MyPrototype() {
+  return (
+    <div className="flex flex-col gap-md p-lg">
+      <InfoMessage
+        type="warning"
+        title="Sending limit reached"
+        description="You've hit your daily limit."
+      />
+      <Button appearance="solid" intent="brand" size="md" leftIcon={faMagnifyingGlass}>
+        Search leads
+      </Button>
+    </div>
+  );
+}
+```
+
+## Dark Mode
+
+Add `data-theme="dark"` to the `<html>` element in `index.html`:
+
+```html
+<html lang="en" data-theme="dark">
+```
+
+## Project Structure
+
+```
+src/
+├── components/    # Reusable prototype components
+├── pages/         # Route pages (add new routes in main.tsx)
+├── index.css      # Global styles (lemDS + Tailwind)
+├── main.tsx       # App entry + React Router
+└── App.tsx        # Root layout
+```
+
+## Commands
+
+| Command | Description |
+|---------|-------------|
+| `pnpm dev` | Start dev server |
+| `pnpm build` | Type-check + production build |
+| `pnpm preview` | Preview production build |
+
+## Auth & Registry
+
+The `.npmrc` file is configured for:
+- `@peteryaz` packages → GitHub Packages (requires `GITHUB_TOKEN`)
+- `@fortawesome` packages → FontAwesome Pro registry
+
+To install new packages, prefix with the token:
+
+```bash
+GITHUB_TOKEN=$(gh auth token) pnpm add <package>
+```

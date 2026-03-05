@@ -1,0 +1,4 @@
+@import "@peteryaz/ui/globals.css";
+
+@source "../node_modules/@peteryaz/ui/dist/**/*.mjs";
+@source "../src/**/*.{ts,tsx}";
