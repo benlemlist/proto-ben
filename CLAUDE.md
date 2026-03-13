@@ -20,7 +20,7 @@ This project uses **lemDS**, Lemlist's internal design system published on GitHu
 
 ### Available Components
 
-Avatar, Badge, Button, Checkbox, DropdownMenu, InfoMessage, InputLabel, Link, SearchBar, Select, Switch, Tag, TextArea, TextInput, Toast, Tooltip, UserMenu
+Avatar, Badge, Button, Checkbox, DropdownMenu, DropdownMenuItem, InfoMessage, InputLabel, Link, SearchBar, Select, Sidebar, SidebarSection, SidebarHeadingItem, SidebarItem, SidebarFooter, Switch, Tag, TextArea, TextInput, Toast, Tooltip, UserMenu, UserMenuInfoRow, UserMenuSection
 
 ### Rules
 
@@ -50,7 +50,16 @@ Some components use `type` instead of `intent` for variants. Always check the ac
 - `Button` → `appearance` (solid/outlined/ghost), `intent` (brand/neutral/alert), `size` (sm/md)
 - `InfoMessage` → `type` (info/success/alert/warning/empty), `title`, `description`, `onClose`, `action`
 - `Select` → `size`, `label`, `labelType`, `placeholder`, `value`, `error`, `errorMessage`, children are `DropdownMenu > DropdownMenuItem`
-- `Badge` → `appearance` (solid/light/outlined), `intent`, `size`
+- `Badge` → `variant` (solid/light/outlined), `type` (primary/success/critical/warning/neutral), `size` (sm/md), `icon`
+- `Sidebar` → `isCollapsed`, `onCollapsedChange`, `className`. Children: SidebarSection, SidebarFooter
+- `SidebarSection` → `className`. Children: SidebarHeadingItem, SidebarItem
+- `SidebarHeadingItem` → `label`
+- `SidebarItem` → `icon`, `solidIcon`, `avatar`, `label`, `state` (default/active), `isNew`, `hasBadge`, `badgeCount`, `onClick`
+- `SidebarFooter` → `className`. Children: SidebarItem
+- `UserMenu` → `className`. Children: UserMenuInfoRow, UserMenuSection
+- `UserMenuInfoRow` → `avatar`, `name`, `subtitle`, `action`
+- `UserMenuSection` → `className`. Children: DropdownMenuItem
+- `DropdownMenuItem` → `icon`, `avatar`, `flag`, `label`, `description`, `badge`, `action`, `isActive`
 
 ### Styles
 
@@ -111,11 +120,16 @@ When you need to understand Lemlist's product features, processes, or help conte
 ```
 src/
 ├── components/    # Reusable prototype components
-├── pages/         # Route pages
+├── pages/         # Route pages (one per sidebar item)
+│   └── PlaceholderPage.tsx  # Generic placeholder for all routes
 ├── index.css      # Global styles + Tailwind + lemDS
-├── main.tsx       # App entry + React Router setup
-└── App.tsx        # Root layout
+├── main.tsx       # App entry + React Router + page definitions
+└── App.tsx        # Root layout with sidebar navigation + UserMenu
 ```
+
+### Routing
+
+Pages are defined in `main.tsx` as a `pages` array. Each sidebar item navigates to its route and shows an active state. To add a new page, add to the array and create a component (or use PlaceholderPage).
 
 ## Commands
 

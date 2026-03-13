@@ -46,7 +46,7 @@ This repo is a **starter template**. To create a new prototype from it:
 
 ```bash
 # 1. Clone the boilerplate
-git clone https://github.com/PeterYaz/Boilerplate.git my-prototype
+git clone https://github.com/l3mpire/boilerplate-product-design.git my-prototype
 
 # 2. Detach from the boilerplate repo
 cd my-prototype
@@ -67,6 +67,27 @@ To **sync with the latest lemDS** updates:
 pnpm sync-ds
 ```
 
+## Pages & Routing
+
+The boilerplate comes with a full Lemlist sidebar and one page per navigation item. Each page is a blank placeholder ready for prototyping.
+
+| Route | Page |
+|-------|------|
+| `/` | Home |
+| `/people-database` | People database |
+| `/signals` | Signals |
+| `/contacts` | Contacts |
+| `/companies` | Companies |
+| `/campaigns` | Campaigns |
+| `/tasks` | Tasks |
+| `/inbox` | Inbox |
+| `/reports` | Reports |
+| `/deliverability-hub` | Deliverability hub |
+| `/calls` | Calls |
+| `/meetings` | Meetings |
+
+To add a new page, add an entry to the `pages` array in `src/main.tsx`.
+
 ## Available Components
 
 All components from lemDS are ready to use:
@@ -78,24 +99,32 @@ All components from lemDS are ready to use:
 | `Button` | Primary action (solid / outlined / ghost) |
 | `Checkbox` | Form checkbox with label |
 | `DropdownMenu` | Menu with items, headings, sections |
+| `DropdownMenuItem` | Item inside a dropdown or user menu section |
 | `InfoMessage` | Alert / notification banner |
 | `InputLabel` | Form label with optional/mandatory indicator |
 | `Link` | Text link (brand / neutral) |
 | `SearchBar` | Search input with icon |
 | `Select` | Custom dropdown select |
+| `Sidebar` | App sidebar with sections, items, and footer |
+| `SidebarSection` | Group of sidebar items with optional heading |
+| `SidebarHeadingItem` | Section heading inside sidebar |
+| `SidebarItem` | Navigation item with icon, label, badge, active state |
+| `SidebarFooter` | Sticky footer area of sidebar |
 | `Switch` | Toggle switch with label |
 | `Tag` | Inline tag (brand / neutral) |
 | `TextArea` | Multi-line text input with character limit |
 | `TextInput` | Form input with icon and validation |
 | `Toast` | Notification toast (info / success / alert / warning) |
 | `Tooltip` | Hover tooltip (default / invert) |
-| `UserMenu` | User profile menu with sections |
+| `UserMenu` | User profile menu with info rows and sections |
+| `UserMenuInfoRow` | Avatar + name + subtitle row in user menu |
+| `UserMenuSection` | Section of items inside user menu |
 
 ### Quick Example
 
 ```tsx
 import { Button, InfoMessage } from "@peteryaz/ui";
-import { Icon, faMagnifyingGlass } from "@peteryaz/icons";
+import { faMagnifyingGlassOutline } from "@peteryaz/icons";
 
 function MyPrototype() {
   return (
@@ -105,7 +134,7 @@ function MyPrototype() {
         title="Sending limit reached"
         description="You've hit your daily limit."
       />
-      <Button appearance="solid" intent="brand" size="md" leftIcon={faMagnifyingGlass}>
+      <Button appearance="solid" intent="brand" size="md" leftIcon={faMagnifyingGlassOutline}>
         Search leads
       </Button>
     </div>
@@ -155,9 +184,10 @@ Add `data-theme="dark"` to the `<html>` element in `index.html`:
 src/
 ├── components/    # Reusable prototype components
 ├── pages/         # Route pages (add new routes in main.tsx)
+│   └── PlaceholderPage.tsx  # Generic placeholder used by all routes
 ├── index.css      # Global styles (lemDS + Tailwind)
-├── main.tsx       # App entry + React Router
-└── App.tsx        # Root layout
+├── main.tsx       # App entry + React Router + page definitions
+└── App.tsx        # Root layout with sidebar + UserMenu
 ```
 
 ## Commands
@@ -167,6 +197,7 @@ src/
 | `pnpm dev` | Start dev server |
 | `pnpm build` | Type-check + production build |
 | `pnpm preview` | Preview production build |
+| `pnpm sync-ds` | Update lemDS packages to latest |
 
 ## Auth & Registry
 
