@@ -9,14 +9,14 @@ importers:
   .:
     dependencies:
       '@peteryaz/icons':
-        specifier: ^0.2.0
-        version: 0.2.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        specifier: ^0.2.3
+        version: 0.2.3(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@peteryaz/tokens':
-        specifier: ^0.2.0
-        version: 0.2.0
+        specifier: ^0.2.3
+        version: 0.2.3
       '@peteryaz/ui':
-        specifier: ^1.2.2
-        version: 1.2.2(@peteryaz/icons@0.2.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        specifier: ^1.3.7
+        version: 1.3.7(@peteryaz/icons@0.2.3(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@tailwindcss/vite':
         specifier: ^4.2.1
         version: 4.2.1(vite@7.3.1(@types/node@24.11.0)(jiti@2.6.1)(lightningcss@1.31.1))
@@ -419,19 +419,19 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
-  '@peteryaz/icons@0.2.0':
-    resolution: {integrity: sha512-aKpaLC3meOY36yOvdYipF5RYjMcXxqqisGQXKEX1McdzL/wafeHOzAXEKp0ZrDX47pdxLWQOftoF/QxHzA+rbA==, tarball: https://npm.pkg.github.com/download/@peteryaz/icons/0.2.0/90f4ad02162b476a43fea5e9a2af0cfcc11c28bb}
+  '@peteryaz/icons@0.2.3':
+    resolution: {integrity: sha512-8B0rEIrQ/4C3xC9/fOWxI0F/qWhOQK+Uszc+V2DW/aV7ke1Svgr5yqyVJyO3X0uAk5jQufprK3T2CiN/yoX/cw==, tarball: https://npm.pkg.github.com/download/@peteryaz/icons/0.2.3/d33d34fbc34330580c9642e1e8d375a768df026c}
     peerDependencies:
       react: '>=18'
       react-dom: '>=18'
 
-  '@peteryaz/tokens@0.2.0':
-    resolution: {integrity: sha512-pMuoe9s/E54+5YETNLwjYZm4QpFLMQZRbgXNb/auHAPaZs2UZiV3WVv5waLGgOrgg6Jpsbt0JdD8nNbrqGC73w==, tarball: https://npm.pkg.github.com/download/@peteryaz/tokens/0.2.0/f595dc436bf4fcfb3c0cbcf574e68a4d47a42d0d}
+  '@peteryaz/tokens@0.2.3':
+    resolution: {integrity: sha512-xqn7TwT3JR+yJLfrcteVPIngW9E0UD+9r6a0HFkmJOiqOJQFeiJt/D88MkvlBa/EQtkyUMiWHa5tKK2J6sRG5w==, tarball: https://npm.pkg.github.com/download/@peteryaz/tokens/0.2.3/abad31b1bf7bc9ec518d91fb83b1d73d57ac3c74}
 
-  '@peteryaz/ui@1.2.2':
-    resolution: {integrity: sha512-XeU5gGG1j0ZUSjdbe1RJTwYCMHo91xg2EXVXvAc6FXQ0aAF2LdNmySndEM2C6qmEQKUeyFtHIWZSvyoc07fDlA==, tarball: https://npm.pkg.github.com/download/@peteryaz/ui/1.2.2/abbdefcec261ae720d1a43f9f1c7433755f03638}
+  '@peteryaz/ui@1.3.7':
+    resolution: {integrity: sha512-MQV8PtYEFy6mFptIuRMkdaiQFXfW5gqsuI/rTQiFmIqN0Mz2KGLtSjhzHrWyZl7dmWuoo4zW3YuCQgq9M8/tpw==, tarball: https://npm.pkg.github.com/download/@peteryaz/ui/1.3.7/d7713f2cfb013b176e8957d2e63f5570ab0a45cd}
     peerDependencies:
-      '@peteryaz/icons': 0.2.0
+      '@peteryaz/icons': 0.2.3
       react: '>=18'
       react-dom: '>=18'
 
@@ -2191,22 +2191,22 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  '@peteryaz/icons@0.2.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+  '@peteryaz/icons@0.2.3(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:
       '@fortawesome/fontawesome-svg-core': 7.2.0
       '@fortawesome/pro-regular-svg-icons': 7.2.0
       '@fortawesome/pro-solid-svg-icons': 7.2.0
       '@fortawesome/react-fontawesome': 0.2.6(@fortawesome/fontawesome-svg-core@7.2.0)(react@19.2.4)
-      '@peteryaz/tokens': 0.2.0
+      '@peteryaz/tokens': 0.2.3
       react: 19.2.4
       react-dom: 19.2.4(react@19.2.4)
 
-  '@peteryaz/tokens@0.2.0': {}
+  '@peteryaz/tokens@0.2.3': {}
 
-  '@peteryaz/ui@1.2.2(@peteryaz/icons@0.2.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+  '@peteryaz/ui@1.3.7(@peteryaz/icons@0.2.3(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:
-      '@peteryaz/icons': 0.2.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      '@peteryaz/tokens': 0.2.0
+      '@peteryaz/icons': 0.2.3(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      '@peteryaz/tokens': 0.2.3
       '@radix-ui/react-avatar': 1.1.11(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@radix-ui/react-checkbox': 1.3.3(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@radix-ui/react-dropdown-menu': 2.1.16(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
