@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router";
 import "./index.css";
 import App from "./App";
 import PlaceholderPage from "./pages/PlaceholderPage";
+import Reports from "./pages/Reports";
 
 const pages = [
   { path: "/", title: "Home" },
@@ -14,7 +15,6 @@ const pages = [
   { path: "/campaigns", title: "Campaigns" },
   { path: "/tasks", title: "Tasks" },
   { path: "/inbox", title: "Inbox" },
-  { path: "/reports", title: "Reports" },
   { path: "/deliverability-hub", title: "Deliverability hub" },
   { path: "/calls", title: "Calls" },
   { path: "/meetings", title: "Meetings" },
@@ -28,6 +28,7 @@ createRoot(document.getElementById("root")!).render(
           {pages.map(({ path, title }) => (
             <Route key={path} path={path} element={<PlaceholderPage title={title} />} />
           ))}
+          <Route path="/reports" element={<Reports />} />
         </Route>
       </Routes>
     </BrowserRouter>

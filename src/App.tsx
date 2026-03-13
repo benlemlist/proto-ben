@@ -62,7 +62,7 @@ export default function App() {
   return (
     <div className="flex h-screen">
       <Sidebar>
-        <SearchBar placeholder="Search for anything" size="md" />
+        <SearchBar placeholder="Search for anything" size="md" hasShortcut />
 
         <SidebarSection>
           <SidebarItem
