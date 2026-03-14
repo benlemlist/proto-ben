@@ -119,6 +119,14 @@ All components from lemDS are ready to use:
 | `UserMenu` | User profile menu with info rows and sections |
 | `UserMenuInfoRow` | Avatar + name + subtitle row in user menu |
 | `UserMenuSection` | Section of items inside user menu |
+| `BrowserTab` | Chrome-like tab bar with add, drag, reorder |
+| `BrowserTabItem` | Individual tab with icon, label, close, rename |
+| `Tabs` | Radix-based tab container |
+| `TabList` / `TabTrigger` / `TabContent` | Tab parts for building tabbed UIs |
+| `ProductLogo` | Lemlist product logo |
+| `Typography` | Text component with design system variants |
+| `ToastProvider` | Provider for toast notifications |
+| `TooltipProvider` / `TooltipTrigger` / `TooltipContent` | Radix tooltip parts |
 
 ### Quick Example
 

@@ -9,14 +9,14 @@ importers:
   .:
     dependencies:
       '@peteryaz/icons':
-        specifier: ^0.3.0
-        version: 0.3.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        specifier: ^0.3.1
+        version: 0.3.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@peteryaz/tokens':
         specifier: ^0.3.0
         version: 0.3.0
       '@peteryaz/ui':
-        specifier: ^2.0.1
-        version: 2.0.1(@peteryaz/icons@0.3.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        specifier: ^2.1.0
+        version: 2.1.0(@peteryaz/icons@0.3.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@tailwindcss/vite':
         specifier: ^4.2.1
         version: 4.2.1(vite@7.3.1(@types/node@24.11.0)(jiti@2.6.1)(lightningcss@1.31.1))
@@ -419,8 +419,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
-  '@peteryaz/icons@0.3.0':
-    resolution: {integrity: sha512-YkwxxZzY7+NLmsAL/+NzuwIGRw/DSpRXE6btYA6TSH0X+0BZEkIA6q/89WUO25CmL+Bqc++lF+sqPKVN9vZorg==, tarball: https://npm.pkg.github.com/download/@peteryaz/icons/0.3.0/99edeff7f482f5e1993d262d52772f7b4e915c4c}
+  '@peteryaz/icons@0.3.1':
+    resolution: {integrity: sha512-dazg8hpjwpOBean658+Mlj+gW90et4xaWS6pKkASRTNFY0y+RnkQ1vsiZa1kTA67qlMxgHJwuuFbey9QKxtVtw==, tarball: https://npm.pkg.github.com/download/@peteryaz/icons/0.3.1/0be25f396366256183704c84594220d3fb834676}
     peerDependencies:
       react: '>=18'
       react-dom: '>=18'
@@ -428,10 +428,13 @@ packages:
   '@peteryaz/tokens@0.3.0':
     resolution: {integrity: sha512-wqC7L9aeUoVXkOV3ZJggvwabujMiKJr6fWF57wUFIIDTH2rmsp7YUQ/j9UvWp+4mVzdOGlQ7AGhw5eowN9nxbw==, tarball: https://npm.pkg.github.com/download/@peteryaz/tokens/0.3.0/770609d086f2ebc616a9b8880bc8a7a59366928e}
 
-  '@peteryaz/ui@2.0.1':
-    resolution: {integrity: sha512-03oeoL1AUKJk0pnpJ+YaGGp0U/zP0ZeZnTgbeghb/O680Ah9AG3pNAQ567nmoLZ6ftn+KxNiz3E2XuoSWfRVZg==, tarball: https://npm.pkg.github.com/download/@peteryaz/ui/2.0.1/79fb292d9a69f210999849219562a4c3dd3e3a51}
+  '@peteryaz/tokens@0.4.0':
+    resolution: {integrity: sha512-Zw7fVfdw0L2FahuxymX8CZM4f5GBJJsR5I7w4XaR2WbDRB5VvAAT2ngiIH+ax0+n+OLm9K0hYyWmsjaZ4oX+2Q==, tarball: https://npm.pkg.github.com/download/@peteryaz/tokens/0.4.0/3fc3338dec64400761a0c3c9144703b586496cf8}
+
+  '@peteryaz/ui@2.1.0':
+    resolution: {integrity: sha512-6dLA/jPYQCiRY0WWI19JJR3hMsJyim9tfd5OVJ0kSSLtcprYSlCmDclrslRCeZBXZGmUhZM8vqMTZ8Ogwpl5Zg==, tarball: https://npm.pkg.github.com/download/@peteryaz/ui/2.1.0/56b1b8cdc6dcf5d5a08fbf27f8fb7e2ff49470b6}
     peerDependencies:
-      '@peteryaz/icons': 0.3.0
+      '@peteryaz/icons': 0.3.1
       react: '>=18'
       react-dom: '>=18'
 
@@ -720,6 +723,19 @@ packages:
 
   '@radix-ui/react-switch@1.2.6':
     resolution: {integrity: sha512-bByzr1+ep1zk4VubeEVViV592vu2lHE2BZY5OnzehZqOOgogN80+mNtCqPkhn2gklJqOpxWgPoYTSnhBCqpOXQ==}
+    peerDependencies:
+      '@types/react': '*'
+      '@types/react-dom': '*'
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+      react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
+
+  '@radix-ui/react-tabs@1.1.13':
+    resolution: {integrity: sha512-7xdcatg7/U+7+Udyoj2zodtI9H/IIopqo+YOIcZOq1nJwXWBZ9p8xiu5llXlekDbZkca79a/fozEYQXIA4sW6A==}
     peerDependencies:
       '@types/react': '*'
       '@types/react-dom': '*'
@@ -2191,22 +2207,24 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  '@peteryaz/icons@0.3.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+  '@peteryaz/icons@0.3.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:
       '@fortawesome/fontawesome-svg-core': 7.2.0
       '@fortawesome/pro-regular-svg-icons': 7.2.0
       '@fortawesome/pro-solid-svg-icons': 7.2.0
       '@fortawesome/react-fontawesome': 0.2.6(@fortawesome/fontawesome-svg-core@7.2.0)(react@19.2.4)
-      '@peteryaz/tokens': 0.3.0
+      '@peteryaz/tokens': 0.4.0
       react: 19.2.4
       react-dom: 19.2.4(react@19.2.4)
 
   '@peteryaz/tokens@0.3.0': {}
 
-  '@peteryaz/ui@2.0.1(@peteryaz/icons@0.3.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+  '@peteryaz/tokens@0.4.0': {}
+
+  '@peteryaz/ui@2.1.0(@peteryaz/icons@0.3.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:
-      '@peteryaz/icons': 0.3.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      '@peteryaz/tokens': 0.3.0
+      '@peteryaz/icons': 0.3.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      '@peteryaz/tokens': 0.4.0
       '@radix-ui/react-avatar': 1.1.11(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@radix-ui/react-checkbox': 1.3.3(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@radix-ui/react-dropdown-menu': 2.1.16(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -2214,6 +2232,7 @@ snapshots:
       '@radix-ui/react-popover': 1.1.15(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@radix-ui/react-slot': 1.2.4(@types/react@19.2.14)(react@19.2.4)
       '@radix-ui/react-switch': 1.2.6(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      '@radix-ui/react-tabs': 1.1.13(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@radix-ui/react-toast': 1.2.15(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@radix-ui/react-tooltip': 1.2.8(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       class-variance-authority: 0.7.1
@@ -2507,6 +2526,22 @@ snapshots:
       '@radix-ui/react-use-controllable-state': 1.2.2(@types/react@19.2.14)(react@19.2.4)
       '@radix-ui/react-use-previous': 1.1.1(@types/react@19.2.14)(react@19.2.4)
       '@radix-ui/react-use-size': 1.1.1(@types/react@19.2.14)(react@19.2.4)
+      react: 19.2.4
+      react-dom: 19.2.4(react@19.2.4)
+    optionalDependencies:
+      '@types/react': 19.2.14
+      '@types/react-dom': 19.2.3(@types/react@19.2.14)
+
+  '@radix-ui/react-tabs@1.1.13(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+    dependencies:
+      '@radix-ui/primitive': 1.1.3
+      '@radix-ui/react-context': 1.1.2(@types/react@19.2.14)(react@19.2.4)
+      '@radix-ui/react-direction': 1.1.1(@types/react@19.2.14)(react@19.2.4)
+      '@radix-ui/react-id': 1.1.1(@types/react@19.2.14)(react@19.2.4)
+      '@radix-ui/react-presence': 1.1.5(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      '@radix-ui/react-primitive': 2.1.3(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      '@radix-ui/react-roving-focus': 1.1.11(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      '@radix-ui/react-use-controllable-state': 1.2.2(@types/react@19.2.14)(react@19.2.4)
       react: 19.2.4
       react-dom: 19.2.4(react@19.2.4)
     optionalDependencies:

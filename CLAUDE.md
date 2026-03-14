@@ -20,7 +20,7 @@ This project uses **lemDS**, Lemlist's internal design system published on GitHu
 
 ### Available Components
 
-Avatar, Badge, Button, Checkbox, DropdownMenu, DropdownMenuItem, InfoMessage, InputLabel, Link, SearchBar, Select, Sidebar, SidebarSection, SidebarHeadingItem, SidebarItem, SidebarFooter, Switch, Tag, TextArea, TextInput, Toast, Tooltip, UserMenu, UserMenuInfoRow, UserMenuSection
+Avatar, Badge, BrowserTab, BrowserTabItem, Button, Checkbox, DropdownMenu, DropdownMenuItem, InfoMessage, InputLabel, Link, ProductLogo, SearchBar, Select, Sidebar, SidebarSection, SidebarHeadingItem, SidebarItem, SidebarFooter, Switch, Tabs, TabList, TabTrigger, TabContent, Tag, TextArea, TextInput, Toast, ToastProvider, Tooltip, Typography, UserMenu, UserMenuInfoRow, UserMenuSection
 
 ### Rules
 
@@ -60,6 +60,16 @@ Some components use `type` instead of `intent` for variants. Always check the ac
 - `UserMenuInfoRow` → `avatar`, `name`, `subtitle`, `action`
 - `UserMenuSection` → `className`. Children: DropdownMenuItem
 - `DropdownMenuItem` → `icon`, `avatar`, `flag`, `label`, `description`, `badge`, `action`, `isActive`
+- `BrowserTab` → `onAddTab`, `draggable`, `onReorder`. Children: BrowserTabItem
+- `BrowserTabItem` → `icon`, `label`, `badge`, `isActive`, `onClose`, `onRename`
+- `Tabs` → Radix-based tabs container. Children: TabList, TabContent
+- `TabList` → Container for TabTrigger items
+- `TabTrigger` → `value`, tab trigger button
+- `TabContent` → `value`, tab panel content
+- `ProductLogo` → Lemlist product logo
+- `Typography` → Text component with variant styling
+- `ToastProvider` → Provider for toast notifications
+- `TooltipProvider` / `TooltipTrigger` / `TooltipContent` → Radix tooltip parts
 
 ### Styles
 
