@@ -20,7 +20,7 @@ This project uses **lemDS**, Lemlist's internal design system published on GitHu
 
 ### Available Components
 
-Avatar, Badge, BrowserTab, BrowserTabItem, Button, Checkbox, DropdownMenu, DropdownMenuItem, InfoMessage, InputLabel, Link, ProductLogo, SearchBar, Select, Sidebar, SidebarSection, SidebarHeadingItem, SidebarItem, SidebarFooter, Switch, Tabs, TabList, TabTrigger, TabContent, Tag, TextArea, TextInput, Toast, ToastProvider, Tooltip, Typography, UserMenu, UserMenuInfoRow, UserMenuSection
+Avatar, Badge, BrowserTab, BrowserTabItem, Button, Checkbox, Dialog, DropdownMenu, DropdownMenuItem, DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuRadixItem, InfoMessage, InputLabel, Link, Modal, ModalTrigger, ModalContent, ModalHeader, ModalTitle, ModalDescription, ModalBody, ModalFooter, ModalClose, ProductLogo, SearchBar, Select, Sidebar, SidebarSection, SidebarHeadingItem, SidebarItem, SidebarFooter, Switch, Tabs, TabList, TabTrigger, TabContent, Tag, TextArea, TextInput, Toast, ToastProvider, Tooltip, TooltipProvider, TooltipTrigger, TooltipContent, Typography, UserMenu, UserMenuInfoRow, UserMenuSection
 
 ### Rules
 
@@ -46,30 +46,29 @@ import { Icon, faMagnifyingGlass } from "@peteryaz/icons";
 
 ### Important: Component Props
 
-Some components use `type` instead of `intent` for variants. Always check the actual prop names:
-- `Button` → `appearance` (solid/outlined/ghost), `intent` (brand/neutral/alert), `size` (sm/md)
-- `InfoMessage` → `type` (info/success/alert/warning/empty), `title`, `description`, `onClose`, `action`
-- `Select` → `size`, `label`, `labelType`, `placeholder`, `value`, `error`, `errorMessage`, children are `DropdownMenu > DropdownMenuItem`
-- `Badge` → `variant` (solid/light/outlined), `type` (primary/success/critical/warning/neutral), `size` (sm/md), `icon`
-- `Sidebar` → `isCollapsed`, `onCollapsedChange`, `className`. Children: SidebarSection, SidebarFooter
-- `SidebarSection` → `className`. Children: SidebarHeadingItem, SidebarItem
-- `SidebarHeadingItem` → `label`
-- `SidebarItem` → `icon`, `solidIcon`, `avatar`, `label`, `state` (default/active), `isNew`, `hasBadge`, `badgeCount`, `onClick`
-- `SidebarFooter` → `className`. Children: SidebarItem
-- `UserMenu` → `className`. Children: UserMenuInfoRow, UserMenuSection
-- `UserMenuInfoRow` → `avatar`, `name`, `subtitle`, `action`
-- `UserMenuSection` → `className`. Children: DropdownMenuItem
-- `DropdownMenuItem` → `icon`, `avatar`, `flag`, `label`, `description`, `badge`, `action`, `isActive`
-- `BrowserTab` → `onAddTab`, `draggable`, `onReorder`. Children: BrowserTabItem
-- `BrowserTabItem` → `icon`, `label`, `badge`, `isActive`, `onClose`, `onRename`
-- `Tabs` → Radix-based tabs container. Children: TabList, TabContent
-- `TabList` → Container for TabTrigger items
-- `TabTrigger` → `value`, tab trigger button
-- `TabContent` → `value`, tab panel content
-- `ProductLogo` → Lemlist product logo
-- `Typography` → Text component with variant styling
-- `ToastProvider` → Provider for toast notifications
-- `TooltipProvider` / `TooltipTrigger` / `TooltipContent` → Radix tooltip parts
+Refer to `node_modules/@peteryaz/ui/USAGE.md` for full props reference. Key notes:
+- `Button` → `appearance` (solid/outlined/ghost), `intent` (brand/neutral/alert), `size` (sm/md/lg), `leftIcon`, `rightIcon`, `iconOnly`, `loading`
+- `Badge` → `variant` (solid/light/outlined), `type` (primary/success/critical/warning/neutral), `size` (sm/md/lg), `icon`
+- `InfoMessage` → `type` (info/success/alert/warning/empty), `title`, `description`, `onClose`, `linkLabel`, `linkHref`
+- `Select` → `size`, `label`, `placeholder`, `value`, `error`, `errorMessage`, `icon`
+- `TextInput` → `size`, `label`, `error`, `errorMessage`, `iconLeft`, `iconRight`, `onClear`, `hasButton`
+- `SearchBar` → `variant` (white/grey), `size`, `hasShortcut`, `onClear`
+- `Sidebar` → `isCollapsed`, `onCollapsedChange`. Children: SidebarSection, SidebarFooter
+- `SidebarItem` → `icon`, `solidIcon`, `avatar`, `label`, `state` (default/active), `isNew`, `hasBadge`, `badgeCount`, `hasSubItems`
+- `BrowserTab` → `activeTabId`, `onTabSelect`, `onNewTab`, `onReorder`. Children: BrowserTabItem
+- `BrowserTabItem` → `id`, `icon`, `label`, `onClose`
+- `Tabs` → `defaultValue`. Children: TabList (with TabTrigger), TabContent
+- `TabTrigger` → `value`, `badge`, `disabled`
+- `Modal` → `ModalTrigger`, `ModalContent` (size: sm/md/lg/full), `ModalHeader` (onClose), `ModalTitle`, `ModalDescription`, `ModalBody`, `ModalFooter` (infoMessage)
+- `Dialog` → `open`, `onOpenChange`, `title`, `description`, `intent` (brand/alert), `primaryLabel`, `onPrimaryAction`, `cancelLabel`
+- `ProductLogo` → `product` (lemlist/lemwarm/lemcal), `size` (sm/md/lg/xl), `hasText`
+- `Typography` → `variant` (h1/h2/h3/lg/md/sm/xs), `weight` (regular/medium/bold)
+- `Tooltip` → wrap with TooltipProvider, use TooltipTrigger + TooltipContent (`type`: default/invert, `side`: top/right/bottom/left)
+- `UserMenu` → Children: UserMenuInfoRow (avatar, name, subtitle, action), UserMenuSection (contains DropdownMenuItem)
+- `DropdownMenu` → Static: DropdownMenu > DropdownMenuList > DropdownMenuItem. Interactive: DropdownMenuRoot > DropdownMenuTrigger + DropdownMenuContent > DropdownMenuRadixItem
+- `Tag` → `variant` (brand/neutral), `size`, `icon`, `onClose`
+- `Link` → `intent` (neutral/brand/alert/success/warning), `size`, `leftIcon`, `rightIcon`
+- `Avatar` → `size` (sm/md/lg/xl), `shape` (rounded/squared), `src`, `initials`
 
 ### Styles
 

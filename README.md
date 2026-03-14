@@ -127,6 +127,9 @@ All components from lemDS are ready to use:
 | `Typography` | Text component with design system variants |
 | `ToastProvider` | Provider for toast notifications |
 | `TooltipProvider` / `TooltipTrigger` / `TooltipContent` | Radix tooltip parts |
+| `Modal` | Radix-based modal dialog (sm/md/lg/full) |
+| `ModalHeader` / `ModalBody` / `ModalFooter` | Modal layout sections |
+| `Dialog` | Pre-composed confirmation dialog (brand/alert) |
 
 ### Quick Example
 
