@@ -24,6 +24,7 @@ Avatar, Badge, BrowserTab, BrowserTabItem, Button, Checkbox, Dialog, DropdownMen
 
 ### Rules
 
+- **ALWAYS read `node_modules/@peteryaz/ui/USAGE.md` first** when using lemDS components. This file is the single source of truth for all component APIs, props, and usage patterns. It is updated with every lemDS release.
 - **ALWAYS use lemDS components** instead of raw HTML elements. Never create custom buttons, inputs, selects, toasts, etc. — use `@peteryaz/ui`.
 - **ALWAYS use lemDS tokens** for spacing, colors, radius, and typography via Tailwind utilities (`p-md`, `gap-sm`, `rounded-base`) or CSS variables (`var(--spacing-md)`).
 - **ALWAYS use lemDS typography tokens** — never hardcode font sizes, weights, or line heights. Use the DS values:

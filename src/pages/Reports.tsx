@@ -1,5 +1,18 @@
 import { useState } from "react";
-import { BrowserTab, BrowserTabItem } from "@peteryaz/ui";
+import {
+  BrowserTab,
+  BrowserTabItem,
+  Button,
+  SidePanel,
+  SidePanelTrigger,
+  SidePanelContent,
+  ModalHeader,
+  ModalTitle,
+  ModalDescription,
+  ModalBody,
+  ModalFooter,
+  ModalClose,
+} from "@peteryaz/ui";
 import {
   faChartLineUpOutline,
   faPaperPlaneTopOutline,
@@ -62,6 +75,28 @@ export default function Reports() {
         <div className="flex flex-col items-center gap-md">
           <h1 className="text-xl font-bold">{activeTab}</h1>
           <p className="text-sm text-foreground/50">Start prototyping</p>
+          <SidePanel>
+            <SidePanelTrigger asChild>
+              <Button appearance="solid" intent="brand" size="md">
+                Open side panel
+              </Button>
+            </SidePanelTrigger>
+            <SidePanelContent>
+              <ModalHeader>
+                <ModalTitle>Report details</ModalTitle>
+                <ModalDescription>Side panel for {activeTab}</ModalDescription>
+              </ModalHeader>
+              <ModalBody>
+                <p className="text-sm">Start prototyping</p>
+              </ModalBody>
+              <ModalFooter>
+                <ModalClose asChild>
+                  <Button appearance="ghost" intent="brand" size="md">Cancel</Button>
+                </ModalClose>
+                <Button appearance="solid" intent="brand" size="md">Save</Button>
+              </ModalFooter>
+            </SidePanelContent>
+          </SidePanel>
         </div>
       </div>
     </div>
