@@ -20,7 +20,9 @@ This project uses **lemDS**, Lemlist's internal design system published on GitHu
 
 ### Available Components
 
-Avatar, Badge, BrowserTab, BrowserTabItem, Button, Checkbox, Dialog, DropdownMenu, DropdownMenuItem, DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuRadixItem, InfoMessage, InputLabel, Link, Modal, ModalTrigger, ModalContent, ModalHeader, ModalTitle, ModalDescription, ModalBody, ModalFooter, ModalClose, ProductLogo, SearchBar, Select, Sidebar, SidebarSection, SidebarHeadingItem, SidebarItem, SidebarFooter, Switch, Tabs, TabList, TabTrigger, TabContent, Tag, TextArea, TextInput, Toast, ToastProvider, Tooltip, TooltipProvider, TooltipTrigger, TooltipContent, Typography, UserMenu, UserMenuInfoRow, UserMenuSection
+Avatar, Badge, BrowserTab, BrowserTabItem, Button, Checkbox, DataTable, DataTablePagination, Dialog, DropdownMenu, DropdownMenuItem, DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuRadixItem, EmptyState, InfoMessage, InputLabel, Link, Modal, ModalTrigger, ModalContent, ModalHeader, ModalTitle, ModalDescription, ModalBody, ModalFooter, ModalClose, ProductLogo, SearchBar, Select, SidePanel, SidePanelTrigger, SidePanelContent, SidePanelClose, Sidebar, SidebarSection, SidebarHeadingItem, SidebarItem, SidebarFooter, Switch, Table, TableHeader, TableBody, TableRow, TableHead, TableCell, Tabs, TabList, TabTrigger, TabContent, Tag, TextArea, TextInput, Toast, ToastProvider, Tooltip, TooltipProvider, TooltipTrigger, TooltipContent, Typography, UserMenu, UserMenuInfoRow, UserMenuSection
+
+DataTable cell components: AvatarCell, ButtonCell, DateCell, EditableCell, EmailCell, LinkCell, NumberCell, StatusCell, TextCell, RowActions
 
 ### Rules
 
@@ -70,6 +72,10 @@ Refer to `node_modules/@l3mpire/ui/USAGE.md` for full props reference. Key notes
 - `Tag` → `variant` (brand/neutral), `size`, `icon`, `onClose`
 - `Link` → `intent` (neutral/brand/alert/success/warning), `size`, `leftIcon`, `rightIcon`
 - `Avatar` → `size` (sm/md/lg/xl), `shape` (rounded/squared), `src`, `initials`
+- `SidePanel` → `SidePanelTrigger` (asChild), `SidePanelContent` (overlay: boolean), `SidePanelClose`. Compose with ModalHeader/ModalBody/ModalFooter
+- `DataTable` → `columns` (TanStack ColumnDef), `data`, `enableSorting`, `enableFiltering`, `enablePagination`, `enableRowSelection`, `enableColumnResizing`, `enableColumnDrag`, `bordered`, `emptyState`
+- `EmptyState` → `icon`, `title`, `description`, `size` (sm/md/lg), `action` (ReactNode)
+- `Table` → Low-level: Table > TableHeader > TableRow > TableHead, TableBody > TableRow > TableCell
 
 ### Styles
 

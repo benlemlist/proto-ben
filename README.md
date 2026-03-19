@@ -122,6 +122,11 @@ All components from lemDS are ready to use:
 | `Modal` | Radix-based modal dialog (sm/md/lg/full) |
 | `ModalHeader` / `ModalBody` / `ModalFooter` | Modal layout sections |
 | `Dialog` | Pre-composed confirmation dialog (brand/alert) |
+| `SidePanel` | Full-height panel sliding from the right |
+| `DataTable` | Data-driven table (TanStack Table) with sorting, filtering, pagination |
+| `DataTablePagination` | Pagination controls for DataTable |
+| `Table` / `TableHeader` / `TableBody` / `TableRow` / `TableCell` | Low-level table primitives |
+| `EmptyState` | Empty state illustration with title, description, action |
 
 ### Quick Example
 
