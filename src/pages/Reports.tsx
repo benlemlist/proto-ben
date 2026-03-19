@@ -12,13 +12,13 @@ import {
   ModalBody,
   ModalFooter,
   ModalClose,
-} from "@peteryaz/ui";
+} from "@l3mpire/ui";
 import {
   faChartLineUpOutline,
   faPaperPlaneTopOutline,
   faUsersOutline,
   faClockOutline,
-} from "@peteryaz/icons";
+} from "@l3mpire/icons";
 
 const fixedTabs = [
   { label: "Overview", icon: faChartLineUpOutline },

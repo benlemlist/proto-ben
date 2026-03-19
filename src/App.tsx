@@ -14,7 +14,7 @@ import {
   UserMenuInfoRow,
   UserMenuSection,
   DropdownMenuItem,
-} from "@peteryaz/ui";
+} from "@l3mpire/ui";
 import {
   faHomeOutline,
   faHomeSolid,
@@ -50,7 +50,7 @@ import {
   faRefreshOutline,
   faArrowRightFromBracketOutline,
   faSortSolid,
-} from "@peteryaz/icons";
+} from "@l3mpire/icons";
 
 export default function App() {
   const [showUserMenu, setShowUserMenu] = useState(false);

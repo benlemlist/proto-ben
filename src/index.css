@@ -1,4 +1,4 @@
-@import "@peteryaz/ui/globals.css";
+@import "@l3mpire/ui/globals.css";
 
-@source "../node_modules/@peteryaz/ui/dist/**/*.mjs";
+@source "../node_modules/@l3mpire/ui/dist/**/*.mjs";
 @source "../src/**/*.{ts,tsx}";

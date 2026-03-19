@@ -8,15 +8,15 @@ This is a **prototyping boilerplate** for Lemlist, a sales engagement platform b
 
 ## Design System — lemDS
 
-This project uses **lemDS**, Lemlist's internal design system published on GitHub Packages under `@peteryaz`.
+This project uses **lemDS**, Lemlist's internal design system published on GitHub Packages under `@l3mpire`.
 
 ### Packages
 
 | Package | Description |
 |---------|-------------|
-| `@peteryaz/tokens` | Design tokens (colors, spacing, typography, shadows) |
-| `@peteryaz/icons` | Icon component + FontAwesome Pro icon re-exports |
-| `@peteryaz/ui` | React components (Button, Badge, Toast, Select, etc.) |
+| `@l3mpire/tokens` | Design tokens (colors, spacing, typography, shadows) |
+| `@l3mpire/icons` | Icon component + FontAwesome Pro icon re-exports |
+| `@l3mpire/ui` | React components (Button, Badge, Toast, Select, etc.) |
 
 ### Available Components
 
@@ -24,21 +24,21 @@ Avatar, Badge, BrowserTab, BrowserTabItem, Button, Checkbox, Dialog, DropdownMen
 
 ### Rules
 
-- **ALWAYS read `node_modules/@peteryaz/ui/USAGE.md` first** when using lemDS components. This file is the single source of truth for all component APIs, props, and usage patterns. It is updated with every lemDS release.
-- **ALWAYS use lemDS components** instead of raw HTML elements. Never create custom buttons, inputs, selects, toasts, etc. — use `@peteryaz/ui`.
+- **ALWAYS read `node_modules/@l3mpire/ui/USAGE.md` first** when using lemDS components. This file is the single source of truth for all component APIs, props, and usage patterns. It is updated with every lemDS release.
+- **ALWAYS use lemDS components** instead of raw HTML elements. Never create custom buttons, inputs, selects, toasts, etc. — use `@l3mpire/ui`.
 - **ALWAYS use lemDS tokens** for spacing, colors, radius, and typography via Tailwind utilities (`p-md`, `gap-sm`, `rounded-base`) or CSS variables (`var(--spacing-md)`).
 - **ALWAYS use lemDS typography tokens** — never hardcode font sizes, weights, or line heights. Use the DS values:
   - Font sizes: `text-xxs` (10px), `text-xs` (12px), `text-sm` (14px), `text-base` (16px), `text-md` (18px), `text-lg` (20px), `text-xl` (24px)
   - Font weights: `font-regular` (400), `font-medium` (500), `font-bold` (700)
   - Line heights: `leading-2xs` (14px), `leading-xs` (16px), `leading-sm` (20px), `leading-base` (24px), `leading-md` (28px), `leading-lg` (32px)
-- **ALWAYS use `@peteryaz/icons`** for icons — never import FontAwesome directly.
+- **ALWAYS use `@l3mpire/icons`** for icons — never import FontAwesome directly.
 - **NEVER hardcode colors, font sizes, or spacing** — use semantic token classes or CSS variables from the design system.
 
 ### Usage Patterns
 
 ```tsx
-import { Button } from "@peteryaz/ui";
-import { Icon, faMagnifyingGlass } from "@peteryaz/icons";
+import { Button } from "@l3mpire/ui";
+import { Icon, faMagnifyingGlass } from "@l3mpire/icons";
 
 <Button appearance="solid" intent="brand" size="md" leftIcon={faMagnifyingGlass}>
   Search
@@ -47,7 +47,7 @@ import { Icon, faMagnifyingGlass } from "@peteryaz/icons";
 
 ### Important: Component Props
 
-Refer to `node_modules/@peteryaz/ui/USAGE.md` for full props reference. Key notes:
+Refer to `node_modules/@l3mpire/ui/USAGE.md` for full props reference. Key notes:
 - `Button` → `appearance` (solid/outlined/ghost), `intent` (brand/neutral/alert), `size` (sm/md/lg), `leftIcon`, `rightIcon`, `iconOnly`, `loading`
 - `Badge` → `variant` (solid/light/outlined), `type` (primary/success/critical/warning/neutral), `size` (sm/md/lg), `icon`
 - `InfoMessage` → `type` (info/success/alert/warning/empty), `title`, `description`, `onClose`, `linkLabel`, `linkHref`
@@ -75,10 +75,10 @@ Refer to `node_modules/@peteryaz/ui/USAGE.md` for full props reference. Key note
 
 Global styles are imported in `src/index.css`:
 ```css
-@import "@peteryaz/ui/globals.css";
+@import "@l3mpire/ui/globals.css";
 ```
 
-The `@source` directive in `index.css` scans `node_modules/@peteryaz/ui/dist/**/*.mjs` to detect all component utility classes for Tailwind.
+The `@source` directive in `index.css` scans `node_modules/@l3mpire/ui/dist/**/*.mjs` to detect all component utility classes for Tailwind.
 
 All design tokens are available as CSS custom properties:
 - Component tokens: `var(--comp-btn-solid-brand-bg-default)`
@@ -151,6 +151,6 @@ pnpm preview  # Preview production build
 
 ## Setup Notes
 
-- `.npmrc` is configured for `@peteryaz` GitHub Packages registry and FontAwesome Pro
-- Requires `GITHUB_TOKEN` env var with `read:packages` scope
-- Run `gh auth refresh --hostname github.com --scopes read:packages` to add the scope
+- `@l3mpire` packages are on **npm public** — no GitHub token or custom registry needed
+- `.npmrc` only configures FontAwesome Pro registry
+- Run `pnpm sync-ds` to update lemDS packages

@@ -8,7 +8,7 @@ Boilerplate for quickly prototyping Lemlist features and UI flows.
 - **Vite 7** — dev server + bundler
 - **Tailwind CSS v4** — utility-first styling
 - **React Router** — multi-page prototypes
-- **lemDS** — Lemlist's design system (`@peteryaz/tokens`, `@peteryaz/icons`, `@peteryaz/ui`)
+- **lemDS** — Lemlist's design system (`@l3mpire/tokens`, `@l3mpire/icons`, `@l3mpire/ui`)
 
 ## Getting Started
 
@@ -16,23 +16,16 @@ Boilerplate for quickly prototyping Lemlist features and UI flows.
 
 - Node.js >= 22.12
 - pnpm 9+
-- GitHub token with `read:packages` scope
 
 ### Setup
 
-1. **Add the `read:packages` scope** to your GitHub CLI token:
+1. **Install dependencies:**
 
    ```bash
-   gh auth refresh --hostname github.com --scopes read:packages
+   pnpm install
    ```
 
-2. **Install dependencies:**
-
-   ```bash
-   GITHUB_TOKEN=$(gh auth token) pnpm install
-   ```
-
-3. **Start the dev server:**
+2. **Start the dev server:**
 
    ```bash
    pnpm dev
@@ -54,8 +47,7 @@ rm -rf .git
 git init
 
 # 3. Install dependencies
-gh auth refresh --hostname github.com --scopes read:packages  # first time only
-GITHUB_TOKEN=$(gh auth token) pnpm install
+pnpm install
 
 # 4. Start prototyping
 pnpm dev
@@ -134,8 +126,8 @@ All components from lemDS are ready to use:
 ### Quick Example
 
 ```tsx
-import { Button, InfoMessage } from "@peteryaz/ui";
-import { faMagnifyingGlassOutline } from "@peteryaz/icons";
+import { Button, InfoMessage } from "@l3mpire/ui";
+import { faMagnifyingGlassOutline } from "@l3mpire/icons";
 
 function MyPrototype() {
   return (
@@ -212,12 +204,5 @@ src/
 
 ## Auth & Registry
 
-The `.npmrc` file is configured for:
-- `@peteryaz` packages → GitHub Packages (requires `GITHUB_TOKEN`)
-- `@fortawesome` packages → FontAwesome Pro registry
-
-To install new packages, prefix with the token:
-
-```bash
-GITHUB_TOKEN=$(gh auth token) pnpm add <package>
-```
+- `@l3mpire` packages are on **npm public** — no token needed
+- `@fortawesome` packages use the FontAwesome Pro registry (configured in `.npmrc`)

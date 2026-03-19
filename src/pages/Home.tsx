@@ -1,4 +1,4 @@
-import { Button } from "@peteryaz/ui";
+import { Button } from "@l3mpire/ui";
 
 export default function Home() {
   return (

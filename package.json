@@ -8,12 +8,12 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "sync-ds": "GITHUB_TOKEN=$(gh auth token) pnpm update @peteryaz/tokens @peteryaz/icons @peteryaz/ui"
+    "sync-ds": "pnpm update @l3mpire/tokens @l3mpire/icons @l3mpire/ui"
   },
   "dependencies": {
-    "@peteryaz/icons": "^0.3.3",
-    "@peteryaz/tokens": "^0.3.0",
-    "@peteryaz/ui": "^2.4.1",
+    "@l3mpire/icons": "^0.3.5",
+    "@l3mpire/tokens": "^0.5.3",
+    "@l3mpire/ui": "^2.5.1",
     "@tailwindcss/vite": "^4.2.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
