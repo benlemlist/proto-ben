@@ -12,11 +12,11 @@ importers:
         specifier: ^0.3.5
         version: 0.3.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@l3mpire/tokens':
-        specifier: ^0.5.3
-        version: 0.5.3
+        specifier: ^0.5.4
+        version: 0.5.4
       '@l3mpire/ui':
-        specifier: ^2.5.4
-        version: 2.5.4(@l3mpire/icons@0.3.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        specifier: ^2.6.0
+        version: 2.6.0(@l3mpire/icons@0.3.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@tailwindcss/vite':
         specifier: ^4.2.1
         version: 4.2.2(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0))
@@ -450,8 +450,11 @@ packages:
   '@l3mpire/tokens@0.5.3':
     resolution: {integrity: sha512-QMpINt0FcfBLyFv4I58DwLpAIJA/x0engeWJtbnKBXzq/Pgkh2idE87Ohg3nxe+6H9TAXMwyP27YzPqxUhhQdQ==}
 
-  '@l3mpire/ui@2.5.4':
-    resolution: {integrity: sha512-pdRvHGD+5v86l7fWMXyrUWredWg69wlUPHiszwQA7EB0VoZ6cZRgceHv9VTym8m3DDEX2UUIsQVfOKDeQG1GOw==}
+  '@l3mpire/tokens@0.5.4':
+    resolution: {integrity: sha512-saFS3qSdWVeO1Mo+uQz5450nPZ9QMMRQTkyCOnIpKvpkuT6HxcRe0Mb0oCAoR/aw3x4ivSVqGWzHXrOvZx2PPg==}
+
+  '@l3mpire/ui@2.6.0':
+    resolution: {integrity: sha512-4HXyK5WG5Fl/qvd7i/uo84nz5AFgASc8j7xCsMax5RGhNsUh4Iqz+VUZ635rK3joBidOaeh5VpMh5ObXm1/S+g==}
     peerDependencies:
       '@l3mpire/icons': 0.3.5
       react: '>=18'
@@ -2287,13 +2290,15 @@ snapshots:
 
   '@l3mpire/tokens@0.5.3': {}
 
-  '@l3mpire/ui@2.5.4(@l3mpire/icons@0.3.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+  '@l3mpire/tokens@0.5.4': {}
+
+  '@l3mpire/ui@2.6.0(@l3mpire/icons@0.3.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:
       '@dnd-kit/core': 6.3.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@dnd-kit/sortable': 10.0.0(@dnd-kit/core@6.3.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)
       '@dnd-kit/utilities': 3.2.2(react@19.2.4)
       '@l3mpire/icons': 0.3.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      '@l3mpire/tokens': 0.5.3
+      '@l3mpire/tokens': 0.5.4
       '@radix-ui/react-avatar': 1.1.11(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@radix-ui/react-checkbox': 1.3.3(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@radix-ui/react-dialog': 1.1.15(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
