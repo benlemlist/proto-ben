@@ -9,14 +9,14 @@ importers:
   .:
     dependencies:
       '@l3mpire/icons':
-        specifier: ^0.3.5
-        version: 0.3.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        specifier: ^0.3.7
+        version: 0.3.7(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@l3mpire/tokens':
-        specifier: ^0.5.4
-        version: 0.5.4
+        specifier: ^0.5.5
+        version: 0.5.5
       '@l3mpire/ui':
-        specifier: ^2.6.0
-        version: 2.6.0(@l3mpire/icons@0.3.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        specifier: ^2.7.2
+        version: 2.7.2(@l3mpire/icons@0.3.7(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@tailwindcss/vite':
         specifier: ^4.2.1
         version: 4.2.2(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0))
@@ -441,22 +441,19 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
-  '@l3mpire/icons@0.3.5':
-    resolution: {integrity: sha512-mpfF0zuU/x5jnhsMdk4BM7fieqZgO4lM3/YX18y51r0VTY2+N40VxfUUoVfBrUO7uOvEh01g74WHgq3yqyyeCw==}
+  '@l3mpire/icons@0.3.7':
+    resolution: {integrity: sha512-aqzW7GrfvSxloVZQ5SRve5shD5GFjk5YbBs48cKomwZiJIRitu/6MeD3YmUWOhhnKRIx7sz15iR6BG3oX/y8dA==}
     peerDependencies:
       react: '>=18'
       react-dom: '>=18'
 
-  '@l3mpire/tokens@0.5.3':
-    resolution: {integrity: sha512-QMpINt0FcfBLyFv4I58DwLpAIJA/x0engeWJtbnKBXzq/Pgkh2idE87Ohg3nxe+6H9TAXMwyP27YzPqxUhhQdQ==}
+  '@l3mpire/tokens@0.5.5':
+    resolution: {integrity: sha512-gz15vEqlXgu+GiwtUufmiqpq/VCmEKs24Lk5WOMxH1szRRFB9D5UZQ6bRunbPSMt224DCQRYL+JuxI2OoJ9NBg==}
 
-  '@l3mpire/tokens@0.5.4':
-    resolution: {integrity: sha512-saFS3qSdWVeO1Mo+uQz5450nPZ9QMMRQTkyCOnIpKvpkuT6HxcRe0Mb0oCAoR/aw3x4ivSVqGWzHXrOvZx2PPg==}
-
-  '@l3mpire/ui@2.6.0':
-    resolution: {integrity: sha512-4HXyK5WG5Fl/qvd7i/uo84nz5AFgASc8j7xCsMax5RGhNsUh4Iqz+VUZ635rK3joBidOaeh5VpMh5ObXm1/S+g==}
+  '@l3mpire/ui@2.7.2':
+    resolution: {integrity: sha512-Lx5VKd1S+vcDpdIdnRq5MxgsKye9sXMxGZPMMGU0djjw9XNn7DUCOXkwLRDLZM9sLjphPbthIsDg4lU/gB8mTQ==}
     peerDependencies:
-      '@l3mpire/icons': 0.3.5
+      '@l3mpire/icons': 0.3.7
       react: '>=18'
       react-dom: '>=18'
 
@@ -2278,27 +2275,25 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  '@l3mpire/icons@0.3.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+  '@l3mpire/icons@0.3.7(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:
       '@fortawesome/fontawesome-svg-core': 7.2.0
       '@fortawesome/pro-regular-svg-icons': 7.2.0
       '@fortawesome/pro-solid-svg-icons': 7.2.0
       '@fortawesome/react-fontawesome': 0.2.6(@fortawesome/fontawesome-svg-core@7.2.0)(react@19.2.4)
-      '@l3mpire/tokens': 0.5.3
+      '@l3mpire/tokens': 0.5.5
       react: 19.2.4
       react-dom: 19.2.4(react@19.2.4)
 
-  '@l3mpire/tokens@0.5.3': {}
+  '@l3mpire/tokens@0.5.5': {}
 
-  '@l3mpire/tokens@0.5.4': {}
-
-  '@l3mpire/ui@2.6.0(@l3mpire/icons@0.3.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+  '@l3mpire/ui@2.7.2(@l3mpire/icons@0.3.7(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:
       '@dnd-kit/core': 6.3.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@dnd-kit/sortable': 10.0.0(@dnd-kit/core@6.3.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)
       '@dnd-kit/utilities': 3.2.2(react@19.2.4)
-      '@l3mpire/icons': 0.3.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      '@l3mpire/tokens': 0.5.4
+      '@l3mpire/icons': 0.3.7(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      '@l3mpire/tokens': 0.5.5
       '@radix-ui/react-avatar': 1.1.11(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@radix-ui/react-checkbox': 1.3.3(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@radix-ui/react-dialog': 1.1.15(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
