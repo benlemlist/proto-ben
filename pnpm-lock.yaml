@@ -9,14 +9,14 @@ importers:
   .:
     dependencies:
       '@l3mpire/icons':
-        specifier: ^0.3.13
-        version: 0.3.13(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        specifier: ^0.5.1
+        version: 0.5.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@l3mpire/tokens':
         specifier: ^0.8.0
         version: 0.8.0
       '@l3mpire/ui':
-        specifier: ^2.15.3
-        version: 2.15.3(@l3mpire/icons@0.3.13(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        specifier: ^2.16.1
+        version: 2.16.1(@l3mpire/icons@0.5.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@tailwindcss/vite':
         specifier: ^4.2.1
         version: 4.2.2(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0))
@@ -386,29 +386,6 @@ packages:
   '@floating-ui/utils@0.2.11':
     resolution: {integrity: sha512-RiB/yIh78pcIxl6lLMG0CgBXAZ2Y0eVHqMPYugu+9U0AeT6YBeiJpf7lbdJNIugFP5SIjwNRgo4DhR1Qxi26Gg==}
 
-  '@fortawesome/fontawesome-common-types@7.2.0':
-    resolution: {integrity: sha512-IpR0bER9FY25p+e7BmFH25MZKEwFHTfRAfhOyJubgiDnoJNsSvJ7nigLraHtp4VOG/cy8D7uiV0dLkHOne5Fhw==}
-    engines: {node: '>=6'}
-
-  '@fortawesome/fontawesome-svg-core@7.2.0':
-    resolution: {integrity: sha512-6639htZMjEkwskf3J+e6/iar+4cTNM9qhoWuRfj9F3eJD6r7iCzV1SWnQr2Mdv0QT0suuqU8BoJCZUyCtP9R4Q==}
-    engines: {node: '>=6'}
-
-  '@fortawesome/pro-regular-svg-icons@7.2.0':
-    resolution: {integrity: sha512-FU6amNj6Dbsb2m19T8ABiL8HoImIGm8AhxnPAgQDDZcslGezu6R7HrDicBPJuVTNFSxFGRRAXIRs/z44xg7ftA==}
-    engines: {node: '>=6'}
-
-  '@fortawesome/pro-solid-svg-icons@7.2.0':
-    resolution: {integrity: sha512-r+YsuG1B+iYcCXNS82bfvRnGJtlRhVI5Xk7vVJ9+ymJU5u4UGGGOSFRV5kRWH2zFItH9PKaIjnN1cXMcgOM/+g==}
-    engines: {node: '>=6'}
-
-  '@fortawesome/react-fontawesome@0.2.6':
-    resolution: {integrity: sha512-mtBFIi1UsYQo7rYonYFkjgYKGoL8T+fEH6NGUpvuqtY3ytMsAoDaPo5rk25KuMtKDipY4bGYM/CkmCHA1N3FUg==}
-    deprecated: v0.2.x is no longer supported. Unless you are still using FontAwesome 5, please update to v3.1.1 or greater.
-    peerDependencies:
-      '@fortawesome/fontawesome-svg-core': ~1 || ~6 || ~7
-      react: ^16.3 || ^17.0.0 || ^18.0.0 || ^19.0.0
-
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
     engines: {node: '>=18.18.0'}
@@ -441,8 +418,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
-  '@l3mpire/icons@0.3.13':
-    resolution: {integrity: sha512-TA3qgfsc6rYTVVgIpwxg+j0VelslrEkGJDcubyLhYuDXya9Z/wgib9bFA3EFAHe4J5EQ8OWr9pV66CV5jCRb4A==}
+  '@l3mpire/icons@0.5.1':
+    resolution: {integrity: sha512-lYcaFT4grW6bbjMPs1thM416bgTt12GgsKwYsBHU1NDZ7Czyq7bXQFAlmieGIZAzjZvUzESjINY9/VZOyIpXqg==}
     peerDependencies:
       react: '>=18'
       react-dom: '>=18'
@@ -450,10 +427,10 @@ packages:
   '@l3mpire/tokens@0.8.0':
     resolution: {integrity: sha512-MX0vrxtNp648NRm8Zg6TbghqpfsmWjbsDDE5pE0eB8Qr/+yVndELwpxl1t0yOc9dGsRcdo9yHxLbdsJTlJomFg==}
 
-  '@l3mpire/ui@2.15.3':
-    resolution: {integrity: sha512-zQlbdmz0b3clvGoz4cT1xHajbcDtFohcf1iQA0Ea1IPCiy0IiXsFV6rzWaQwxLAVtMqv+Ik+FnFR3llLma3qhg==}
+  '@l3mpire/ui@2.16.1':
+    resolution: {integrity: sha512-i7bZGkfQ8SLKt7wL4LRmLVlzTylADhUErnvshzpTcsnjX5ZUU1+f+23xer7VMZxauqYtaPgp8lKVZ8eXf7tNzA==}
     peerDependencies:
-      '@l3mpire/icons': 0.4.0
+      '@l3mpire/icons': 0.5.1
       react: '>=18'
       react-dom: '>=18'
 
@@ -1636,10 +1613,6 @@ packages:
   lodash.merge@4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
 
-  loose-envify@1.4.0:
-    resolution: {integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==}
-    hasBin: true
-
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
 
@@ -1666,10 +1639,6 @@ packages:
 
   node-releases@2.0.36:
     resolution: {integrity: sha512-TdC8FSgHz8Mwtw9g5L4gR/Sh9XhSP/0DEkQxfEFXOpiul5IiHgHan2VhYYb6agDSfp4KuvltmGApc8HMgUrIkA==}
-
-  object-assign@4.1.1:
-    resolution: {integrity: sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==}
-    engines: {node: '>=0.10.0'}
 
   optionator@0.9.4:
     resolution: {integrity: sha512-6IpQ7mKUxRcZNLIObR0hz7lxsapSSIYNZJwXPGeF0mTVqGKFIXj1DQcMoT22S3ROcLyY/rz0PWaWZ9ayWmad9g==}
@@ -1710,9 +1679,6 @@ packages:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
 
-  prop-types@15.8.1:
-    resolution: {integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==}
-
   punycode@2.3.1:
     resolution: {integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==}
     engines: {node: '>=6'}
@@ -1721,9 +1687,6 @@ packages:
     resolution: {integrity: sha512-AXJdLo8kgMbimY95O2aKQqsz2iWi9jMgKJhRBAxECE4IFxfcazB2LmzloIoibJI3C12IlY20+KFaLv+71bUJeQ==}
     peerDependencies:
       react: ^19.2.4
-
-  react-is@16.13.1:
-    resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
   react-refresh@0.18.0:
     resolution: {integrity: sha512-QgT5//D3jfjJb6Gsjxv0Slpj23ip+HtOpnNgnb2S5zU3CB26G/IDPGoy4RJB42wzFE46DRsstbW6tKHoKbhAxw==}
@@ -2238,26 +2201,6 @@ snapshots:
 
   '@floating-ui/utils@0.2.11': {}
 
-  '@fortawesome/fontawesome-common-types@7.2.0': {}
-
-  '@fortawesome/fontawesome-svg-core@7.2.0':
-    dependencies:
-      '@fortawesome/fontawesome-common-types': 7.2.0
-
-  '@fortawesome/pro-regular-svg-icons@7.2.0':
-    dependencies:
-      '@fortawesome/fontawesome-common-types': 7.2.0
-
-  '@fortawesome/pro-solid-svg-icons@7.2.0':
-    dependencies:
-      '@fortawesome/fontawesome-common-types': 7.2.0
-
-  '@fortawesome/react-fontawesome@0.2.6(@fortawesome/fontawesome-svg-core@7.2.0)(react@19.2.4)':
-    dependencies:
-      '@fortawesome/fontawesome-svg-core': 7.2.0
-      prop-types: 15.8.1
-      react: 19.2.4
-
   '@humanfs/core@0.19.1': {}
 
   '@humanfs/node@0.16.7':
@@ -2288,24 +2231,20 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  '@l3mpire/icons@0.3.13(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+  '@l3mpire/icons@0.5.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:
-      '@fortawesome/fontawesome-svg-core': 7.2.0
-      '@fortawesome/pro-regular-svg-icons': 7.2.0
-      '@fortawesome/pro-solid-svg-icons': 7.2.0
-      '@fortawesome/react-fontawesome': 0.2.6(@fortawesome/fontawesome-svg-core@7.2.0)(react@19.2.4)
       '@l3mpire/tokens': 0.8.0
       react: 19.2.4
       react-dom: 19.2.4(react@19.2.4)
 
   '@l3mpire/tokens@0.8.0': {}
 
-  '@l3mpire/ui@2.15.3(@l3mpire/icons@0.3.13(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+  '@l3mpire/ui@2.16.1(@l3mpire/icons@0.5.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:
       '@dnd-kit/core': 6.3.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@dnd-kit/sortable': 10.0.0(@dnd-kit/core@6.3.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)
       '@dnd-kit/utilities': 3.2.2(react@19.2.4)
-      '@l3mpire/icons': 0.3.13(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      '@l3mpire/icons': 0.5.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@l3mpire/tokens': 0.8.0
       '@radix-ui/react-avatar': 1.1.11(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@radix-ui/react-checkbox': 1.3.3(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -3446,10 +3385,6 @@ snapshots:
 
   lodash.merge@4.6.2: {}
 
-  loose-envify@1.4.0:
-    dependencies:
-      js-tokens: 4.0.0
-
   lru-cache@5.1.1:
     dependencies:
       yallist: 3.1.1
@@ -3473,8 +3408,6 @@ snapshots:
   natural-compare@1.4.0: {}
 
   node-releases@2.0.36: {}
-
-  object-assign@4.1.1: {}
 
   optionator@0.9.4:
     dependencies:
@@ -3513,20 +3446,12 @@ snapshots:
 
   prelude-ls@1.2.1: {}
 
-  prop-types@15.8.1:
-    dependencies:
-      loose-envify: 1.4.0
-      object-assign: 4.1.1
-      react-is: 16.13.1
-
   punycode@2.3.1: {}
 
   react-dom@19.2.4(react@19.2.4):
     dependencies:
       react: 19.2.4
       scheduler: 0.27.0
-
-  react-is@16.13.1: {}
 
   react-refresh@0.18.0: {}
 
