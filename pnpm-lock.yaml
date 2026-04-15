@@ -15,8 +15,8 @@ importers:
         specifier: ^0.8.0
         version: 0.8.0
       '@l3mpire/ui':
-        specifier: ^2.15.0
-        version: 2.15.0(@l3mpire/icons@0.3.13(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        specifier: ^2.15.3
+        version: 2.15.3(@l3mpire/icons@0.3.13(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@tailwindcss/vite':
         specifier: ^4.2.1
         version: 4.2.2(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0))
@@ -450,10 +450,10 @@ packages:
   '@l3mpire/tokens@0.8.0':
     resolution: {integrity: sha512-MX0vrxtNp648NRm8Zg6TbghqpfsmWjbsDDE5pE0eB8Qr/+yVndELwpxl1t0yOc9dGsRcdo9yHxLbdsJTlJomFg==}
 
-  '@l3mpire/ui@2.15.0':
-    resolution: {integrity: sha512-0XbFOVhLzR4Zt/jxqy8iN+IXpoqrdsadbkV5HJF6YqZ8Chj9VoeQC5C0zksRRvYlWkaxUFH/zAEYBPfHDNUYhg==}
+  '@l3mpire/ui@2.15.3':
+    resolution: {integrity: sha512-zQlbdmz0b3clvGoz4cT1xHajbcDtFohcf1iQA0Ea1IPCiy0IiXsFV6rzWaQwxLAVtMqv+Ik+FnFR3llLma3qhg==}
     peerDependencies:
-      '@l3mpire/icons': 0.3.13
+      '@l3mpire/icons': 0.4.0
       react: '>=18'
       react-dom: '>=18'
 
@@ -2300,7 +2300,7 @@ snapshots:
 
   '@l3mpire/tokens@0.8.0': {}
 
-  '@l3mpire/ui@2.15.0(@l3mpire/icons@0.3.13(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+  '@l3mpire/ui@2.15.3(@l3mpire/icons@0.3.13(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:
       '@dnd-kit/core': 6.3.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@dnd-kit/sortable': 10.0.0(@dnd-kit/core@6.3.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)
