@@ -15,7 +15,7 @@ This project uses **lemDS**, Lemlist's internal design system published on GitHu
 | Package | Description |
 |---------|-------------|
 | `@l3mpire/tokens` | Design tokens (colors, spacing, typography, shadows) |
-| `@l3mpire/icons` | Icon component + FontAwesome Pro icon re-exports |
+| `@l3mpire/icons` | Icon component + FontAwesome Pro icons (loaded via Kit CDN) |
 | `@l3mpire/ui` | React components (Button, Badge, Toast, Select, etc.) |
 
 ### Available Components
@@ -158,5 +158,6 @@ pnpm preview  # Preview production build
 ## Setup Notes
 
 - `@l3mpire` packages are on **npm public** — no GitHub token or custom registry needed
-- `.npmrc` only configures FontAwesome Pro registry
+- `.npmrc` only contains `shamefully-hoist=true` — no custom registries or auth tokens
+- FontAwesome Pro icons are loaded at runtime via a **Kit CDN script** in `index.html` — no npm `@fortawesome/*` packages needed
 - Run `pnpm sync-ds` to update lemDS packages
