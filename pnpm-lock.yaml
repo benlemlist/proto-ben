@@ -9,14 +9,14 @@ importers:
   .:
     dependencies:
       '@l3mpire/icons':
-        specifier: ^0.5.1
-        version: 0.5.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        specifier: ^0.5.2
+        version: 0.5.2(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@l3mpire/tokens':
         specifier: ^0.8.0
         version: 0.8.0
       '@l3mpire/ui':
-        specifier: ^2.16.1
-        version: 2.16.1(@l3mpire/icons@0.5.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        specifier: ^2.21.0
+        version: 2.21.0(@l3mpire/icons@0.5.2(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@tailwindcss/vite':
         specifier: ^4.2.1
         version: 4.2.2(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0))
@@ -418,8 +418,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
-  '@l3mpire/icons@0.5.1':
-    resolution: {integrity: sha512-lYcaFT4grW6bbjMPs1thM416bgTt12GgsKwYsBHU1NDZ7Czyq7bXQFAlmieGIZAzjZvUzESjINY9/VZOyIpXqg==}
+  '@l3mpire/icons@0.5.2':
+    resolution: {integrity: sha512-TjFiup3V1c0a19O2Q3/IEEILdbbqhZPS7UiMn4pmrafu/HnqqkRCD7VEWqCb6u9N70/s46KJQRKiMlKgV36ADw==}
     peerDependencies:
       react: '>=18'
       react-dom: '>=18'
@@ -427,10 +427,13 @@ packages:
   '@l3mpire/tokens@0.8.0':
     resolution: {integrity: sha512-MX0vrxtNp648NRm8Zg6TbghqpfsmWjbsDDE5pE0eB8Qr/+yVndELwpxl1t0yOc9dGsRcdo9yHxLbdsJTlJomFg==}
 
-  '@l3mpire/ui@2.16.1':
-    resolution: {integrity: sha512-i7bZGkfQ8SLKt7wL4LRmLVlzTylADhUErnvshzpTcsnjX5ZUU1+f+23xer7VMZxauqYtaPgp8lKVZ8eXf7tNzA==}
+  '@l3mpire/tokens@0.9.0':
+    resolution: {integrity: sha512-baboxAGa9rCdruU3jOCIBectYpjG0pHBrA575DREJmJMgVzoqxAMU0KYwk0Do8UyqFMEidfgBGOG1un+4TJskA==}
+
+  '@l3mpire/ui@2.21.0':
+    resolution: {integrity: sha512-K4wlFJBAAX/zfTR5cxRg7NSNkBBEVDVLfcLiaT/rt5RWKGafJrKzLLr4cLkGRe/r5Y+lqXXKBQGlFMzy7IeO1g==}
     peerDependencies:
-      '@l3mpire/icons': 0.5.1
+      '@l3mpire/icons': 0.5.2
       react: '>=18'
       react-dom: '>=18'
 
@@ -2231,21 +2234,23 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  '@l3mpire/icons@0.5.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+  '@l3mpire/icons@0.5.2(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:
-      '@l3mpire/tokens': 0.8.0
+      '@l3mpire/tokens': 0.9.0
       react: 19.2.4
       react-dom: 19.2.4(react@19.2.4)
 
   '@l3mpire/tokens@0.8.0': {}
 
-  '@l3mpire/ui@2.16.1(@l3mpire/icons@0.5.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+  '@l3mpire/tokens@0.9.0': {}
+
+  '@l3mpire/ui@2.21.0(@l3mpire/icons@0.5.2(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:
       '@dnd-kit/core': 6.3.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@dnd-kit/sortable': 10.0.0(@dnd-kit/core@6.3.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)
       '@dnd-kit/utilities': 3.2.2(react@19.2.4)
-      '@l3mpire/icons': 0.5.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      '@l3mpire/tokens': 0.8.0
+      '@l3mpire/icons': 0.5.2(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      '@l3mpire/tokens': 0.9.0
       '@radix-ui/react-avatar': 1.1.11(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@radix-ui/react-checkbox': 1.3.3(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@radix-ui/react-dialog': 1.1.15(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
