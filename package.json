@@ -11,9 +11,9 @@
     "sync-ds": "pnpm update @l3mpire/tokens @l3mpire/icons @l3mpire/ui"
   },
   "dependencies": {
-    "@l3mpire/icons": "^0.5.2",
+    "@l3mpire/icons": "^0.5.3",
     "@l3mpire/tokens": "^0.8.0",
-    "@l3mpire/ui": "^2.21.0",
+    "@l3mpire/ui": "^2.25.1",
     "@tailwindcss/vite": "^4.2.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",

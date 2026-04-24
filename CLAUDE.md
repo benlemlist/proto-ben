@@ -20,7 +20,7 @@ This project uses **lemDS**, Lemlist's internal design system published on GitHu
 
 ### Available Components
 
-Avatar, Badge, BrowserTab, BrowserTabItem, Button, Checkbox, DataTable, DataTablePagination, Dialog, DropdownMenu, DropdownMenuItem, DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuRadixItem, EmptyState, InfoMessage, InputLabel, Link, Modal, ModalTrigger, ModalContent, ModalHeader, ModalTitle, ModalDescription, ModalBody, ModalFooter, ModalClose, ProductLogo, SearchBar, Select, SidePanel, SidePanelTrigger, SidePanelContent, SidePanelClose, Sidebar, SidebarSection, SidebarHeadingItem, SidebarItem, SidebarFooter, Switch, Table, TableHeader, TableBody, TableRow, TableHead, TableCell, Tabs, TabList, TabTrigger, TabContent, Tag, TextArea, TextInput, Toast, ToastProvider, Tooltip, TooltipProvider, TooltipTrigger, TooltipContent, Typography, UserMenu, UserMenuInfoRow, UserMenuSection
+Avatar, Badge, BrowserTab, BrowserTabItem, BulkAction, Button, Checkbox, ChipInput, DataTable, DataTablePagination, DatePicker, DatePickerCalendar, DatePickerSelects, DatePickerSuggestions, DatePickerFooter, DatePickerPanel, DatePickerRoot, DatePickerTrigger, DatePickerPopover, Dialog, DropdownMenu, DropdownMenuItem, DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuRadixItem, EmptyState, FilterSystem, FilterBar, FilterBarLeft, FilterBarRight, FilterChip, InteractiveFilterChip, SortButton, FilterBarButton, SaveViewButton, PropertySelector, AdvancedPopover, AdvancedChip, InfoMessage, InputLabel, Link, Modal, ModalTrigger, ModalContent, ModalHeader, ModalTitle, ModalDescription, ModalBody, ModalFooter, ModalClose, NumberInput, ProductLogo, RadioGroup, RadioGroupItem, RadioCard, RadioCardGroup, SearchBar, Select, SidePanel, SidePanelTrigger, SidePanelContent, SidePanelClose, Sidebar, SidebarSection, SidebarHeadingItem, SidebarItem, SidebarFooter, Switch, SwitchCard, Table, TableHeader, TableBody, TableRow, TableHead, TableCell, Tabs, TabList, TabTrigger, TabContent, Tag, TextArea, TextInput, Toast, ToastProvider, Tooltip, TooltipProvider, TooltipTrigger, TooltipContent, Typography, UserMenu, UserMenuInfoRow, UserMenuSection
 
 DataTable cell components: AvatarCell, ButtonCell, DateCell, EditableCell, EmailCell, LinkCell, NumberCell, StatusCell, TextCell, RowActions
 
@@ -76,6 +76,14 @@ Refer to `node_modules/@l3mpire/ui/USAGE.md` for full props reference. Key notes
 - `DataTable` → `columns` (TanStack ColumnDef), `data`, `enableSorting`, `enableFiltering`, `enablePagination`, `enableRowSelection`, `enableColumnResizing`, `enableColumnDrag`, `bordered`, `emptyState`
 - `EmptyState` → `icon`, `title`, `description`, `size` (sm/md/lg), `action` (ReactNode)
 - `Table` → Low-level: Table > TableHeader > TableRow > TableHead, TableBody > TableRow > TableCell
+- `ChipInput` → `size` (sm/md), `values`, `onChange`, `label`, `placeholder`, `error`, `errorMessage`, `iconLeft`, `max`. Enter creates chip, Backspace on empty removes last
+- `NumberInput` → `size` (sm/md), `value`, `onChange`, `min`, `max`, `step`, `label`, `error`, `errorMessage`. Buttons auto-disable at min/max
+- `RadioGroup` / `RadioGroupItem` → `value`, `onValueChange`; item: `value`, `label`, `disabled`
+- `RadioCard` / `RadioCardGroup` → Card-style radio. Group: `label`, `orientation` (horizontal/vertical), `value`. Item: `value`, `title`, `description`, `icon`, `hideIndicator`
+- `SwitchCard` → Card-style switch. `title`, `description`, `icon`, `checked`, `defaultChecked`, `onCheckedChange`
+- `DatePicker` → Composable: `mode` (single/range), `value`, `onValueChange`. Parts: DatePickerCalendar, DatePickerPanel, DatePickerSelects, DatePickerSuggestions, DatePickerFooter, DatePickerRoot+DatePickerTrigger+DatePickerPopover
+- `FilterSystem` → Top-level orchestrator. Props: `properties`, `filterState`, `onFilterStateChange`, `sortFields`, `actions`, `filterActions`, `breakpoint`. Composable parts: FilterBar, SortButton, FilterChip, InteractiveFilterChip, PropertySelector, AdvancedPopover, SaveViewButton. Auto-responsive via ResizeObserver
+- `BulkAction` → Bottom-anchored selection toolbar. `count`, `onClear`, `actions` (BulkActionItem[]), `sticky` (default true), `countLabel`, `clearLabel`. Overflowing actions collapse into "…" dropdown
 
 ### Styles
 
