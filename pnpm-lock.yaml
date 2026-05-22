@@ -9,14 +9,14 @@ importers:
   .:
     dependencies:
       '@l3mpire/icons':
-        specifier: ^0.5.5
-        version: 0.5.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        specifier: ^0.6.2
+        version: 0.6.2(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@l3mpire/tokens':
-        specifier: ^0.8.0
-        version: 0.8.0
+        specifier: ^0.14.0
+        version: 0.14.0
       '@l3mpire/ui':
-        specifier: ^2.26.3
-        version: 2.26.3(@l3mpire/icons@0.5.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        specifier: ^3.3.0
+        version: 3.3.0(@l3mpire/icons@0.6.2(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(emoji-mart@5.6.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@tailwindcss/vite':
         specifier: ^4.2.1
         version: 4.2.2(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0))
@@ -176,6 +176,15 @@ packages:
     resolution: {integrity: sha512-+MKAJEOfaBe5SmV6t34p80MMKhjvUz0vRrvVJbPT0WElzaOJ/1xs+D+KDv+tD/NE5ujfrChEcshd4fLn0wpiqg==}
     peerDependencies:
       react: '>=16.8.0'
+
+  '@emoji-mart/data@1.2.1':
+    resolution: {integrity: sha512-no2pQMWiBy6gpBEiqGeU77/bFejDqUTRY7KX+0+iur13op3bqUsXdnwoZs6Xb1zbv0gAj5VvS1PWoUUckSr5Dw==}
+
+  '@emoji-mart/react@1.1.1':
+    resolution: {integrity: sha512-NMlFNeWgv1//uPsvLxvGQoIerPuVdXwK/EUek8OOkJ6wVOWPUizRBJU0hDqWZCOROVpfBgCemaC3m6jDOXi03g==}
+    peerDependencies:
+      emoji-mart: ^5.2
+      react: ^16.8 || ^17 || ^18
 
   '@esbuild/aix-ppc64@0.27.4':
     resolution: {integrity: sha512-cQPwL2mp2nSmHHJlCyoXgHGhbEPMrEEU5xhkcy3Hs/O7nGZqEpZ2sUtLaL9MORLtDfRvVl2/3PAuEkYZH0Ty8Q==}
@@ -418,22 +427,19 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
-  '@l3mpire/icons@0.5.5':
-    resolution: {integrity: sha512-GIinmXM+NqRKY1jyf0fPYnF9/e2bX8Ylq4n9Z7lMu0CR4q3tKYcKWxyfDg3CJUc3EvrFhkGiO5kbx72FYKO01g==}
+  '@l3mpire/icons@0.6.2':
+    resolution: {integrity: sha512-Fs08kt9c3dqNluckDPjjUMS86tOTBl2VLAllS22F9cAjKZgucfF5H9FKlT25BOksVwfHtDcCGUPACZatMf7NgA==}
     peerDependencies:
       react: '>=18'
       react-dom: '>=18'
 
-  '@l3mpire/tokens@0.11.0':
-    resolution: {integrity: sha512-5/oOdYtEphGQKqgQ7AQqvmx8m+1vDmRnOLJt185ucAF1eiCP/Ygml5lGhAKb1TwEejUOj236cRU8LM3ar7Y5pA==}
+  '@l3mpire/tokens@0.14.0':
+    resolution: {integrity: sha512-Q8Rk+4fJbiaiqYk46HMPMhXarlrMrspiZp+oax+f/+Gv9B7zIje90B5RFAsJyyrPk0VGjulNeW20tJGBTN+aRg==}
 
-  '@l3mpire/tokens@0.8.0':
-    resolution: {integrity: sha512-MX0vrxtNp648NRm8Zg6TbghqpfsmWjbsDDE5pE0eB8Qr/+yVndELwpxl1t0yOc9dGsRcdo9yHxLbdsJTlJomFg==}
-
-  '@l3mpire/ui@2.26.3':
-    resolution: {integrity: sha512-49+WqguuG4s7H8TJw6P0ZUttheMLqtFl/7pb96BEpQ5l/uBT7QGhmK3uD7IE2UTHGizI8cxp0bipkf2CtkxlKQ==}
+  '@l3mpire/ui@3.3.0':
+    resolution: {integrity: sha512-mur+cQstRHJ6+SqNtJS/w0e6ReraVR279PBvZvfk4bA1P58tX7twgfVBlqh8g3ABmWNOXbW1wdHesAtWyk2Pkw==}
     peerDependencies:
-      '@l3mpire/icons': 0.5.5
+      '@l3mpire/icons': 0.6.2
       react: '>=18'
       react-dom: '>=18'
 
@@ -1330,6 +1336,9 @@ packages:
   electron-to-chromium@1.5.321:
     resolution: {integrity: sha512-L2C7Q279W2D/J4PLZLk7sebOILDSWos7bMsMNN06rK482umHUrh/3lM8G7IlHFOYip2oAg5nha1rCMxr/rs6ZQ==}
 
+  emoji-mart@5.6.0:
+    resolution: {integrity: sha512-eJp3QRe79pjwa+duv+n7+5YsNhRcMl812EcFVwrnRvYKoNPoQb5qxU8DG6Bgwji0akHdp6D4Ln6tYLG58MFSow==}
+
   enhanced-resolve@5.20.1:
     resolution: {integrity: sha512-Qohcme7V1inbAfvjItgw0EaxVX5q2rdVEZHRBrEQdRZTssLDGsL8Lwrznl8oQ/6kuTJONLaDcGjkNP247XEhcA==}
     engines: {node: '>=10.13.0'}
@@ -2063,6 +2072,13 @@ snapshots:
       react: 19.2.4
       tslib: 2.8.1
 
+  '@emoji-mart/data@1.2.1': {}
+
+  '@emoji-mart/react@1.1.1(emoji-mart@5.6.0)(react@19.2.4)':
+    dependencies:
+      emoji-mart: 5.6.0
+      react: 19.2.4
+
   '@esbuild/aix-ppc64@0.27.4':
     optional: true
 
@@ -2234,23 +2250,23 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  '@l3mpire/icons@0.5.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+  '@l3mpire/icons@0.6.2(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:
-      '@l3mpire/tokens': 0.11.0
+      '@l3mpire/tokens': 0.14.0
       react: 19.2.4
       react-dom: 19.2.4(react@19.2.4)
 
-  '@l3mpire/tokens@0.11.0': {}
+  '@l3mpire/tokens@0.14.0': {}
 
-  '@l3mpire/tokens@0.8.0': {}
-
-  '@l3mpire/ui@2.26.3(@l3mpire/icons@0.5.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+  '@l3mpire/ui@3.3.0(@l3mpire/icons@0.6.2(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(emoji-mart@5.6.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:
       '@dnd-kit/core': 6.3.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@dnd-kit/sortable': 10.0.0(@dnd-kit/core@6.3.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)
       '@dnd-kit/utilities': 3.2.2(react@19.2.4)
-      '@l3mpire/icons': 0.5.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      '@l3mpire/tokens': 0.11.0
+      '@emoji-mart/data': 1.2.1
+      '@emoji-mart/react': 1.1.1(emoji-mart@5.6.0)(react@19.2.4)
+      '@l3mpire/icons': 0.6.2(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      '@l3mpire/tokens': 0.14.0
       '@radix-ui/react-avatar': 1.1.11(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@radix-ui/react-checkbox': 1.3.3(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@radix-ui/react-dialog': 1.1.15(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -2272,6 +2288,7 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
       - '@types/react-dom'
+      - emoji-mart
 
   '@radix-ui/primitive@1.1.3': {}
 
@@ -3114,6 +3131,8 @@ snapshots:
   detect-node-es@1.1.0: {}
 
   electron-to-chromium@1.5.321: {}
+
+  emoji-mart@5.6.0: {}
 
   enhanced-resolve@5.20.1:
     dependencies:

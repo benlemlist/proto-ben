@@ -20,7 +20,7 @@ This project uses **lemDS**, Lemlist's internal design system published on GitHu
 
 ### Available Components
 
-Avatar, Badge, BrowserTab, BrowserTabItem, BulkAction, Button, Checkbox, ChipInput, DataTable, DataTablePagination, DatePicker, DatePickerCalendar, DatePickerSelects, DatePickerSuggestions, DatePickerFooter, DatePickerPanel, DatePickerRoot, DatePickerTrigger, DatePickerPopover, Dialog, DropdownMenu, DropdownMenuItem, DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuRadixItem, EmptyState, FilterSystem, FilterBar, FilterBarLeft, FilterBarRight, FilterChip, InteractiveFilterChip, SortButton, FilterBarButton, SaveViewButton, PropertySelector, AdvancedPopover, AdvancedChip, InfoMessage, InputLabel, Link, Modal, ModalTrigger, ModalContent, ModalHeader, ModalTitle, ModalDescription, ModalBody, ModalFooter, ModalClose, NumberInput, ProductLogo, RadioGroup, RadioGroupItem, RadioCard, RadioCardGroup, SearchBar, Select, SidePanel, SidePanelTrigger, SidePanelContent, SidePanelClose, Sidebar, SidebarSection, SidebarHeadingItem, SidebarItem, SidebarFooter, Switch, SwitchCard, Table, TableHeader, TableBody, TableRow, TableHead, TableCell, Tabs, TabList, TabTrigger, TabContent, Tag, TextArea, TextInput, Toast, ToastProvider, Tooltip, TooltipProvider, TooltipTrigger, TooltipContent, Typography, UserMenu, UserMenuInfoRow, UserMenuSection
+Avatar, Badge, BrowserTab, BrowserTabItem, BulkAction, Button, Checkbox, ChipInput, DataTable, DataTablePagination, DatePicker, DatePickerCalendar, DatePickerSelects, DatePickerSuggestions, DatePickerFooter, DatePickerPanel, DatePickerRoot, DatePickerTrigger, DatePickerPopover, Dialog, DropdownMenu, DropdownMenuItem, DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuRadixItem, EmojiPicker, EmojiPickerPopover, EmptyState, FilterSystem, FilterBar, FilterBarLeft, FilterBarRight, FilterChip, InteractiveFilterChip, SortButton, FilterBarButton, SaveViewButton, PropertySelector, AdvancedPopover, AdvancedChip, InfoMessage, InputLabel, Link, Modal, ModalTrigger, ModalContent, ModalHeader, ModalTitle, ModalDescription, ModalBody, ModalFooter, ModalClose, NumberInput, ProductLogo, RadioGroup, RadioGroupItem, RadioCard, RadioCardGroup, SearchBar, Select, SidePanel, SidePanelTrigger, SidePanelContent, SidePanelClose, Sidebar, SidebarSection, SidebarHeadingItem, SidebarItem, SidebarFooter, Switch, SwitchCard, Table, TableHeader, TableBody, TableRow, TableHead, TableCell, Tabs, TabList, TabTrigger, TabContent, Tag, TextArea, TextInput, Toast, ToastProvider, Tooltip, TooltipProvider, TooltipTrigger, TooltipContent, TruncatedText, Typography, UserMenu, UserMenuInfoRow, UserMenuSection
 
 DataTable cell components: AvatarCell, ButtonCell, DateCell, EditableCell, EmailCell, LinkCell, NumberCell, StatusCell, TextCell, RowActions
 
@@ -50,8 +50,8 @@ import { Icon, faMagnifyingGlass } from "@l3mpire/icons";
 ### Important: Component Props
 
 Refer to `node_modules/@l3mpire/ui/USAGE.md` for full props reference. Key notes:
-- `Button` → `appearance` (solid/outlined/ghost), `intent` (brand/neutral/alert), `size` (sm/md/lg), `leftIcon`, `rightIcon`, `iconOnly`, `loading`
-- `Badge` → `variant` (solid/light/outlined), `type` (primary/success/critical/warning/neutral), `size` (sm/md/lg), `icon`
+- `Button` → `appearance` (solid/outlined/ghost), `intent` (brand/alert), `size` (sm/md/lg), `leftIcon`, `rightIcon`, `iconOnly`, `badge`, `loading`, `asChild`
+- `Badge` → `variant` (solid/light/outlined), `type` (primary/success/critical/warning/neutral), `tone` (indigo/rose/lime/violet/cyan/orange/emerald/fuchsia/amber/slate — categorical, overrides type), `size` (sm/md/lg), `icon`
 - `InfoMessage` → `type` (info/success/alert/warning/empty), `title`, `description`, `onClose`, `linkLabel`, `linkHref`
 - `Select` → `size`, `label`, `placeholder`, `value`, `error`, `errorMessage`, `icon`
 - `TextInput` → `size`, `label`, `error`, `errorMessage`, `iconLeft`, `iconRight`, `onClear`, `hasButton`
@@ -84,6 +84,8 @@ Refer to `node_modules/@l3mpire/ui/USAGE.md` for full props reference. Key notes
 - `DatePicker` → Composable: `mode` (single/range), `value`, `onValueChange`. Parts: DatePickerCalendar, DatePickerPanel, DatePickerSelects, DatePickerSuggestions, DatePickerFooter, DatePickerRoot+DatePickerTrigger+DatePickerPopover
 - `FilterSystem` → Top-level orchestrator. Props: `properties`, `filterState`, `onFilterStateChange`, `sortFields`, `actions`, `filterActions`, `breakpoint`. Composable parts: FilterBar, SortButton, FilterChip, InteractiveFilterChip, PropertySelector, AdvancedPopover, SaveViewButton. Auto-responsive via ResizeObserver
 - `BulkAction` → Bottom-anchored selection toolbar. `count`, `onClear`, `actions` (BulkActionItem[]), `sticky` (default true), `countLabel`, `clearLabel`. Overflowing actions collapse into "…" dropdown
+- `TruncatedText` → `<span>` that ellipsis-truncates and auto-shows a tooltip with the full content only when clipped. `children`, `tooltip` (override body), `delayDuration`. Needs a width constraint (`max-w-*`)
+- `EmojiPicker` / `EmojiPickerPopover` → emoji-mart-based picker with lemDS theming + dark-mode auto-detect. `onSelect` (EmojiSelection), `locale` (en/fr), `theme`, `perLine`, `previewPosition`. Popover variant: `children` (custom trigger), `open`/`onOpenChange`, `side`/`align`. Data bundle (~150KB) dynamically imported on first mount
 
 ### Styles
 
