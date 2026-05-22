@@ -155,6 +155,15 @@ src/
 
 Pages are defined in `main.tsx` as a `pages` array. Each sidebar item navigates to its route and shows an active state. To add a new page, add to the array and create a component (or use PlaceholderPage).
 
+## Project Documentation
+
+Every prototype built from this boilerplate maintains **two living docs** at the repo root, kept up to date as the project evolves:
+
+- **`project.md`** — context, goals, non-goals, status, key decisions, links
+- **`specs.md`** — detailed feature/screen specs (user stories, behavior, UI states, edge cases)
+
+When starting a new project, scaffold both. When scope or behavior changes, update the relevant doc in the same change. Use the **`/project-docs`** skill (`.claude/skills/project-docs/`) to scaffold and maintain them.
+
 ## Commands
 
 ```bash
