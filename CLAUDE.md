@@ -20,9 +20,11 @@ This project uses **lemDS**, Lemlist's internal design system published on GitHu
 
 ### Available Components
 
-Avatar, Badge, BrowserTab, BrowserTabItem, BulkAction, Button, Checkbox, ChipInput, DataTable, DataTablePagination, DatePicker, DatePickerCalendar, DatePickerSelects, DatePickerSuggestions, DatePickerFooter, DatePickerPanel, DatePickerRoot, DatePickerTrigger, DatePickerPopover, Dialog, DropdownMenu, DropdownMenuItem, DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuRadixItem, EmojiPicker, EmojiPickerPopover, EmptyState, FilterSystem, FilterBar, FilterBarLeft, FilterBarRight, FilterChip, InteractiveFilterChip, SortButton, FilterBarButton, SaveViewButton, PropertySelector, AdvancedPopover, AdvancedChip, InfoMessage, InputLabel, Link, Modal, ModalTrigger, ModalContent, ModalHeader, ModalTitle, ModalDescription, ModalBody, ModalFooter, ModalClose, NumberInput, ProductLogo, RadioGroup, RadioGroupItem, RadioCard, RadioCardGroup, SearchBar, Select, SidePanel, SidePanelTrigger, SidePanelContent, SidePanelClose, Sidebar, SidebarSection, SidebarHeadingItem, SidebarItem, SidebarFooter, Switch, SwitchCard, Table, TableHeader, TableBody, TableRow, TableHead, TableCell, Tabs, TabList, TabTrigger, TabContent, Tag, TextArea, TextInput, Toast, ToastProvider, Tooltip, TooltipProvider, TooltipTrigger, TooltipContent, TruncatedText, Typography, UserMenu, UserMenuInfoRow, UserMenuSection
+Avatar, Badge, BrowserTab, BrowserTabItem, BulkAction, Button, Checkbox, ChipInput, DataTable, DataTablePagination, DatePicker, DatePickerCalendar, DatePickerSelects, DatePickerSuggestions, DatePickerFooter, DatePickerPanel, DatePickerRoot, DatePickerTrigger, DatePickerPopover, Dialog, DropdownMenu, DropdownMenuItem, DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuRadixItem, EmojiPicker, EmojiPickerPopover, EmptyState, FilterSystem, FilterBar, FilterBarLeft, FilterBarRight, FilterChip, InteractiveFilterChip, SortButton, FilterBarButton, SaveViewButton, PropertySelector, AdvancedPopover, AdvancedChip, HoverCard, InfoMessage, InputLabel, Link, Modal, ModalTrigger, ModalContent, ModalHeader, ModalTitle, ModalDescription, ModalBody, ModalFooter, ModalClose, NumberInput, ProductLogo, RadioGroup, RadioGroupItem, RadioCard, RadioCardGroup, SearchBar, Select, SidePanel, SidePanelTrigger, SidePanelContent, SidePanelClose, Sidebar, SidebarSection, SidebarHeadingItem, SidebarItem, SidebarFooter, Switch, SwitchCard, Table, TableHeader, TableBody, TableRow, TableHead, TableCell, Tabs, TabList, TabTrigger, TabContent, Tag, TextArea, TextInput, Toast, ToastProvider, Tooltip, TooltipProvider, TooltipTrigger, TooltipContent, TruncatedText, Typography, UserMenu, UserMenuInfoRow, UserMenuSection
 
-DataTable cell components: AvatarCell, ButtonCell, DateCell, EditableCell, EmailCell, LinkCell, NumberCell, StatusCell, TextCell, RowActions
+DataTable cell components: AvatarCell, ButtonCell, DateCell, EditableCell, EmailCell, EntityCell, LinkCell, NumberCell, StatusCell, StatusPickerCell, TextCell, RowActions, RowQuickActions
+
+Column / status / AI helpers: ScoreBadge, ColumnTypeBadge, ColumnHeaderMenu, ColumnManagerPopover, CreateFieldColumnPanel, CreateScoreColumnPanel, AIBadge, AICell, AISuggestionDot, AIColumnHeaderBar, AIColumnSidePanel
 
 ### Rules
 
@@ -35,6 +37,7 @@ DataTable cell components: AvatarCell, ButtonCell, DateCell, EditableCell, Email
   - Line heights: `leading-2xs` (14px), `leading-xs` (16px), `leading-sm` (20px), `leading-base` (24px), `leading-md` (28px), `leading-lg` (32px)
 - **ALWAYS use `@l3mpire/icons`** for icons — never import FontAwesome directly.
 - **NEVER hardcode colors, font sizes, or spacing** — use semantic token classes or CSS variables from the design system.
+- **Icon rotation/spin animations MUST live on a parent `<span>`**, not on the `<Icon>` itself. The FA Kit script swaps `<i>` → `<svg>` via MutationObserver on every className change, which interrupts any animation applied directly to the icon (symptom: icon ticks ~90° and resets in a loop). Wrap with a stable span (`<span className="ai-icon-spin"><Icon … /></span>`).
 
 ### Usage Patterns
 
