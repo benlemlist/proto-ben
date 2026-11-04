@@ -20,11 +20,22 @@ This project uses **lemDS**, Lemlist's internal design system published on GitHu
 
 ### Available Components
 
-Avatar, Badge, BrowserTab, BrowserTabItem, BulkAction, Button, Checkbox, ChipInput, DataTable, DataTablePagination, DatePicker, DatePickerCalendar, DatePickerSelects, DatePickerSuggestions, DatePickerFooter, DatePickerPanel, DatePickerRoot, DatePickerTrigger, DatePickerPopover, Dialog, DropdownMenu, DropdownMenuItem, DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuRadixItem, EmojiPicker, EmojiPickerPopover, EmptyState, FilterSystem, FilterBar, FilterBarLeft, FilterBarRight, FilterChip, InteractiveFilterChip, SortButton, FilterBarButton, SaveViewButton, PropertySelector, AdvancedPopover, AdvancedChip, HoverCard, InfoMessage, InputLabel, Link, Modal, ModalTrigger, ModalContent, ModalHeader, ModalTitle, ModalDescription, ModalBody, ModalFooter, ModalClose, NumberInput, ProductLogo, RadioGroup, RadioGroupItem, RadioCard, RadioCardGroup, SearchBar, Select, SidePanel, SidePanelTrigger, SidePanelContent, SidePanelClose, Sidebar, SidebarSection, SidebarHeadingItem, SidebarItem, SidebarFooter, Switch, SwitchCard, Table, TableHeader, TableBody, TableRow, TableHead, TableCell, Tabs, TabList, TabTrigger, TabContent, Tag, TextArea, TextInput, Toast, ToastProvider, Tooltip, TooltipProvider, TooltipTrigger, TooltipContent, TruncatedText, Typography, UserMenu, UserMenuInfoRow, UserMenuSection
+Avatar, Badge, BadgeSpecific, StatusPill, TagButton, BrowserTab, BrowserTabItem, BulkAction, Button, Checkbox, ChipInput, DataTable, DataTablePagination, DataTableSettingsModal, DatePicker, DatePickerCalendar, DatePickerSelects, DatePickerSuggestions, DatePickerFooter, DatePickerPanel, DatePickerRelative, DatePickerRoot, DatePickerTrigger, DatePickerPopover, Dialog, DropdownMenu, DropdownMenuList, DropdownMenuItem, DropdownMenuHeading, DropdownMenuGroup, DropdownMenuDelimiter, DropdownMenuSearch, DropdownMenuTabs, DropdownMenuInputItem, DropdownMenuEmpty, DropdownMenuFooter, DropdownMenuClear, DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuRadixItem, EmojiPicker, EmojiPickerPopover, EmptyState, FilterSystem, FilterBar, FilterBarLeft, FilterBarRight, FilterChip, FilterChipSegment, InteractiveFilterChip, FilterEditor, SortButton, FilterBarButton, SaveViewButton, PropertySelector, AdvancedPopover, AdvancedChip, AdvancedRow, KebabMenu, SummaryChip, HoverCard, HoverCardTrigger, HoverCardContent, InfoMessage, InlineEdit, InputLabel, Link, Modal, ModalTrigger, ModalContent, ModalHeader, ModalTitle, ModalDescription, ModalBody, ModalFooter, ModalClose, ModalOverlay, NumberInput, ObjectButton, ObjectLinkCell, ObjectPanelHeader, ProductLogo, RadioGroup, RadioGroupItem, RadioCard, RadioCardGroup, SearchBar, Select, SidePanel, SidePanelTrigger, SidePanelContent, SidePanelClose, Sidebar, SidebarHeader, SidebarLogoButton, SidebarSection, SidebarHeadingItem, SidebarItem, SidebarFooter, SidebarSettings, Stepper, StepperItem, StepperSeparator, Switch, SwitchCard, Table, TableHeader, TableBody, TableFooter, TableCaption, TableRow, TableHead, TableCell, Tabs, TabList, TabTrigger, TabContent, TextArea, TextInput, Toast, ToastProvider, ToastViewport, Tooltip, TooltipProvider, TooltipTrigger, TooltipContent, TruncatedText, Typography, UserMenu, UserMenuInfoRow, UserMenuSection
 
 DataTable cell components: AvatarCell, ButtonCell, DateCell, EditableCell, EmailCell, EntityCell, LinkCell, NumberCell, StatusCell, StatusPickerCell, TextCell, RowActions, RowQuickActions
 
-Column / status / AI helpers: ScoreBadge, ColumnTypeBadge, ColumnHeaderMenu, ColumnManagerPopover, CreateFieldColumnPanel, CreateScoreColumnPanel, AIBadge, AICell, AISuggestionDot, AIColumnHeaderBar, AIColumnSidePanel
+Discreet inline fields (record detail / side panel): DiscreetTextInput, DiscreetTextarea, DiscreetNumberInput, DiscreetSelect, DiscreetTags, DiscreetChipInput, DiscreetDate, DiscreetLink, DiscreetEmail, DiscreetPhone, DiscreetOwner, DiscreetSwitch
+
+Forms: InputGroup, InputGroupItem (radio / checkbox / switch rows in one card, options under the checked one), EnrichmentButton
+
+Filter parts and helpers: OperatorSelector, OperatorList, ValueInput, SingleSelectValueInput, MultiSelectValueInput, `OPERATORS_BY_TYPE`, `getDefaultOperator`, `createFilterWithDefaults`
+
+Column / status / AI helpers: ScoreBadge, ColumnTypeBadge, ColumnHeaderMenu, ColumnManagerPopover, ColumnManagerTrigger, CreateFieldColumnPanel, CreateScoreColumnPanel, AICell (+ helpers `pickRunningVerb`, `AI_RUNNING_VERBS`)
+
+**Added in lemDS 9.0 (ui):** `variant="borderless"` on `DataTable` / `Table` (Figma « Table borderless », list views: Campaigns, Tasks) with `TableSelectionHead` / `TableSelectionCell`, `TableFolderRow` (+ DataTable `folders`), borderless cells `DoneTick`, `FavoriteToggle`, `TagsPickerCell`, `TableItemHover`, `StatusPickerCell triggerStyle="item"`, `TextCell done`. A borderless DataTable pins its own columns and paints its own 48px rows. Nested menus: `DropdownMenuSub` + `DropdownMenuSubTrigger` + `DropdownMenuSubContent`.
+
+**Removed in v7:** `Tag` (→ `Badge` with `onClose`). See "Migration — v7.0.0" in USAGE.md for the full Badge / Button / SearchBar / Icon / Sidebar migration tables.
+**v7.2 → v8:** Select + TextInput sizes are now `xs` 24 / `sm` 28 / `md` 32 (old `sm` 32px → `md`, old `md` 40px → `md`); new `ObjectButton` / `ObjectLinkCell` / `ObjectPanelHeader`.
 
 ### Rules
 
@@ -32,10 +43,11 @@ Column / status / AI helpers: ScoreBadge, ColumnTypeBadge, ColumnHeaderMenu, Col
 - **ALWAYS use lemDS components** instead of raw HTML elements. Never create custom buttons, inputs, selects, toasts, etc. — use `@l3mpire/ui`.
 - **ALWAYS use lemDS tokens** for spacing, colors, radius, and typography via Tailwind utilities (`p-md`, `gap-sm`, `rounded-base`) or CSS variables (`var(--spacing-md)`).
 - **ALWAYS use lemDS typography tokens** — never hardcode font sizes, weights, or line heights. Use the DS values:
-  - Font sizes: `text-xxs` (10px), `text-xs` (12px), `text-sm` (14px), `text-base` (16px), `text-md` (18px), `text-lg` (20px), `text-xl` (24px)
-  - Font weights: `font-regular` (400), `font-medium` (500), `font-bold` (700)
-  - Line heights: `leading-2xs` (14px), `leading-xs` (16px), `leading-sm` (20px), `leading-base` (24px), `leading-md` (28px), `leading-lg` (32px)
-- **ALWAYS use `@l3mpire/icons`** for icons — never import FontAwesome directly.
+  - Font sizes (lemDS tokens 0.26+, names = Figma): `text-xs` (10px), `text-sm` (12px), `text-base` (14px), `text-md` (16px), `text-lg` (18px), `text-xl` (20px), `text-xxl` (24px)
+  - Font weights: `font-regular` (400), `font-medium` (500), `font-semibold` (600), `font-solid` (700), since lemDS 6.0 (Tailwind's own `font-bold` still renders 700, prefer `font-solid`)
+  - Line heights: `leading-xs` (14px), `leading-sm` (16px), `leading-base` (20px), `leading-md` (24px), `leading-lg` (28px), `leading-xl` (32px)
+- **ALWAYS use `@l3mpire/icons`** for icons — never import FontAwesome directly. Icons are named `faXxxOutline` / `faXxxSolid` (e.g. `faMagnifyingGlassOutline`).
+- **`Icon` `size` is container-driven** (since icons 0.9): `xxs` 12/10 · `xs` 16/12 · `sm` 20/14 · `md` 24/14 · `lg` 28/16 · `xl` 32/20 (container/glyph px). Figma « Icon / SM » = `size="sm"` 1:1. For a 16px glyph use `lg`, for 20px use `xl`.
 - **NEVER hardcode colors, font sizes, or spacing** — use semantic token classes or CSS variables from the design system.
 - **Icon rotation/spin animations MUST live on a parent `<span>`**, not on the `<Icon>` itself. The FA Kit script swaps `<i>` → `<svg>` via MutationObserver on every className change, which interrupts any animation applied directly to the icon (symptom: icon ticks ~90° and resets in a loop). Wrap with a stable span (`<span className="ai-icon-spin"><Icon … /></span>`).
 
@@ -43,9 +55,9 @@ Column / status / AI helpers: ScoreBadge, ColumnTypeBadge, ColumnHeaderMenu, Col
 
 ```tsx
 import { Button } from "@l3mpire/ui";
-import { Icon, faMagnifyingGlass } from "@l3mpire/icons";
+import { Icon, faMagnifyingGlassOutline } from "@l3mpire/icons";
 
-<Button appearance="solid" intent="brand" size="md" leftIcon={faMagnifyingGlass}>
+<Button appearance="solid" intent="brand" size="md" leftIcon={faMagnifyingGlassOutline}>
   Search
 </Button>
 ```
@@ -53,14 +65,16 @@ import { Icon, faMagnifyingGlass } from "@l3mpire/icons";
 ### Important: Component Props
 
 Refer to `node_modules/@l3mpire/ui/USAGE.md` for full props reference. Key notes:
-- `Button` → `appearance` (solid/outlined/ghost), `intent` (brand/alert), `size` (sm/md/lg), `leftIcon`, `rightIcon`, `iconOnly`, `badge`, `loading`, `asChild`
-- `Badge` → `variant` (solid/light/outlined), `type` (primary/success/critical/warning/neutral), `tone` (indigo/rose/lime/violet/cyan/orange/emerald/fuchsia/amber/slate — categorical, overrides type), `size` (sm/md/lg), `icon`
-- `InfoMessage` → `type` (info/success/alert/warning/empty), `title`, `description`, `onClose`, `linkLabel`, `linkHref`
-- `Select` → `size`, `label`, `placeholder`, `value`, `error`, `errorMessage`, `icon`
-- `TextInput` → `size`, `label`, `error`, `errorMessage`, `iconLeft`, `iconRight`, `onClear`, `hasButton`
-- `SearchBar` → `variant` (white/grey), `size`, `hasShortcut`, `onClear`
-- `Sidebar` → `isCollapsed`, `onCollapsedChange`. Children: SidebarSection, SidebarFooter
-- `SidebarItem` → `icon`, `solidIcon`, `avatar`, `label`, `state` (default/active), `isNew`, `hasBadge`, `badgeCount`, `hasSubItems`
+- `Button` → `appearance` (solid/outlined/ghost), `intent` (brand/alert/ai), `size` (xs 24px / sm 28px / md 32px — **no more `lg`**), `leftIcon`, `rightIcon`, `iconOnly`, `badge`, `loading`, `asChild`
+- `Badge` → outlined-only, **no `variant` / `tone`**. `type` (info/success/critical/warning/neutral/orange/amber/teal/cyan/sky/indigo/violet/purple/fuchsia/pink/transparent/ai), `size` (sm 20px / md 24px — table cells / lg 28px), `icon`, `onClose` (removable chip, ex-Tag)
+- `BadgeSpecific` → fixed-purpose 20px badges: `type` (new/notif/locked). Use `<BadgeSpecific type="notif">99</BadgeSpecific>` for counters (never `Badge type="critical"`)
+- `StatusPill` → rounded status pill, same 15 hues as Badge (no ai/transparent), `size` (sm/md/lg), `icon`, `onClose`. Rendered by StatusCell / StatusPickerCell
+- `InfoMessage` → `type` (info/success/alert/warning/empty/ai), `title` (optional), `description`, `onClose` + `closeLabel`, `action` (right slot), `bottomAction` (bottom slot) or `linkLabel`/`linkHref`/`onLinkClick` (neutral underlined Link)
+- `Select` → `size` (xs 24 / sm 28 / md 32), `appearance` (default/ghost), `label`, `placeholder`, `value`, `error`, `errorMessage`, `icon`, `avatar`/`flag`, `tags` + `onTagRemove` (neutral Badges with ✕, `+N` overflow), `multiCount`, `isOpen`/`onOpenChange`
+- `TextInput` → `size` (xs 24 / sm 28 / md 32), `label`, `status` (success/risky/error, or `error`/`success` shortcuts), `errorMessage`, `hint`, `iconLeft`, `iconRight`, `onClear`, `hasButton` + `buttonIcon`/`buttonLabel`/`onButtonClick`, `selectBefore` (prefix segment)
+- `SearchBar` → `variant` (white/grey), `size` (xs 24px / sm 28px / md 32px — 40px removed), `hasShortcut`, `onClear`
+- `Sidebar` → `isCollapsed`, `onCollapsedChange`, `onLogoClick` (SidebarLogoButton in header). Collapsed width = 56px. Children: SidebarSection, SidebarFooter. `SidebarSettings` = 260px variant without header/footer for settings pages
+- `SidebarItem` → `icon`, `solidIcon`, `avatar`, `label`, `state` (default/hover/active/disabled), `isNew`, `hasBadge`, `badgeCount`, `isLocked` (with `state="disabled"`), `hasSubItems`. Active state is neutral (no longer blue)
 - `BrowserTab` → `activeTabId`, `onTabSelect`, `onNewTab`, `onReorder`. Children: BrowserTabItem
 - `BrowserTabItem` → `id`, `icon`, `label`, `onClose`
 - `Tabs` → `defaultValue`. Children: TabList (with TabTrigger), TabContent
@@ -71,14 +85,18 @@ Refer to `node_modules/@l3mpire/ui/USAGE.md` for full props reference. Key notes
 - `Typography` → `variant` (h1/h2/h3/lg/md/sm/xs), `weight` (regular/medium/bold)
 - `Tooltip` → wrap with TooltipProvider, use TooltipTrigger + TooltipContent (`type`: default/invert, `side`: top/right/bottom/left)
 - `UserMenu` → Children: UserMenuInfoRow (avatar, name, subtitle, action), UserMenuSection (contains DropdownMenuItem)
-- `DropdownMenu` → Static: DropdownMenu > DropdownMenuList > DropdownMenuItem. Interactive: DropdownMenuRoot > DropdownMenuTrigger + DropdownMenuContent > DropdownMenuRadixItem
-- `Tag` → `variant` (brand/neutral), `size`, `icon`, `onClose`
-- `Link` → `intent` (neutral/brand/alert/success/warning), `size`, `leftIcon`, `rightIcon`
+- `DropdownMenu` → Static: DropdownMenu > DropdownMenuList > DropdownMenuItem. Interactive: DropdownMenuRoot > DropdownMenuTrigger + DropdownMenuContent > DropdownMenuList > DropdownMenuRadixItem. The frame has **no padding** — always wrap items in `DropdownMenuList`. Parts: DropdownMenuSearch (`onBack`), DropdownMenuTabs, DropdownMenuGroup, DropdownMenuDelimiter (`bleed`), DropdownMenuInputItem, DropdownMenuEmpty, DropdownMenuFooter, DropdownMenuClear
+- `DropdownMenuSub` → nested menu: `DropdownMenuSub` > `DropdownMenuSubTrigger` (item props: `icon`, `label`, `value` shown before the chevron) + `DropdownMenuSubContent` (same frame, opens beside the trigger)
+- `DropdownMenuItem` → `icon`, `label`, `sublabel` (inline), `description` (2nd line), `badge`, `checkbox`/`checked`, `leftSlot`, `hasChildren`, `selected` (`isActive` deprecated), `disabled`, `destructive`
+- `Link` → `intent` (neutral/brand/alert/success/warning), `size`, `leftIcon`, `rightIcon`, `underlined`
+- `ObjectButton` → inline link naming an object: `type` (contact/company/campaign), `label`, `src`/`initials`/`tone` or `emoji`, `pressed`. Use wherever an object is *cited* — never for the object the row/page *is* (that's `EntityCell`)
+- `ObjectLinkCell` → table cell citing objects: `type`, `items` ({id,label,src?,initials?,emoji?,onClick?}), `max` (default 2, then `+N` Badge with tooltip), `activeId`, `onRun` (▶ on hover, AI columns), `quickActions`, `group="row"`, `emptyText`
+- `ObjectPanelHeader` → side-panel head for Contact/Company: `type`, `name`, `src`/`initials`, `role` + `company` (ObjectButton), `hasLinkedIn`, `crm`, `onMore`/`onPrevious`/`onNext`/`onExpand`/`onClose`, slots `actions`, `tabs`
 - `Avatar` → `size` (sm/md/lg/xl), `shape` (rounded/squared), `src`, `initials`
 - `SidePanel` → `SidePanelTrigger` (asChild), `SidePanelContent` (overlay: boolean), `SidePanelClose`. Compose with ModalHeader/ModalBody/ModalFooter
-- `DataTable` → `columns` (TanStack ColumnDef), `data`, `enableSorting`, `enableFiltering`, `enablePagination`, `enableRowSelection`, `enableColumnResizing`, `enableColumnDrag`, `bordered`, `emptyState`
+- `DataTable` → `columns` (TanStack ColumnDef), `data`, `variant` (default / `borderless`, lemDS 9.0), `folders`, `enableSorting`, `enableFiltering`, `enablePagination`, `enableRowSelection`, `enableColumnResizing`, `enableColumnDrag`, `bordered`, `emptyState`
 - `EmptyState` → `icon`, `title`, `description`, `size` (sm/md/lg), `action` (ReactNode)
-- `Table` → Low-level: Table > TableHeader > TableRow > TableHead, TableBody > TableRow > TableCell
+- `Table` → Low-level: Table > TableHeader > TableRow > TableHead, TableBody > TableRow > TableCell. `variant="borderless"` + `TableSelectionHead` / `TableSelectionCell` for list views
 - `ChipInput` → `size` (sm/md), `values`, `onChange`, `label`, `placeholder`, `error`, `errorMessage`, `iconLeft`, `max`. Enter creates chip, Backspace on empty removes last
 - `NumberInput` → `size` (sm/md), `value`, `onChange`, `min`, `max`, `step`, `label`, `error`, `errorMessage`. Buttons auto-disable at min/max
 - `RadioGroup` / `RadioGroupItem` → `value`, `onValueChange`; item: `value`, `label`, `disabled`
@@ -102,13 +120,13 @@ The `@source` directive in `index.css` scans `node_modules/@l3mpire/ui/dist/**/*
 All design tokens are available as CSS custom properties:
 - Component tokens: `var(--comp-btn-solid-brand-bg-default)`
 - Semantic tokens: `var(--core-bg-main-primary)`, `var(--core-text-main-primary)`
-- Spacing: `var(--spacing-md)` (16px)
+- Spacing: `var(--spacing-base)` (8px), `var(--spacing-xl)` (16px). Scale: `2xs` 2 · `xs` 4 · `sm` 6 · `base` 8 · `md` 10 · `lg` 12 · `xl` 16 · `2xl` 24 · `3xl` 32 · `4xl` 40 · `5xl` 48 · `6xl` 56
 - Radius: `var(--radius-base)` (8px)
-- Typography sizes: `var(--font-size-size-xxs)` (10px) → `var(--font-size-size-xl)` (24px)
-- Font weights: `var(--font-weight-regular)` (400), `var(--font-weight-medium)` (500), `var(--font-weight-bold)` (700)
-- Line heights: `var(--font-line-height-line-height-2xs)` (14px) → `var(--font-line-height-line-height-lg)` (32px)
+- Typography sizes: `var(--font-size-xs)` (10px) → `var(--font-size-xxl)` (24px)
+- Font weights: `var(--font-weight-regular)` (400), `var(--font-weight-medium)` (500), `var(--font-weight-semibold)` (600), `var(--font-weight-solid)` (700)
+- Line heights: `var(--font-line-height-xs)` (14px) → `var(--font-line-height-xl)` (32px)
 
-Tailwind utility classes are registered: `p-md`, `gap-sm`, `rounded-base`, `text-sm`, `text-lg`, `font-medium`, `font-bold`, `leading-sm`, `leading-base`
+Tailwind utility classes are registered: `p-md`, `gap-sm`, `rounded-base`, `text-sm`, `text-lg`, `font-medium`, `font-solid`, `leading-sm`, `leading-base`
 
 ### Dark Mode
 
@@ -151,6 +169,8 @@ src/
 ├── components/    # Reusable prototype components
 ├── pages/         # Route pages (one per sidebar item)
 │   └── PlaceholderPage.tsx  # Generic placeholder for all routes
+├── lib/
+│   └── proto-identity.ts    # Tab title + favicon (see "Proto identity")
 ├── index.css      # Global styles + Tailwind + lemDS
 ├── main.tsx       # App entry + React Router + page definitions
 └── App.tsx        # Root layout with sidebar navigation + UserMenu
@@ -168,6 +188,21 @@ Every prototype built from this boilerplate maintains **two living docs** at the
 - **`specs.md`** — detailed feature/screen specs (user stories, behavior, UI states, edge cases)
 
 When starting a new project, scaffold both. When scope or behavior changes, update the relevant doc in the same change. Use the **`/project-docs`** skill (`.claude/skills/project-docs/`) to scaffold and maintain them.
+
+## Proto identity (tab title + favicon)
+
+Every proto tells its browser tabs apart:
+- **Favicon**: the lemlist mark, **blue** on the deployed proto, **yellow** on a local dev server (`localhost`, `127.0.0.1`, LAN addresses).
+- **Tab title**: the proto's name first, then `local` on a dev server, then the page or `lemlist`. For example `Account-based · lemlist`, `Account-based · local`, `Account-based · local · Cold Email - Tech Startups`.
+
+**When you start a new proto from this boilerplate, give it its name** in `index.html`, in both lines:
+
+```html
+<meta name="proto-name" content="Account-based" />
+<title>Account-based · lemlist</title>
+```
+
+`src/lib/proto-identity.ts` does the rest (`installProtoIdentity()` runs in `main.tsx`). A page that sets its own tab title calls `protoTitle(pageTitle)`, so the proto's name stays first.
 
 ## Commands
 

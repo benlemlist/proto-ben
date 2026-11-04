@@ -9,7 +9,7 @@ import {
   SearchBar,
   Avatar,
   Button,
-  Badge,
+  BadgeSpecific,
   UserMenu,
   UserMenuInfoRow,
   UserMenuSection,
@@ -207,14 +207,14 @@ export default function App() {
                     <DropdownMenuItem
                       icon={faBellOutline}
                       label="Notifications"
-                      badge={<Badge variant="solid" type="critical" size="sm">99</Badge>}
+                      badge={<BadgeSpecific type="notif">99</BadgeSpecific>}
                     />
                     <DropdownMenuItem icon={faShapesOutline} label="Templates" />
                     <DropdownMenuItem icon={faBrakeWarningOutline} label="Share feedback" />
                     <DropdownMenuItem
                       icon={faRefreshOutline}
                       label="Product updates"
-                      badge={<Badge variant="solid" type="critical" size="sm">99</Badge>}
+                      badge={<BadgeSpecific type="notif">99</BadgeSpecific>}
                     />
                   </UserMenuSection>
                   <UserMenuInfoRow

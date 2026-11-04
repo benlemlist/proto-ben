@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router";
 import "./index.css";
 import App from "./App";
+import { installProtoIdentity } from "./lib/proto-identity";
 import PlaceholderPage from "./pages/PlaceholderPage";
 import Reports from "./pages/Reports";
 
@@ -19,6 +20,9 @@ const pages = [
   { path: "/calls", title: "Calls" },
   { path: "/meetings", title: "Meetings" },
 ];
+
+// Favicon (blue deployed, yellow local) and "Proto name · …" tab title.
+installProtoIdentity();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

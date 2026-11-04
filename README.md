@@ -49,9 +49,22 @@ git init
 # 3. Install dependencies
 pnpm install
 
-# 4. Start prototyping
+# 4. Name it: set the proto's name in index.html (see "Naming the proto" below)
+
+# 5. Start prototyping
 pnpm dev
 ```
+
+### Naming the proto
+
+Each proto names itself, so its browser tabs read apart: the tab title starts with the proto's name, and the favicon is the lemlist mark in **blue** when deployed, **yellow** on localhost. Set the name in `index.html`, in both lines:
+
+```html
+<meta name="proto-name" content="Account-based" />
+<title>Account-based · lemlist</title>
+```
+
+`src/lib/proto-identity.ts` does the rest: `Account-based · lemlist` when deployed, `Account-based · local` on localhost.
 
 To **sync with the latest lemDS** updates:
 
@@ -87,7 +100,8 @@ All components from lemDS are ready to use:
 | Component | Description |
 |-----------|-------------|
 | `Avatar` | User profile image with fallback |
-| `Badge` | Inline label (solid / light / outlined) |
+| `Badge` | Inline label, outlined (`type`, `size`, `onClose` for a removable chip) |
+| `BadgeSpecific` | Fixed-purpose badges: new, notification counter, locked |
 | `Button` | Primary action (solid / outlined / ghost) |
 | `Checkbox` | Form checkbox with label |
 | `DropdownMenu` | Menu with items, headings, sections |
@@ -103,7 +117,6 @@ All components from lemDS are ready to use:
 | `SidebarItem` | Navigation item with icon, label, badge, active state |
 | `SidebarFooter` | Sticky footer area of sidebar |
 | `Switch` | Toggle switch with label |
-| `Tag` | Inline tag (brand / neutral) |
 | `TextArea` | Multi-line text input with character limit |
 | `TextInput` | Form input with icon and validation |
 | `Toast` | Notification toast (info / success / alert / warning) |
