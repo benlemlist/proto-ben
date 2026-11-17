@@ -34,6 +34,8 @@ Column / status / AI helpers: ScoreBadge, ColumnTypeBadge, ColumnHeaderMenu, Col
 
 **Added in lemDS 9.0 (ui):** `variant="borderless"` on `DataTable` / `Table` (Figma « Table borderless », list views: Campaigns, Tasks) with `TableSelectionHead` / `TableSelectionCell`, `TableFolderRow` (+ DataTable `folders`), borderless cells `DoneTick`, `FavoriteToggle`, `TagsPickerCell`, `TableItemHover`, `StatusPickerCell triggerStyle="item"`, `TextCell done`. A borderless DataTable pins its own columns and paints its own 48px rows. Nested menus: `DropdownMenuSub` + `DropdownMenuSubTrigger` + `DropdownMenuSubContent`.
 
+**Added between lemDS 9.2.2 and 9.4.0 (ui):** `MultiSelect` (ready-made multi-select on `Select` + `DropdownMenu`), `Skeleton` (Figma « Loader › Skeleton ») with the `useDelayedLoading` hook, `DropdownMenuSkeleton` (skeleton rows in a menu).
+
 **Removed in v7:** `Tag` (→ `Badge` with `onClose`). See "Migration — v7.0.0" in USAGE.md for the full Badge / Button / SearchBar / Icon / Sidebar migration tables.
 **v7.2 → v8:** Select + TextInput sizes are now `xs` 24 / `sm` 28 / `md` 32 (old `sm` 32px → `md`, old `md` 40px → `md`); new `ObjectButton` / `ObjectLinkCell` / `ObjectPanelHeader`.
 
@@ -71,6 +73,9 @@ Refer to `node_modules/@l3mpire/ui/USAGE.md` for full props reference. Key notes
 - `StatusPill` → rounded status pill, same 15 hues as Badge (no ai/transparent), `size` (sm/md/lg), `icon`, `onClose`. Rendered by StatusCell / StatusPickerCell
 - `InfoMessage` → `type` (info/success/alert/warning/empty/ai), `title` (optional), `description`, `onClose` + `closeLabel`, `action` (right slot), `bottomAction` (bottom slot) or `linkLabel`/`linkHref`/`onLinkClick` (neutral underlined Link)
 - `Select` → `size` (xs 24 / sm 28 / md 32), `appearance` (default/ghost), `label`, `placeholder`, `value`, `error`, `errorMessage`, `icon`, `avatar`/`flag`, `tags` + `onTagRemove` (neutral Badges with ✕, `+N` overflow), `multiCount`, `isOpen`/`onOpenChange`
+- `MultiSelect` → `options` ({value, label?, sublabel?, avatar?, icon?, color?, disabled?}), `value`/`defaultValue` (string[] of ids), `onValueChange`, `mode` (instant / apply = Cancel + Apply footer), `searchable` (auto above 8 options), `showSelectAll`, `onSearchChange` + `loading` (server search, skeleton rows), `skeleton`, plus the `Select` props (`size`, `appearance`, `label`, `placeholder`, `error`…). The trigger shows the selection as Badge chips with `+N` overflow
+- `Skeleton` → `type` (title / body / avatar / company / badge / block = free size via `className`). Use for the first load of an empty zone, 3 to 5 lines with variable widths. Pair with `useDelayedLoading(loading)` (shown after 250 ms, kept ≥ 450 ms)
+- `DropdownMenuSkeleton` → replaces `DropdownMenuList` during a server load or search: `rows` (default 4), `checkbox`, `leading` (icon/avatar/company), `sublabel`, `description`
 - `TextInput` → `size` (xs 24 / sm 28 / md 32), `label`, `status` (success/risky/error, or `error`/`success` shortcuts), `errorMessage`, `hint`, `iconLeft`, `iconRight`, `onClear`, `hasButton` + `buttonIcon`/`buttonLabel`/`onButtonClick`, `selectBefore` (prefix segment)
 - `SearchBar` → `variant` (white/grey), `size` (xs 24px / sm 28px / md 32px — 40px removed), `hasShortcut`, `onClear`
 - `Sidebar` → `isCollapsed`, `onCollapsedChange`, `onLogoClick` (SidebarLogoButton in header). Collapsed width = 56px. Children: SidebarSection, SidebarFooter. `SidebarSettings` = 260px variant without header/footer for settings pages
