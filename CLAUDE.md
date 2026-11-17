@@ -175,7 +175,9 @@ src/
 ├── pages/         # Route pages (one per sidebar item)
 │   └── PlaceholderPage.tsx  # Generic placeholder for all routes
 ├── lib/
-│   └── proto-identity.ts    # Tab title + favicon (see "Proto identity")
+│   ├── proto-identity.ts    # Tab title + favicon (see "Proto identity")
+│   ├── ai/                  # aiText, aiObject, aiAgent, aiPool, Live AI switch (see "AI")
+│   └── agent.ts             # Transport of lib/ai: SSE reader, retries, tool loop
 ├── index.css      # Global styles + Tailwind + lemDS
 ├── main.tsx       # App entry + React Router + page definitions
 └── App.tsx        # Root layout with sidebar navigation + UserMenu
@@ -209,6 +211,47 @@ Every proto tells its browser tabs apart:
 
 `src/lib/proto-identity.ts` does the rest (`installProtoIdentity()` runs in `main.tsx`). A page that sets its own tab title calls `protoTitle(pageTitle)`, so the proto's name stays first.
 
+## AI (DeepSeek)
+
+Every AI feature of a proto runs on a real model, **DeepSeek V4.1 Flash**, through one stack. A new AI feature is live the moment it calls `src/lib/ai`.
+
+```
+feature (AI column, copilot, chat…)
+  → src/lib/ai         aiText · aiObject · aiAgent · aiPool · isAiFallback
+  → src/lib/agent.ts   SSE reader, retries, tool loop, the Live AI switch
+  → POST /api/agent    vite-plugin-agent.ts (pnpm dev / preview) · api/agent.ts (Vercel edge)
+  → DeepSeek           through OpenRouter, or DeepSeek's own API (both: Anthropic Messages format)
+```
+
+- **The key**: one key in `.env.local` (git-ignored, template in `.env.example`), then restart `pnpm dev`. `OPENROUTER_API_KEY` (a key that starts with `sk-or-`, used first) goes through OpenRouter. `DEEPSEEK_API_KEY` goes to DeepSeek's own API. The dev server prints `[agent-proxy] OpenRouter key loaded` (or `DeepSeek key loaded`) at start. For a deployed proto: the same variable in the Vercel project.
+- **The key never goes in the client**: no `VITE_*` key, no direct call to a model provider from the browser, never a key in a committed file.
+- **ALWAYS use `src/lib/ai`** for an AI feature. Never write a new `fetch` to a model provider.
+- **ALWAYS keep a mock as the fallback**. With no key or with Live AI off, the call throws `NoKeyError`: catch it with `isAiFallback(err)` and show the mock, so the proto works for a person without a key.
+- **Model**: the proxy sets the model, whatever the client asks for: `deepseek/deepseek-v4.1-flash-1017` on OpenRouter, `deepseek-flash` on DeepSeek's own API (the `OPENROUTER` and `DEEPSEEK` constants in `vite-plugin-agent.ts` and `api/agent.ts`).
+
+```ts
+import { aiObject, aiText, aiPool, isAiFallback, LEMLIST_CONTEXT, AI_STYLE } from "../lib/ai";
+
+try {
+  const out = await aiObject<{ value: string }>({
+    system: `${LEMLIST_CONTEXT} ${AI_STYLE}`,
+    prompt: "…",
+    name: "fill_cell",
+    description: "…",
+    schema: { type: "object", properties: { value: { type: "string" } }, required: ["value"] },
+  });
+} catch (err) {
+  if (!isAiFallback(err)) console.error(err);
+  // the feature's mock
+}
+```
+
+- **Text** → `aiText` (stream `onText` into the UI). **Structured** (a cell, a sequence, filters, a score) → `aiObject` with a JSON schema. **Multi-step with tools** → `aiAgent` (tool loop, return `PAUSE` from `onTool` to wait for the user).
+- **Many rows** (AI columns, bulk) → `aiPool(items, 4, fn)`. Cap the number of rows of one run.
+- **Reasoning**: off by default (fast, cheap). Pass `think: true` (`aiText`, `aiObject`) or `thinking: { type: "enabled" }` (`aiAgent`) to stream the reasoning through `onThinking`. Use it for what the user watches, not for bulk calls. The reasoning counts in `maxTokens`.
+- **Live AI switch**: `setLiveAi(on)` / `useLiveAiSetting()` (`src/lib/ai/live.ts`), on by default. A proto that wants the switch in its UI binds a lemDS `Switch` to them.
+- **Copy**: put `AI_STYLE` in the system prompt (plain English, short, no invented figures) and `LEMLIST_CONTEXT` when the model must know the product.
+
 ## Commands
 
 ```bash
@@ -223,3 +266,4 @@ pnpm preview  # Preview production build
 - `.npmrc` only contains `shamefully-hoist=true` — no custom registries or auth tokens
 - FontAwesome Pro icons are loaded at runtime via a **Kit CDN script** in `index.html` — no npm `@fortawesome/*` packages needed
 - Run `pnpm sync-ds` to update lemDS packages
+- AI: one key in `.env.local` (`OPENROUTER_API_KEY=` or `DEEPSEEK_API_KEY=`), see "AI (DeepSeek)"

@@ -72,6 +72,18 @@ To **sync with the latest lemDS** updates:
 pnpm sync-ds
 ```
 
+## AI (DeepSeek)
+
+The AI features of a proto run on DeepSeek V4.1 Flash. To turn them on:
+
+1. Copy `.env.example` to `.env.local` (git-ignored).
+2. Paste one key: an OpenRouter key (starts with `sk-or-`) after `OPENROUTER_API_KEY=`, or a [DeepSeek key](https://platform.deepseek.com/api_keys) after `DEEPSEEK_API_KEY=`.
+3. Restart `pnpm dev`. The terminal prints `[agent-proxy] OpenRouter key loaded` (or `DeepSeek key loaded`).
+
+The key stays on the server side: the browser calls `/api/agent`, and the proxy (`vite-plugin-agent.ts` in dev, `api/agent.ts` on Vercel) adds the key. For a deployed proto, set the same variable in the Vercel project. With no key, each AI feature shows its mock.
+
+In the code, every AI feature goes through `src/lib/ai` (`aiText`, `aiObject`, `aiAgent`, `aiPool`). See "AI (DeepSeek)" in `CLAUDE.md`.
+
 ## Pages & Routing
 
 The boilerplate comes with a full Lemlist sidebar and one page per navigation item. Each page is a blank placeholder ready for prototyping.
@@ -206,6 +218,9 @@ src/
 ├── components/    # Reusable prototype components
 ├── pages/         # Route pages (add new routes in main.tsx)
 │   └── PlaceholderPage.tsx  # Generic placeholder used by all routes
+├── lib/
+│   ├── ai/        # aiText, aiObject, aiAgent, aiPool (see "AI (DeepSeek)")
+│   └── agent.ts   # Transport of lib/ai (SSE reader, retries, tool loop)
 ├── index.css      # Global styles (lemDS + Tailwind)
 ├── main.tsx       # App entry + React Router + page definitions
 └── App.tsx        # Root layout with sidebar + UserMenu
