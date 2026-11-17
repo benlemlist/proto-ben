@@ -19,6 +19,32 @@ function upstreamOf(env: Record<string, string | undefined>) {
   return null;
 }
 
+// What a client may send upstream. The proxy sets `model` and `stream` itself.
+const ALLOWED_FIELDS = ["system", "messages", "tools", "tool_choice", "thinking", "max_tokens", "temperature", "top_p", "stop_sequences", "output_config"];
+/** The most output tokens one call can ask for (a cost limit per request). */
+const MAX_TOKENS_CAP = 16_000;
+/** The largest request body the proxy forwards. */
+const MAX_BODY_BYTES = 2_000_000;
+
+/** The body sent upstream: only the allowed fields, max_tokens capped, the proxy's model, always streamed. */
+function upstreamBody(payload: Record<string, unknown>, model: string) {
+  const body: Record<string, unknown> = {};
+  for (const field of ALLOWED_FIELDS) if (payload[field] !== undefined) body[field] = payload[field];
+  const asked = Number(payload.max_tokens);
+  body.max_tokens = Math.min(Number.isFinite(asked) && asked >= 1 ? Math.floor(asked) : 2048, MAX_TOKENS_CAP);
+  return JSON.stringify({ ...body, model, stream: true });
+}
+
+/** True for a request that another website's page sent from a browser: the proxy refuses it. */
+function isCrossOrigin(origin: string | null | undefined, host: string | null | undefined) {
+  if (!origin) return false;
+  try {
+    return new URL(origin).host !== host;
+  } catch {
+    return true;
+  }
+}
+
 // `pnpm dev` and `pnpm preview` only. Proxies POST /api/agent → DeepSeek
 // (streaming), and adds the key of .env.local (OPENROUTER_API_KEY or
 // DEEPSEEK_API_KEY) on the server side, so the key never reaches the browser
@@ -34,6 +60,11 @@ export function agentProxy(): Plugin {
       res.end("Method Not Allowed");
       return;
     }
+    if (isCrossOrigin(req.headers.origin, req.headers.host)) {
+      res.statusCode = 403;
+      res.end("Forbidden");
+      return;
+    }
     const up = target;
     if (!up) {
       res.statusCode = 503;
@@ -44,15 +75,26 @@ export function agentProxy(): Plugin {
     }
     let body = "";
     req.on("error", () => { if (!res.writableEnded) res.end(); });
-    req.on("data", (chunk) => { body += chunk; });
+    let tooLarge = false;
+    req.on("data", (chunk) => {
+      if (tooLarge) return;
+      body += chunk;
+      if (body.length > MAX_BODY_BYTES) {
+        tooLarge = true;
+        body = "";
+        res.statusCode = 413;
+        res.end("Payload Too Large");
+      }
+    });
     req.on("end", async () => {
+      if (tooLarge) return;
       try {
         const payload = JSON.parse(body || "{}");
         const upstream = await fetch(up.url, {
           method: "POST",
           headers: { "content-type": "application/json", authorization: `Bearer ${up.key}` },
           // The proxy decides the model, whatever the client asks for.
-          body: JSON.stringify({ stream: true, ...payload, model: up.model }),
+          body: upstreamBody(payload, up.model),
         });
         if (!upstream.ok || !upstream.body) {
           const text = await upstream.text();

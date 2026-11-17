@@ -82,6 +82,8 @@ The AI features of a proto run on DeepSeek V4.1 Flash. To turn them on:
 
 The key stays on the server side: the browser calls `/api/agent`, and the proxy (`vite-plugin-agent.ts` in dev, `api/agent.ts` on Vercel) adds the key. For a deployed proto, set the same variable in the Vercel project. With no key, each AI feature shows its mock.
 
+**Before you deploy a proto with a key:** `/api/agent` has no login, so a person who has the URL can use the key. Turn on Vercel Deployment Protection for the project, and set a spending limit on the key.
+
 In the code, every AI feature goes through `src/lib/ai` (`aiText`, `aiObject`, `aiAgent`, `aiPool`). See "AI (DeepSeek)" in `CLAUDE.md`.
 
 ## Pages & Routing

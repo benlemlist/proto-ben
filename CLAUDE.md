@@ -225,6 +225,7 @@ feature (AI column, copilot, chat…)
 
 - **The key**: one key in `.env.local` (git-ignored, template in `.env.example`), then restart `pnpm dev`. `OPENROUTER_API_KEY` (a key that starts with `sk-or-`, used first) goes through OpenRouter. `DEEPSEEK_API_KEY` goes to DeepSeek's own API. The dev server prints `[agent-proxy] OpenRouter key loaded` (or `DeepSeek key loaded`) at start. For a deployed proto: the same variable in the Vercel project.
 - **The key never goes in the client**: no `VITE_*` key, no direct call to a model provider from the browser, never a key in a committed file.
+- **A deployed proto has no login on `/api/agent`**: a person who has the URL can use the key. Turn on Vercel Deployment Protection for the project, and set a spending limit on the key. The proxy limits each request (allowed fields, `max_tokens` ≤ 16 000, body ≤ 2 MB) and refuses the pages of other websites.
 - **ALWAYS use `src/lib/ai`** for an AI feature. Never write a new `fetch` to a model provider.
 - **ALWAYS keep a mock as the fallback**. With no key or with Live AI off, the call throws `NoKeyError`: catch it with `isAiFallback(err)` and show the mock, so the proto works for a person without a key.
 - **Model**: the proxy sets the model, whatever the client asks for: `deepseek/deepseek-v4.1-flash-1017` on OpenRouter, `deepseek-flash` on DeepSeek's own API (the `OPENROUTER` and `DEEPSEEK` constants in `vite-plugin-agent.ts` and `api/agent.ts`).
