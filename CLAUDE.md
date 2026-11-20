@@ -1,3 +1,13 @@
+# Ben proto (built from the Lemlist Proto boilerplate)
+
+## This proto
+- One proto for all of Benjamin's projects. Each project: code in `src/projects/<project>/`, docs in `projects/<project>/` (`project.md`, `specs.md`, `priorities.md`), route in `src/main.tsx`. Root `project.md` / `specs.md` are the index.
+- Projects: **Inbox Q1 2027** (`/inbox`, `src/projects/inbox/`, hidden proto commands on ⌘⇧K, delivery lots in `lots.ts`).
+- **Push to BOTH remotes on every push**: `origin` (l3mpire, for devs) and `perso` (personal, Vercel). `pnpm push:all`.
+- `boilerplate` remote = Peter's boilerplate; merge its updates with `git pull boilerplate main`.
+
+---
+
 # Lemlist Proto — Boilerplate
 
 ## Project Context

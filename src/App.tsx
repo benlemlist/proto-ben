@@ -57,11 +57,14 @@ export default function App() {
   const location = useLocation();
   const navigate = useNavigate();
 
+  // Dense screens (e.g. Inbox) start with the app sidebar collapsed; the user can expand it.
+  const [collapsed, setCollapsed] = useState(() => ["/inbox"].includes(location.pathname));
+
   const isActive = (path: string) => location.pathname === path;
 
   return (
     <div className="flex h-screen">
-      <Sidebar>
+      <Sidebar isCollapsed={collapsed} onCollapsedChange={setCollapsed}>
         <SearchBar placeholder="Search for anything" size="md" hasShortcut />
 
         <SidebarSection>
@@ -237,7 +240,7 @@ export default function App() {
           </div>
         </SidebarFooter>
       </Sidebar>
-      <main className="flex-1 overflow-auto">
+      <main className="min-w-0 flex-1 overflow-auto">
         <Outlet />
       </main>
     </div>

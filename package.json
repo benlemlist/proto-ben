@@ -1,5 +1,5 @@
 {
-  "name": "lemlist-proto",
+  "name": "ben-proto",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "sync-ds": "pnpm update --latest @l3mpire/tokens @l3mpire/icons @l3mpire/ui"
+    "sync-ds": "pnpm update --latest @l3mpire/tokens @l3mpire/icons @l3mpire/ui",
+    "push:all": "git push origin main && git push perso main"
   },
   "dependencies": {
     "@l3mpire/icons": "^0.11.1",

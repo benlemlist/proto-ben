@@ -6,6 +6,7 @@ import App from "./App";
 import { installProtoIdentity } from "./lib/proto-identity";
 import PlaceholderPage from "./pages/PlaceholderPage";
 import Reports from "./pages/Reports";
+import InboxPage from "./projects/inbox/InboxPage";
 
 const pages = [
   { path: "/", title: "Home" },
@@ -15,7 +16,6 @@ const pages = [
   { path: "/companies", title: "Companies" },
   { path: "/campaigns", title: "Campaigns" },
   { path: "/tasks", title: "Tasks" },
-  { path: "/inbox", title: "Inbox" },
   { path: "/deliverability-hub", title: "Deliverability hub" },
   { path: "/calls", title: "Calls" },
   { path: "/meetings", title: "Meetings" },
@@ -33,6 +33,8 @@ createRoot(document.getElementById("root")!).render(
             <Route key={path} path={path} element={<PlaceholderPage title={title} />} />
           ))}
           <Route path="/reports" element={<Reports />} />
+          {/* Project: Inbox Q1 2027 (projects/inbox-q1-2027) */}
+          <Route path="/inbox" element={<InboxPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
