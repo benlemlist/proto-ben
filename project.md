@@ -9,6 +9,7 @@ lemlist product design prototypes (React + Vite + lemDS). The boilerplate's comp
 
 | Project | Route | Docs | Status |
 |---|---|---|---|
+| Accounts list monitoring — signals from a company list (FEATURE-4869) | `/companies` | [project](projects/accounts-monitoring/project.md) | V1 (Maxime L) vs V2 (Ben), switch in the proto panel, to review with the PM |
 | PeopleDB — suggested lead lists (FEATURE-5060) | `/people-database` | [project](projects/people-db/project.md) · [specs](projects/people-db/specs.md) | v1, to review with the PM |
 | Duplicate rules — simplification | `/settings/data-management/duplicates` | [project](projects/duplicate-rules/project.md) | v1, to review with Edouard on Monday |
 | Dynamic contact status (FEATURE-1804) | `/settings/data-management/statuses` | [project](projects/contact-status/project.md) · [specs](projects/contact-status/specs.md) | v1, to review with the PM on Monday |

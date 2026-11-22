@@ -11,11 +11,11 @@ import StatusesPage from "./projects/contact-status/StatusesPage";
 import DuplicatesPage from "./projects/duplicate-rules/DuplicatesPage";
 import SignalsPage from "./projects/signals/SignalsPage";
 import PeopleDbPage from "./projects/people-db/PeopleDbPage";
+import CompaniesPage from "./projects/accounts-monitoring/CompaniesPage";
 
 const pages = [
   { path: "/", title: "Home" },
   { path: "/contacts", title: "Contacts" },
-  { path: "/companies", title: "Companies" },
   { path: "/campaigns", title: "Campaigns" },
   { path: "/tasks", title: "Tasks" },
   { path: "/deliverability-hub", title: "Deliverability hub" },
@@ -45,6 +45,8 @@ createRoot(document.getElementById("root")!).render(
           <Route path="/signals" element={<SignalsPage />} />
           {/* Project: PeopleDB suggested lead lists (projects/people-db) */}
           <Route path="/people-database" element={<PeopleDbPage />} />
+          {/* Project: Accounts list monitoring — signals from a company list (projects/accounts-monitoring) */}
+          <Route path="/companies" element={<CompaniesPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
