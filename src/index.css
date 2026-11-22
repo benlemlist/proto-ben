@@ -2,3 +2,38 @@
 
 @source "../node_modules/@l3mpire/ui/dist/**/*.mjs";
 @source "../src/**/*.{ts,tsx}";
+
+/* Floating proto panel (src/lib/proto-panel.tsx) is in dark theme. lemDS component tokens
+   are resolved on :root, so the ones the panel uses are declared again in its scope.
+   Copied from @l3mpire/tokens components.css (checkbox, link). */
+[data-proto-panel] {
+  --comp-checkbox-unchecked-bg: var(--core-bg-main-primary);
+  --comp-checkbox-unchecked-border-default: var(--core-border-main-secondary);
+  --comp-checkbox-unchecked-border-hover: var(--interactive-border-primary-dark-hover);
+  --comp-checkbox-unchecked-border-pressed: var(--interactive-border-primary-dark-pressed);
+  --comp-checkbox-checked-bg-default: var(--interactive-bg-primary-dark-default);
+  --comp-checkbox-checked-bg-hover: var(--interactive-bg-primary-dark-hover);
+  --comp-checkbox-checked-bg-pressed: var(--interactive-bg-primary-dark-pressed);
+  --comp-checkbox-checked-icon: var(--core-text-main-invert-primary);
+  --comp-checkbox-disabled-bg: var(--core-bg-main-hover);
+  --comp-checkbox-disabled-border: var(--core-border-main-secondary);
+  --comp-checkbox-disabled-icon: var(--core-text-functional-disabled);
+  --comp-checkbox-label-default: var(--core-text-main-primary);
+  --comp-checkbox-label-disabled: var(--core-text-functional-disabled);
+  --comp-link-neutral-text-default: var(--interactive-text-neutral-dark-default);
+  --comp-link-neutral-text-hover: var(--interactive-text-neutral-dark-hover);
+  --comp-link-neutral-text-pressed: var(--interactive-text-neutral-dark-pressed);
+  --comp-link-brand-text-default: var(--interactive-text-primary-dark-default);
+  --comp-link-brand-text-hover: var(--interactive-text-primary-dark-hover);
+  --comp-link-brand-text-pressed: var(--interactive-text-primary-dark-pressed);
+  --comp-link-alert-text-default: var(--interactive-text-critical-dark-default);
+  --comp-link-alert-text-hover: var(--interactive-text-critical-dark-hover);
+  --comp-link-alert-text-pressed: var(--interactive-text-critical-dark-pressed);
+  --comp-link-success-text-default: var(--interactive-text-success-dark-default);
+  --comp-link-success-text-hover: var(--interactive-text-success-dark-hover);
+  --comp-link-success-text-pressed: var(--interactive-text-success-dark-pressed);
+  --comp-link-warning-text-default: var(--interactive-text-warning-dark-default);
+  --comp-link-warning-text-hover: var(--interactive-text-warning-dark-hover);
+  --comp-link-warning-text-pressed: var(--interactive-text-warning-dark-pressed);
+  --comp-link-disabled-text: var(--core-text-functional-disabled);
+}

@@ -3,7 +3,7 @@
 ## This proto
 - One proto for all of Benjamin's projects. Each project: code in `src/projects/<project>/`, docs in `projects/<project>/` (`project.md`, `specs.md`, `priorities.md`), route in `src/main.tsx`. Root `project.md` / `specs.md` are the index.
 - Projects: **Inbox Q1 2027** (`/inbox`, `src/projects/inbox/`, hidden proto commands on ⌘⇧K, delivery lots in `lots.ts`). **Dynamic contact status** (`/settings/data-management/statuses`, `src/projects/contact-status/`, ⌘⇧K scenarios, rules engine in `logic.ts`). **New signals** (`/signals`, `src/projects/signals/`, built on the prod watch-list wizard, ⌘⇧K commands). **PeopleDB suggested lists** (`/people-database`, `src/projects/people-db/`, ⌘⇧K commands, lists and lead generator in `data.ts`).
-- **Floating proto panel** (`src/lib/proto-panel.tsx`, mounted in `App.tsx`): 4 corners, foldable. A page adds its options with `<ProtoPanelSection title="…">` (portaled, keeps the page's context). Inbox: delivery lots checkboxes (`src/projects/inbox/components/LotsPanel.tsx`).
+- **Floating proto panel** (`src/lib/proto-panel.tsx`, mounted in `App.tsx`): dark theme, drag by the grip to snap to one of 4 corners, foldable. lemDS `--comp-*` tokens resolve on `:root`, so the ones used inside the panel are redeclared under `[data-proto-panel]` in `src/index.css` (add more there if a new component looks light). A page adds its options with `<ProtoPanelSection title="…">` (portaled, keeps the page's context). Inbox: delivery lots checkboxes (`src/projects/inbox/components/LotsPanel.tsx`).
 - **Push to BOTH remotes on every push**: `origin` (l3mpire, for devs) and `perso` (personal, Vercel). `pnpm push:all`.
 - `boilerplate` remote = Peter's boilerplate; merge its updates with `git pull boilerplate main`.
 

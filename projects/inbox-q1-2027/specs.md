@@ -75,7 +75,7 @@
 
 ## Proto panel (floating)
 
-- Proto-wide panel (`src/lib/proto-panel.tsx`), folded into a « Proto » pill, movable to any of the 4 corners (2×2 picker), position remembered per browser. A page adds options with `<ProtoPanelSection>`; hidden on pages with none.
+- Proto-wide panel (`src/lib/proto-panel.tsx`), dark theme (stands apart from lemlist), folded into a « Proto » pill. Drag it by its grip: it snaps to the nearest of the 4 corners (a dashed outline shows where). Position remembered per browser. A page adds options with `<ProtoPanelSection>`; hidden on pages with none.
 - Inbox section « Delivery lots »: checkboxes Prod, Lot 1 … Lot 6. Cumulative: checking lot 3 checks 1–2, unchecking lot 3 unchecks 3–6. Prod is always on. Replaces the old lot badge.
 
 ## Proto commands (hidden)
