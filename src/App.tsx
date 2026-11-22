@@ -51,6 +51,7 @@ import {
   faArrowRightFromBracketOutline,
   faSortSolid,
 } from "@l3mpire/icons";
+import { ProtoPanelProvider } from "./lib/proto-panel";
 
 export default function App() {
   const [showUserMenu, setShowUserMenu] = useState(false);
@@ -63,6 +64,7 @@ export default function App() {
   const isActive = (path: string) => location.pathname === path;
 
   return (
+    <ProtoPanelProvider>
     <div className="flex h-screen">
       <Sidebar isCollapsed={collapsed} onCollapsedChange={setCollapsed}>
         <SearchBar placeholder="Search for anything" size="md" hasShortcut />
@@ -244,5 +246,6 @@ export default function App() {
         <Outlet />
       </main>
     </div>
+    </ProtoPanelProvider>
   );
 }

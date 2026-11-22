@@ -73,6 +73,11 @@
 - Lot 1 hotfix: a teammate's private conversation is not visible. Lot 0 shows it with a red banner (production bug).
 - Lot 5: lock on private conversations, "Thomas · unread" on rows of a teammate who has not read the reply, notes.
 
+## Proto panel (floating)
+
+- Proto-wide panel (`src/lib/proto-panel.tsx`), folded into a « Proto » pill, movable to any of the 4 corners (2×2 picker), position remembered per browser. A page adds options with `<ProtoPanelSection>`; hidden on pages with none.
+- Inbox section « Delivery lots »: checkboxes Prod, Lot 1 … Lot 6. Cumulative: checking lot 3 checks 1–2, unchecking lot 3 unchecks 3–6. Prod is always on. Replaces the old lot badge.
+
 ## Proto commands (hidden)
 
 - `⌘⇧K` / `Ctrl+Shift+K`, `?proto` in the URL, or `window.proto.help()` in the console.

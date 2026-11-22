@@ -1,6 +1,6 @@
 // Inbox — Q1 2027 focus. Layout: [inbox nav (lot 3)] | list | conversation + composer | contact panel.
 import { useEffect } from "react";
-import { Toast, Badge } from "@l3mpire/ui";
+import { Toast } from "@l3mpire/ui";
 import { InboxProvider, useInbox } from "./store";
 import { InboxNav } from "./components/InboxNav";
 import { ConversationList } from "./components/ConversationList";
@@ -8,7 +8,7 @@ import { useListedConversations } from "./hooks";
 import { ConversationView } from "./components/ConversationView";
 import { ContactPanel } from "./components/ContactPanel";
 import { ProtoCommands } from "./components/ProtoCommands";
-import { LOTS } from "./lots";
+import { LotsPanel } from "./components/LotsPanel";
 import { protoTitle } from "../../lib/proto-identity";
 import { inDays } from "./data";
 
@@ -52,8 +52,6 @@ function InboxLayout() {
     return () => window.removeEventListener("keydown", onKey);
   }, [s, list]);
 
-  const lot = LOTS.find((l) => l.lot === s.lot)!;
-
   return (
     <div className="relative flex h-full min-h-0 bg-[var(--core-bg-main-primary)]">
       {s.has("left_nav") && <InboxNav />}
@@ -62,11 +60,7 @@ function InboxLayout() {
       <ContactPanel />
       <ProtoCommands />
 
-      {s.lot !== 6 && (
-        <button type="button" onClick={() => s.setCommandsOpen(true)} className="absolute bottom-lg left-lg z-10" title="Proto: delivery lot shown (⌘⇧K)">
-          <Badge type={s.lot === 0 ? "warning" : "indigo"} size="md">{lot.title}</Badge>
-        </button>
-      )}
+      <LotsPanel />
 
       <div className="pointer-events-none fixed right-xl bottom-xl z-50 flex w-[380px] flex-col gap-base">
         {s.toasts.map((t) => (
