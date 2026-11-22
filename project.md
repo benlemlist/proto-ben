@@ -9,6 +9,9 @@ lemlist product design prototypes (React + Vite + lemDS). The boilerplate's comp
 
 | Project | Route | Docs | Status |
 |---|---|---|---|
+| PeopleDB — suggested lead lists (FEATURE-5060) | `/people-database` | [project](projects/people-db/project.md) · [specs](projects/people-db/specs.md) | v1, to review with the PM |
+| Dynamic contact status (FEATURE-1804) | `/settings/data-management/statuses` | [project](projects/contact-status/project.md) · [specs](projects/contact-status/specs.md) | v1, to review with the PM on Monday |
+| New signals — Rodz sprint + Ads engagement | `/signals` | [project](projects/new-signals/project.md) · [specs](projects/new-signals/specs.md) | v1, to review with Etienne |
 | Inbox — Q1 2027 focus | `/inbox` | [project](projects/inbox-q1-2027/project.md) · [specs](projects/inbox-q1-2027/specs.md) · [priorities by lot](projects/inbox-q1-2027/priorities.md) | v1, to review with the PM |
 
 ## Repositories

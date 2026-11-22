@@ -58,7 +58,7 @@ export default function App() {
   const navigate = useNavigate();
 
   // Dense screens (e.g. Inbox) start with the app sidebar collapsed; the user can expand it.
-  const [collapsed, setCollapsed] = useState(() => ["/inbox"].includes(location.pathname));
+  const [collapsed, setCollapsed] = useState(() => ["/inbox", "/people-database"].includes(location.pathname) || location.pathname.startsWith("/settings"));
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -204,7 +204,7 @@ export default function App() {
                     }
                   />
                   <UserMenuSection>
-                    <DropdownMenuItem icon={faGearOutline} label="Settings" />
+                    <DropdownMenuItem icon={faGearOutline} label="Settings" onClick={() => { setShowUserMenu(false); navigate("/settings/data-management/statuses"); }} />
                     <DropdownMenuItem icon={faBadgeDollarOutline} label="Plans & billing" />
                     <DropdownMenuItem icon={faGaugeHighOutline} label="Cockpit" />
                     <DropdownMenuItem

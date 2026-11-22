@@ -7,11 +7,12 @@ import { installProtoIdentity } from "./lib/proto-identity";
 import PlaceholderPage from "./pages/PlaceholderPage";
 import Reports from "./pages/Reports";
 import InboxPage from "./projects/inbox/InboxPage";
+import StatusesPage from "./projects/contact-status/StatusesPage";
+import SignalsPage from "./projects/signals/SignalsPage";
+import PeopleDbPage from "./projects/people-db/PeopleDbPage";
 
 const pages = [
   { path: "/", title: "Home" },
-  { path: "/people-database", title: "People database" },
-  { path: "/signals", title: "Signals" },
   { path: "/contacts", title: "Contacts" },
   { path: "/companies", title: "Companies" },
   { path: "/campaigns", title: "Campaigns" },
@@ -35,6 +36,12 @@ createRoot(document.getElementById("root")!).render(
           <Route path="/reports" element={<Reports />} />
           {/* Project: Inbox Q1 2027 (projects/inbox-q1-2027) */}
           <Route path="/inbox" element={<InboxPage />} />
+          {/* Project: Dynamic contact status (projects/contact-status) */}
+          <Route path="/settings/data-management/statuses" element={<StatusesPage />} />
+          {/* Project: New signals — Rodz sprint + Ads engagement (projects/new-signals) */}
+          <Route path="/signals" element={<SignalsPage />} />
+          {/* Project: PeopleDB suggested lead lists (projects/people-db) */}
+          <Route path="/people-database" element={<PeopleDbPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
