@@ -7,6 +7,8 @@
    are resolved on :root, so the ones the panel uses are declared again in its scope.
    Copied from @l3mpire/tokens components.css (checkbox, link). */
 [data-proto-panel] {
+  /* A Radix modal sets pointer-events: none on <body>; the proto panel stays usable on top of it. */
+  pointer-events: auto;
   --comp-checkbox-unchecked-bg: var(--core-bg-main-primary);
   --comp-checkbox-unchecked-border-default: var(--core-border-main-secondary);
   --comp-checkbox-unchecked-border-hover: var(--interactive-border-primary-dark-hover);
@@ -20,6 +22,15 @@
   --comp-checkbox-disabled-icon: var(--core-text-functional-disabled);
   --comp-checkbox-label-default: var(--core-text-main-primary);
   --comp-checkbox-label-disabled: var(--core-text-functional-disabled);
+  --comp-radio-label-default: var(--core-text-main-primary);
+  --comp-radio-label-disabled: var(--core-text-functional-disabled);
+  --comp-radio-unselected-bg: var(--core-bg-main-primary);
+  --comp-radio-unselected-border-default: var(--core-border-main-secondary);
+  --comp-radio-unselected-border-hover: var(--interactive-border-primary-dark-hover);
+  --comp-radio-unselected-border-pressed: var(--interactive-border-primary-dark-pressed);
+  --comp-radio-selected-bg-default: var(--interactive-bg-primary-dark-default);
+  --comp-radio-selected-bg-hover: var(--interactive-bg-primary-dark-hover);
+  --comp-radio-selected-bg-pressed: var(--interactive-bg-primary-dark-pressed);
   --comp-link-neutral-text-default: var(--interactive-text-neutral-dark-default);
   --comp-link-neutral-text-hover: var(--interactive-text-neutral-dark-hover);
   --comp-link-neutral-text-pressed: var(--interactive-text-neutral-dark-pressed);

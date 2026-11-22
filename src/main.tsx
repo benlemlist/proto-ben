@@ -8,6 +8,7 @@ import PlaceholderPage from "./pages/PlaceholderPage";
 import Reports from "./pages/Reports";
 import InboxPage from "./projects/inbox/InboxPage";
 import StatusesPage from "./projects/contact-status/StatusesPage";
+import DuplicatesPage from "./projects/duplicate-rules/DuplicatesPage";
 import SignalsPage from "./projects/signals/SignalsPage";
 import PeopleDbPage from "./projects/people-db/PeopleDbPage";
 
@@ -38,6 +39,8 @@ createRoot(document.getElementById("root")!).render(
           <Route path="/inbox" element={<InboxPage />} />
           {/* Project: Dynamic contact status (projects/contact-status) */}
           <Route path="/settings/data-management/statuses" element={<StatusesPage />} />
+          {/* Project: Duplicate rules (projects/duplicate-rules) */}
+          <Route path="/settings/data-management/duplicates" element={<DuplicatesPage />} />
           {/* Project: New signals — Rodz sprint + Ads engagement (projects/new-signals) */}
           <Route path="/signals" element={<SignalsPage />} />
           {/* Project: PeopleDB suggested lead lists (projects/people-db) */}

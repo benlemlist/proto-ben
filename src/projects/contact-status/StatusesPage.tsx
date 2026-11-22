@@ -68,7 +68,7 @@ function Layout() {
 
       <div className="flex min-w-0 flex-1 flex-col">
         <div className="flex items-center border-b border-[var(--core-border-main-subtle)] pr-lg">
-          <Tabs value={tab} onValueChange={setTab} className="flex-1">
+          <Tabs value={tab} onValueChange={(t) => (t === "Duplicates" ? navigate("/settings/data-management/duplicates") : setTab(t))} className="flex-1">
             <TabList hasOffset>
               {DM_TABS.map((t) => <TabTrigger key={t} value={t}>{t}</TabTrigger>)}
             </TabList>
