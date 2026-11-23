@@ -10,7 +10,7 @@ import {
   faLockOutline, faStarsOutline, faUsersOutline,
 } from "@l3mpire/icons";
 import { useCS } from "../store";
-import { CRM_FIELDS, suggestFor, type Column, type ContactStatus, type Config } from "../data";
+import { CRM_FIELDS, OUTCOMES, suggestFor, type Column, type ContactStatus, type Config } from "../data";
 import { Card, Muted } from "./shared";
 import { StatusModal } from "./StatusModal";
 import { SyncCrmModal } from "./SyncCrmModal";
@@ -45,6 +45,8 @@ export function LifecycleCard() {
   const [syncOpen, setSyncOpen] = useState(false);
 
   const mappedCount = (id: string) => Object.values(cfg.mapping).filter((v) => v === id).length;
+  // The event groups that move a contact to this status (Events card, same order).
+  const triggers = (id: string) => OUTCOMES.filter((o) => cfg.mapping[o.id] === id);
 
   const onDrop = (e: DragEvent) => {
     e.preventDefault();
@@ -53,7 +55,6 @@ export function LifecycleCard() {
   };
 
   const row = (st: ContactStatus, i: number) => {
-    const n = mappedCount(st.id);
     const isOver = over?.beforeId === st.id && dragId !== st.id;
     return (
       <div
@@ -73,7 +74,31 @@ export function LifecycleCard() {
         {st.column === "path" && <span className="w-[12px] text-sm leading-sm text-[var(--core-text-main-tertiary)]">{i + 1}</span>}
         <StatusPill type={st.color} size="sm">{st.name}</StatusPill>
         <span className="flex-1" />
-        {st.column !== "unused" && <Muted className={cn("whitespace-nowrap", n === 0 && "text-[var(--core-text-main-quaternary-icon-only)]")}>{n} mapped</Muted>}
+        {st.column !== "unused" && (() => {
+          const t = triggers(st.id);
+          return (
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <span className="cursor-default"><Muted className={cn("whitespace-nowrap", t.length === 0 && "text-[var(--core-text-main-quaternary-icon-only)]")}>{t.length} mapped</Muted></span>
+              </TooltipTrigger>
+              <TooltipContent side="top" className="max-w-[300px]">
+                {t.length === 0 ? (
+                  <span>No event moves contacts to {st.name}. Pick it for an event group in Events below.</span>
+                ) : (
+                  <div className="flex flex-col gap-sm">
+                    <span>Moves contacts to {st.name}:</span>
+                    {t.map((o) => (
+                      <div key={o.id} className="flex flex-col">
+                        <span className="font-medium">{o.label}</span>
+                        <span className="opacity-70">{o.events.join(" · ")}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </TooltipContent>
+            </Tooltip>
+          );
+        })()}
         {crm ? (
           <Tooltip>
             <TooltipTrigger asChild>
