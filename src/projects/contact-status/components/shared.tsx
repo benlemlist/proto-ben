@@ -13,7 +13,7 @@ export const Muted = ({ children, className }: { children: ReactNode; className?
 
 export function Card({ icon, title, description, action, children, className }: { icon: IconDefinition; title: string; description: ReactNode; action?: ReactNode; children: ReactNode; className?: string }) {
   return (
-    <section className={cn("overflow-hidden rounded-lg border border-[var(--core-border-main-subtle)] bg-[var(--core-bg-main-primary)]", className)}>
+    <section className={cn("overflow-hidden rounded-lg border border-[var(--core-border-main-primary)] bg-[var(--core-bg-main-primary)]", className)}>
       <header className="flex items-center gap-lg border-b border-[var(--core-border-main-subtle)] bg-[var(--core-bg-main-secondary)] px-xl py-lg">
         <Icon icon={icon} size="md" className="text-[var(--core-text-main-secondary)]" />
         <div className="flex min-w-0 flex-1 flex-col">
@@ -48,9 +48,9 @@ export function StatusSelect({ statuses, value, onChange, disabled, noneLabel = 
     >
       <DropdownMenu className="w-[240px]">
         <DropdownMenuList>
-          {path.length > 0 && <DropdownMenuHeading>Lifecycle path</DropdownMenuHeading>}
+          {path.length > 0 && <DropdownMenuHeading className="[&_span]:normal-case">Lifecycle path</DropdownMenuHeading>}
           {path.map((s) => <DropdownMenuItem key={s.id} label={s.name} avatar={<Dot color={s.color} />} selected={s.id === value} onClick={() => pick(s.id)} />)}
-          {exits.length > 0 && <DropdownMenuHeading>Exits</DropdownMenuHeading>}
+          {exits.length > 0 && <DropdownMenuHeading className="[&_span]:normal-case">Exits</DropdownMenuHeading>}
           {exits.map((s) => <DropdownMenuItem key={s.id} label={s.name} avatar={<Dot color={s.color} />} selected={s.id === value} onClick={() => pick(s.id)} />)}
           {noneLabel && (
             <>

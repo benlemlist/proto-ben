@@ -1,25 +1,17 @@
 // "Events" card (Figma Layout 2): the 80 lead events grouped into 15 outcomes. Only what the
 // contact did can move a contact status; team actions and technical failures never do.
 import { Button, Badge, InfoMessage, Tooltip, TooltipTrigger, TooltipContent, TooltipProvider, Select, cn } from "@l3mpire/ui";
-import { Icon, faBoltOutline, faStarsOutline, faUserOutline, faPlayOutline, faCircleSmallSolid } from "@l3mpire/icons";
+import { Icon, faBoltOutline, faStarsOutline, faUserOutline, faPlayOutline, faCircleSmallSolid, faChevronDownOutline, faChevronUpOutline } from "@l3mpire/icons";
+import { useState } from "react";
 import { useCS } from "../store";
 import { MOVING_OUTCOMES, STILL_OUTCOMES, CRM_FIELDS, suggestFor, type Outcome } from "../data";
 import { Card, Muted, StatusSelect } from "./shared";
 
-const MAX_CHIPS = 4;
-
+// Settings page: every event is shown, no "+N" overflow, so the admin sees exactly what a row covers.
 function EventChips({ events }: { events: string[] }) {
-  const shown = events.slice(0, MAX_CHIPS);
-  const rest = events.slice(MAX_CHIPS);
   return (
     <div className="flex flex-wrap gap-xs">
-      {shown.map((e) => <Badge key={e} type="neutral" size="sm">{e}</Badge>)}
-      {rest.length > 0 && (
-        <Tooltip>
-          <TooltipTrigger asChild><span><Badge type="neutral" size="sm">+{rest.length}</Badge></span></TooltipTrigger>
-          <TooltipContent side="top" className="max-w-[280px]">{rest.join(" · ")}</TooltipContent>
-        </Tooltip>
-      )}
+      {events.map((e) => <Badge key={e} type="neutral" size="sm">{e}</Badge>)}
     </div>
   );
 }
@@ -36,10 +28,9 @@ function Head() {
 
 export function EventsCard() {
   const s = useCS();
+  const [showStill, setShowStill] = useState(false);
   const cfg = s.draft;
   const disabled = !cfg.enabled;
-  const movingCount = MOVING_OUTCOMES.reduce((n, o) => n + o.events.length, 0);
-  const stillCount = STILL_OUTCOMES.reduce((n, o) => n + o.events.length, 0);
 
   const autoMap = () => {
     const crm = CRM_FIELDS.find((f) => f.id === cfg.crmFieldId);
@@ -84,24 +75,29 @@ export function EventsCard() {
           <div className="flex flex-col gap-base">
             <div className="flex items-baseline gap-base">
               <span className="text-base leading-base font-medium text-[var(--core-text-main-primary)]">Moves a contact</span>
-              <Muted>{movingCount} events</Muted>
             </div>
-            <div className="overflow-hidden rounded-lg border border-[var(--core-border-main-subtle)]">
+            <div className="overflow-hidden rounded-lg border border-[var(--core-border-main-primary)]">
               <Head />
               {MOVING_OUTCOMES.map((o) => row(o, false))}
             </div>
           </div>
 
+          {/* Nobody edits these rows: folded by default so the page stays short. */}
           <div className="flex flex-col gap-base">
-            <div className="flex items-baseline gap-base">
-              <span className="text-base leading-base font-medium text-[var(--core-text-main-primary)]">Never moves a contact</span>
-              <Muted>{stillCount} events</Muted>
+            <div>
+              <Button appearance="ghost" intent="brand" size="sm" rightIcon={showStill ? faChevronUpOutline : faChevronDownOutline} onClick={() => setShowStill((v) => !v)}>
+                {showStill ? "Hide" : "Show"} the {STILL_OUTCOMES.length} event groups that never move a contact
+              </Button>
             </div>
-            <InfoMessage type="info" description="These events are not lost: they all reach your CRM through the lemlist Lead status field, which carries the detail of every step." />
-            <div className="overflow-hidden rounded-lg border border-[var(--core-border-main-subtle)]">
-              <Head />
-              {STILL_OUTCOMES.map((o) => row(o, true))}
-            </div>
+            {showStill && (
+              <>
+                <InfoMessage type="info" description="These events are not lost: they all reach your CRM through the lemlist Lead status field, which carries the detail of every step." />
+                <div className="overflow-hidden rounded-lg border border-[var(--core-border-main-primary)]">
+                  <Head />
+                  {STILL_OUTCOMES.map((o) => row(o, true))}
+                </div>
+              </>
+            )}
           </div>
         </div>
       </Card>

@@ -26,6 +26,8 @@ Contact status is static: only a person, CSV, API or the CRM changes it. A lead 
 - 2026-11-22: "last vs max" (grooming 25/09) is a setting, "A new campaign can move a contact back", on by default (latest campaign wins).
 - 2026-11-22: a CRM or manual change locks the contact status for the rest of that campaign; the next campaign resumes the mapping.
 - 2026-11-22: saving offers the 3 options of the 28/09 grooming: only from now on / recalculate / recalculate and push to the CRM.
+- 2026-11-23: the "new campaign" setting is its own card between the lifecycle and Events ("When a contact joins a new campaign"), two radio cards side by side: Start over / Keep the highest stage. The fixed rules (never back within a campaign, manual/CRM wins) are not shown as rows: read-only rows look like disabled settings. "Never moves a contact" is folded by default.
+- 2026-11-23: one feature switch above both cards. Off = a plain status list (like prod) and no Events card; on = lifecycle + events. Turning it on for a team that never set it up places its statuses and maps events. The "new campaign" rule moved to the Events card, where the event behaviour lives.
 - 2026-11-23: aligned with prod (lemcrm-status-modal.tsx): a status some contacts use can't be deleted, same wording ("Life cycle cannot be removed because some contacts are using it").
 - 2026-11-23: settings open in the prod full-screen modal (settings navbar + Data management tabs), Statuses is a new tab.
 - 2026-11-22: when an exit is reached, the same campaign brings the contact back only with a stage above the highest one it reached.

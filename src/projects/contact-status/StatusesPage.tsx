@@ -8,6 +8,8 @@ import { ContactStatusProvider, useCS } from "./store";
 import { SCENARIOS } from "./data";
 import { LifecycleCard } from "./components/LifecycleCard";
 import { EventsCard } from "./components/EventsCard";
+import { FeatureSwitch } from "./components/FeatureSwitch";
+import { NewCampaignCard } from "./components/NewCampaignCard";
 import { SaveModal } from "./components/SaveModal";
 import { Simulator } from "./components/Simulator";
 import { ProtoCommands } from "./components/ProtoCommands";
@@ -78,7 +80,7 @@ function Layout() {
                 <button key={o.id} type="button" onClick={() => setObject(o.id)}
                   className={cn(
                     "flex flex-col gap-2xs rounded-lg border px-lg py-md text-left hover:bg-[var(--core-bg-main-hover)]",
-                    object === o.id ? "border-[var(--core-border-main-selected)]" : "border-[var(--core-border-main-subtle)]",
+                    object === o.id ? "border-[var(--core-border-main-selected)]" : "border-[var(--core-border-main-primary)]",
                   )}>
                   <span className="text-base leading-base font-medium text-[var(--core-text-main-primary)]">{o.title}</span>
                   <span className="text-sm leading-sm text-[var(--core-text-main-tertiary)]">{o.description}</span>
@@ -88,11 +90,13 @@ function Layout() {
 
             {object === "contact" ? (
               <>
+                <FeatureSwitch />
                 <LifecycleCard />
-                <EventsCard />
+                {s.draft.enabled && <NewCampaignCard />}
+                {s.draft.enabled && <EventsCard />}
               </>
             ) : (
-              <div className="rounded-lg border border-[var(--core-border-main-subtle)] p-4xl">
+              <div className="rounded-lg border border-[var(--core-border-main-primary)] p-4xl">
                 <EmptyState icon={object === "account" ? faBuildingsOutline : faCoinOutline} title={object === "account" ? "Account status" : "Deal status"} description="Same logic, next step: contact ↔ account and deal → account. Not designed yet." />
               </div>
             )}
@@ -101,8 +105,7 @@ function Layout() {
       </div>
 
       {s.dirty && tab === "statuses" && (
-        <div className="absolute right-0 bottom-0 left-0 z-20 flex items-center justify-between gap-lg border-t border-[var(--core-border-main-subtle)] bg-[var(--core-bg-main-primary)] px-2xl py-lg shadow-lg">
-          <span className="text-base leading-base text-[var(--core-text-main-primary)]">You have unsaved changes</span>
+        <div className="absolute right-0 bottom-0 left-0 z-20 flex items-center justify-end gap-lg border-t border-[var(--core-border-main-primary)] bg-[var(--core-bg-main-primary)] px-2xl py-lg shadow-lg">
           <div className="flex gap-base">
             <Button appearance="ghost" intent="brand" size="md" onClick={s.discard}>Discard</Button>
             <Button appearance="outlined" intent="brand" size="md" onClick={() => s.setSimOpen(true)}>Try on a contact</Button>

@@ -67,7 +67,7 @@ export function SettingsModal({ page = "dataManagement", children, overlays }: {
           className="h-[calc(100%-16px)] w-[calc(100%-16px)] flex-row"
         >
           <ModalTitle className="sr-only">Settings</ModalTitle>
-          <SidebarSettings className="shrink-0 overflow-y-auto border-r border-[var(--core-border-main-primary)]">
+          <SidebarSettings className="shrink-0 overflow-y-auto">
             <SidebarSection>
               <SidebarHeadingItem label="Account settings" />
               <SidebarItem avatar={<Avatar size="lg" initials="AD" />} label="Adrien Donot" />
@@ -104,7 +104,7 @@ export function DataManagementHeader({ tab, onTab }: { tab: string; onTab: (id: 
         }}
         className="flex-1"
       >
-        <TabList>
+        <TabList className="border-b-0">
           {DATA_MANAGEMENT_TABS.map((t) => <TabTrigger key={t.id} value={t.id}>{t.label}</TabTrigger>)}
         </TabList>
       </Tabs>

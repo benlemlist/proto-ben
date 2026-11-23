@@ -1,16 +1,18 @@
-// "Contact lifecycle" card (Figma Layout 2): lifecycle path (ordered, cold → hot), exits, and
-// the statuses kept out of the lifecycle (PM note 27/10: a status must be able to leave the mapping).
+// Statuses card. Feature off (every team today): a plain list of contact statuses, as in prod's
+// "Manage your contact statuses" modal. Feature on: the lifecycle (Figma Layout 2), path (ordered,
+// cold → hot), exits, and the statuses kept out of it (PM note 27/10). The feature switch itself
+// lives above this card (FeatureSwitch), the rules below it (Events card).
 import { useState, type DragEvent } from "react";
 import {
-  Button, StatusPill, Badge, InfoMessage, Dialog, Switch, Tooltip, TooltipTrigger, TooltipContent, TooltipProvider,
+  Button, StatusPill, Badge, Dialog, Tooltip, TooltipTrigger, TooltipContent, TooltipProvider,
   DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuList, DropdownMenuRadixItem, DropdownMenuDelimiter, cn,
 } from "@l3mpire/ui";
 import {
   Icon, faGripDotsVerticalOutline, faPenOutline, faTrashOutline, faPlusOutline, faEllipsisOutline, faArrowRightOutline,
-  faLockOutline, faStarsOutline, faUsersOutline,
+  faLockOutline, faUsersOutline,
 } from "@l3mpire/icons";
 import { useCS } from "../store";
-import { CRM_FIELDS, OUTCOMES, suggestFor, type Column, type ContactStatus, type Config } from "../data";
+import { CRM_FIELDS, OUTCOMES, type Column, type ContactStatus, type Config } from "../data";
 import { Card, Muted } from "./shared";
 import { StatusModal } from "./StatusModal";
 import { SyncCrmModal } from "./SyncCrmModal";
@@ -34,6 +36,16 @@ function move(cfg: Config, id: string, column: Column, beforeId: string | null):
   return { ...cfg, statuses: rest, mapping };
 }
 
+// Plain list (feature off): reorder without touching a status' column.
+function reorder(cfg: Config, id: string, beforeId: string | null): Config {
+  const st = cfg.statuses.find((s) => s.id === id)!;
+  const rest = cfg.statuses.filter((s) => s.id !== id);
+  const idx = beforeId ? rest.findIndex((s) => s.id === beforeId) : -1;
+  if (idx >= 0) rest.splice(idx, 0, st);
+  else rest.push(st);
+  return { ...cfg, statuses: rest };
+}
+
 export function LifecycleCard() {
   const s = useCS();
   const cfg = s.draft;
@@ -43,6 +55,7 @@ export function LifecycleCard() {
   const [modal, setModal] = useState<{ column: Column; status: ContactStatus | null } | null>(null);
   const [toDelete, setToDelete] = useState<ContactStatus | null>(null);
   const [syncOpen, setSyncOpen] = useState(false);
+  const simple = !cfg.enabled;
 
   const mappedCount = (id: string) => Object.values(cfg.mapping).filter((v) => v === id).length;
   // The event groups that move a contact to this status (Events card, same order).
@@ -50,7 +63,8 @@ export function LifecycleCard() {
 
   const onDrop = (e: DragEvent) => {
     e.preventDefault();
-    if (dragId && over) s.setDraft((c) => move(c, dragId, over.column, over.beforeId === dragId ? null : over.beforeId));
+    const before = over?.beforeId === dragId ? null : over?.beforeId ?? null;
+    if (dragId && over) s.setDraft((c) => (simple ? reorder(c, dragId, before) : move(c, dragId, over.column, before)));
     setDragId(null); setOver(null);
   };
 
@@ -71,10 +85,10 @@ export function LifecycleCard() {
       >
         {isOver && <span className="absolute -top-[5px] right-0 left-0 h-[2px] rounded-full bg-[var(--core-border-main-selected)]" />}
         <span className="cursor-grab text-[var(--core-text-main-tertiary)]"><Icon icon={faGripDotsVerticalOutline} size="xs" /></span>
-        {st.column === "path" && <span className="w-[12px] text-sm leading-sm text-[var(--core-text-main-tertiary)]">{i + 1}</span>}
+        {!simple && st.column === "path" && <span className="w-[12px] text-sm leading-sm text-[var(--core-text-main-tertiary)]">{i + 1}</span>}
         <StatusPill type={st.color} size="sm">{st.name}</StatusPill>
         <span className="flex-1" />
-        {st.column !== "unused" && (() => {
+        {!simple && st.column !== "unused" && (() => {
           const t = triggers(st.id);
           return (
             <Tooltip>
@@ -99,43 +113,33 @@ export function LifecycleCard() {
             </Tooltip>
           );
         })()}
-        {crm ? (
+        {crm && (
           <Tooltip>
             <TooltipTrigger asChild>
               <span className="flex size-[24px] items-center justify-center text-[var(--core-text-main-tertiary)]"><Icon icon={faLockOutline} size="xs" /></span>
             </TooltipTrigger>
             <TooltipContent side="top">Comes from {crm.crm}. Rename or delete it in {crm.crm}.</TooltipContent>
           </Tooltip>
-        ) : (
-          <>
-            <Button appearance="ghost" intent="brand" size="xs" iconOnly leftIcon={faPenOutline} aria-label="Edit" onClick={() => setModal({ column: st.column, status: st })} />
-            {(st.contacts ?? 0) > 0 ? (
-              // Same rule and wording as prod (lemcrm-status-modal.tsx): a status in use can't be deleted.
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <span><Button appearance="ghost" intent="brand" size="xs" iconOnly leftIcon={faTrashOutline} aria-label="Delete" disabled /></span>
-                </TooltipTrigger>
-                <TooltipContent side="top" className="max-w-[260px]">Life cycle cannot be removed because some contacts are using it ({st.contacts!.toLocaleString("en-US")} contacts).</TooltipContent>
-              </Tooltip>
-            ) : (
-              <Button appearance="ghost" intent="brand" size="xs" iconOnly leftIcon={faTrashOutline} aria-label="Delete" onClick={() => setToDelete(st)} />
-            )}
-          </>
         )}
         <DropdownMenuRoot>
           <DropdownMenuTrigger asChild>
             <Button appearance="ghost" intent="brand" size="xs" iconOnly leftIcon={faEllipsisOutline} aria-label="More" />
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-[220px]">
+          <DropdownMenuContent align="end" className="w-max min-w-[220px] max-w-[320px]">
             <DropdownMenuList>
-              {(["path", "exit", "unused"] as Column[]).filter((c) => c !== st.column).map((c) => (
-                <DropdownMenuRadixItem key={c} icon={faArrowRightOutline} label={`Move to ${COLUMN_LABEL[c].toLowerCase()}`} onSelect={() => s.setDraft((cf) => move(cf, st.id, c, null))} />
+              {!crm && <DropdownMenuRadixItem icon={faPenOutline} label="Edit" onSelect={() => setModal({ column: st.column, status: st })} />}
+              {!simple && (["path", "exit", "unused"] as Column[]).filter((c) => c !== st.column).map((c) => (
+                <DropdownMenuRadixItem key={c} icon={faArrowRightOutline} label={`Move to ${COLUMN_LABEL[c]}`} onSelect={() => s.setDraft((cf) => move(cf, st.id, c, null))} />
               ))}
               {!crm && (
                 <>
                   <DropdownMenuDelimiter bleed />
-                  <DropdownMenuRadixItem icon={faPenOutline} label="Edit" onSelect={() => setModal({ column: st.column, status: st })} />
-                  <DropdownMenuRadixItem icon={faTrashOutline} label="Delete" destructive disabled={(st.contacts ?? 0) > 0} description={(st.contacts ?? 0) > 0 ? "Some contacts are using it" : undefined} onSelect={() => setToDelete(st)} />
+                  {/* Same rule as prod (lemcrm-status-modal.tsx): a status in use can't be deleted. Prod's sentence doesn't fit a menu item. */}
+                  <DropdownMenuRadixItem
+                    icon={faTrashOutline} label="Delete" destructive disabled={(st.contacts ?? 0) > 0}
+                    description={(st.contacts ?? 0) > 0 ? `Used by ${st.contacts!.toLocaleString("en-US")} contacts` : undefined}
+                    onSelect={() => setToDelete(st)}
+                  />
                 </>
               )}
             </DropdownMenuList>
@@ -150,7 +154,7 @@ export function LifecycleCard() {
     const zoneOver = over?.column === col && over.beforeId === null;
     return (
       <div
-        className={cn("flex min-h-[200px] flex-col rounded-lg border border-[var(--core-border-main-subtle)]", zoneOver && dragId && "border-[var(--core-border-main-selected)]")}
+        className={cn("flex min-h-[200px] flex-col rounded-lg border border-[var(--core-border-main-primary)]", zoneOver && dragId && "border-[var(--core-border-main-selected)]")}
         onDragOver={(e) => { e.preventDefault(); setOver({ column: col, beforeId: null }); }}
         onDrop={onDrop}
       >
@@ -179,8 +183,8 @@ export function LifecycleCard() {
     <TooltipProvider>
       <Card
         icon={faUsersOutline}
-        title="Contact lifecycle"
-        description={cfg.enabled ? "Drag each status into the right column, or use the ··· menu." : "Contact status is set by hand today. Lead events don't change it."}
+        title={simple ? "Contact statuses" : "Contact lifecycle"}
+        description={simple ? "Set by hand, by CSV, API or from your CRM." : "Drag each status where it belongs."}
         action={
           <div className="flex items-center gap-lg">
             {crm && <Badge type="neutral" size="md">Values from {crm.crm} · {crm.label}</Badge>}
@@ -188,62 +192,53 @@ export function LifecycleCard() {
           </div>
         }
       >
-        <div className="flex flex-col gap-xl">
-          {!cfg.enabled && (
-            <InfoMessage
-              type="info"
-              title="Let lead status move contact status"
-              description="We place your statuses in a lifecycle and map each campaign event to one of them. You review it, then save."
-              action={
-                <Button appearance="outlined" intent="brand" size="md" leftIcon={faStarsOutline}
-                  onClick={() => s.setDraft((c) => ({ ...c, ...suggestFor(c.statuses), enabled: true }))}>
-                  Suggest a setup
-                </Button>
-              }
-            />
-          )}
-
-          <div className="grid grid-cols-2 gap-lg">
-            {column("path", "Moves a contact forward, from top to bottom. Never back down on the same campaign.")}
-            {column("exit", "Contacts who drop out. They can come back at their next event.")}
-          </div>
-
+        {simple ? (
+          // Same content as prod's status modal: ordered list, add, edit, delete.
           <div
-            className={cn("flex flex-col gap-base rounded-lg border border-dashed border-[var(--core-border-main-primary)] px-xl py-lg", over?.column === "unused" && dragId && "border-[var(--core-border-main-selected)]")}
+            className="flex flex-col rounded-lg border border-[var(--core-border-main-primary)]"
             onDragOver={(e) => { e.preventDefault(); setOver({ column: "unused", beforeId: null }); }}
             onDrop={onDrop}
           >
-            <div className="flex items-baseline gap-base">
-              <span className="text-sm leading-sm font-medium text-[var(--core-text-main-secondary)]">{COLUMN_LABEL.unused}</span>
-              <Muted>Events never set these. Still available by hand, by CSV, API and from your CRM.</Muted>
-            </div>
-            {unused.length > 0 ? (
-              <div className="grid grid-cols-2 gap-sm">{unused.map(row)}</div>
-            ) : (
-              <Muted>Drag a status here to keep it out of the lifecycle.</Muted>
-            )}
-          </div>
-
-          {cfg.enabled && (
-            <div className="flex items-center justify-between gap-xl rounded-lg bg-[var(--core-bg-main-secondary)] px-xl py-lg">
-              <div className="flex flex-col">
-                <span className="text-base leading-base font-medium text-[var(--core-text-main-primary)]">A new campaign can move a contact back</span>
-                <Muted>
-                  {cfg.newLeadRule === "latest"
-                    ? "On: the latest campaign wins. Not interested in January, contacted again in September → Contacted."
-                    : "Off: the contact keeps the highest stage reached in any campaign. A webinar invite never turns an Opportunity back into Contacted."}
-                </Muted>
+            <div className="flex items-start gap-base border-b border-[var(--core-border-main-subtle)] px-xl py-lg">
+              <div className="flex flex-1 flex-col">
+                <span className="text-base leading-base font-medium text-[var(--core-text-main-primary)]">{cfg.statuses.length} statuses</span>
+                <Muted>Drag to reorder. The order is the one your team sees in the status picker.</Muted>
               </div>
-              <Switch checked={cfg.newLeadRule === "latest"} onCheckedChange={(v) => s.setDraft((c) => ({ ...c, newLeadRule: v ? "latest" : "highest" }))} />
+              {!crm && <Button appearance="ghost" intent="brand" size="sm" leftIcon={faPlusOutline} onClick={() => setModal({ column: "unused", status: null })}>Add status</Button>}
             </div>
-          )}
+            <div className="flex flex-col gap-sm p-xl">{cfg.statuses.map(row)}</div>
+          </div>
+        ) : (
+          <div className="flex flex-col gap-xl">
+            <div className="grid grid-cols-2 gap-lg">
+              {column("path", "Moves a contact forward, from top to bottom.")}
+              {column("exit", "Contacts who drop out. They can come back at their next event.")}
+            </div>
 
-          {cfg.enabled && (
-            <div className="flex justify-end">
-              <Button appearance="ghost" intent="alert" size="sm" onClick={() => s.setDraft((c) => ({ ...c, enabled: false }))}>Stop moving contact status with lead status</Button>
+            {/* Same box as the two columns, without Add status: a status lands here by being dragged out. */}
+            <div
+              className={cn("flex flex-col rounded-lg border border-[var(--core-border-main-primary)]", over?.column === "unused" && dragId && "border-[var(--core-border-main-selected)]")}
+              onDragOver={(e) => { e.preventDefault(); setOver({ column: "unused", beforeId: null }); }}
+              onDrop={onDrop}
+            >
+              <div className="flex items-start gap-base border-b border-[var(--core-border-main-subtle)] px-xl py-lg">
+                <div className="flex flex-1 flex-col">
+                  <span className="text-base leading-base font-medium text-[var(--core-text-main-primary)]">{COLUMN_LABEL.unused}</span>
+                  <Muted>Events never set these. Still available by hand, by CSV, API and from your CRM.</Muted>
+                </div>
+              </div>
+              <div className="p-xl">
+                {unused.length > 0 ? (
+                  <div className="grid grid-cols-2 gap-sm">{unused.map(row)}</div>
+                ) : (
+                  <div className="flex items-center justify-center rounded-base border border-dashed border-[var(--core-border-main-primary)] p-xl text-center">
+                    <Muted>Drag a status here to keep it out of the lifecycle</Muted>
+                  </div>
+                )}
+              </div>
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </Card>
 
       <StatusModal
