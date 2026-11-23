@@ -31,6 +31,7 @@ This prototype explores the Q1 2027 vision asked by the PM (FEATURE-4991), start
 - 2026-11-20 — Badges in the inbox navigation count **unread** conversations, not all of them.
 
 ## Links
+- **Spec to share (PM + devs):** https://claude.ai/artifact/WLJpJCTtA5ypwYUfmfyNip (why the lots, each change tied to its problem)
 - Notion opportunity: https://app.notion.com/p/40cdfb675ef481458aa6d6111bd1a392
 - Inbox vision: https://app.notion.com/p/31edfb675ef480c595a7d85d090ef2e5
 - All messages (FEATURE-3797): https://app.notion.com/p/3a3dfb675ef4800d9d9be4cef1875e69
