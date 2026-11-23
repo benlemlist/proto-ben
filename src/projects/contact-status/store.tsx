@@ -5,7 +5,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState, t
 import { SCENARIOS, SIM_CAMPAIGNS, type Config } from "./data";
 import { newSim, type SimState } from "./logic";
 
-const STORAGE_KEY = "contact-status-proto-v1";
+const STORAGE_KEY = "contact-status-proto-v2";
 
 export interface ToastItem { id: number; type: "info" | "success" | "alert" | "warning"; title: string; subtitle?: string }
 

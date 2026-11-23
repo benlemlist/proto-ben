@@ -11,6 +11,8 @@ export interface ContactStatus {
   name: string;
   color: StatusPillType;
   column: Column;
+  /** Contacts at this status today (fake). Prod blocks deleting a status in use. */
+  contacts?: number;
 }
 
 export type OutcomeFamily = "contact" | "team" | "lemlist";
@@ -81,12 +83,12 @@ const LEMLIST_MAPPING: Mapping = {
 
 // Production today: 6 values, set by hand only, nothing placed in a lifecycle.
 const PROD_STATUSES: ContactStatus[] = [
-  { id: "st_new", name: "New", color: "info", column: "unused" },
-  { id: "st_lead", name: "Lead", color: "pink", column: "unused" },
-  { id: "st_contacted", name: "Contacted", color: "neutral", column: "unused" },
-  { id: "st_opportunity", name: "Opportunity", color: "purple", column: "unused" },
-  { id: "st_customer", name: "Customer", color: "orange", column: "unused" },
-  { id: "st_evangelist", name: "Evangelist", color: "teal", column: "unused" },
+  { id: "st_new", name: "New", color: "info", column: "unused", contacts: 3120 },
+  { id: "st_lead", name: "Lead", color: "pink", column: "unused", contacts: 1840 },
+  { id: "st_contacted", name: "Contacted", color: "neutral", column: "unused", contacts: 4210 },
+  { id: "st_opportunity", name: "Opportunity", color: "purple", column: "unused", contacts: 612 },
+  { id: "st_customer", name: "Customer", color: "orange", column: "unused", contacts: 287 },
+  { id: "st_evangelist", name: "Evangelist", color: "teal", column: "unused", contacts: 0 },
 ];
 
 // ── CRM picklists (Sync with CRM) ───────────────────────────────────────────

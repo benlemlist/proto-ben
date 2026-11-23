@@ -109,7 +109,17 @@ export function LifecycleCard() {
         ) : (
           <>
             <Button appearance="ghost" intent="brand" size="xs" iconOnly leftIcon={faPenOutline} aria-label="Edit" onClick={() => setModal({ column: st.column, status: st })} />
-            <Button appearance="ghost" intent="brand" size="xs" iconOnly leftIcon={faTrashOutline} aria-label="Delete" onClick={() => setToDelete(st)} />
+            {(st.contacts ?? 0) > 0 ? (
+              // Same rule and wording as prod (lemcrm-status-modal.tsx): a status in use can't be deleted.
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <span><Button appearance="ghost" intent="brand" size="xs" iconOnly leftIcon={faTrashOutline} aria-label="Delete" disabled /></span>
+                </TooltipTrigger>
+                <TooltipContent side="top" className="max-w-[260px]">Life cycle cannot be removed because some contacts are using it ({st.contacts!.toLocaleString("en-US")} contacts).</TooltipContent>
+              </Tooltip>
+            ) : (
+              <Button appearance="ghost" intent="brand" size="xs" iconOnly leftIcon={faTrashOutline} aria-label="Delete" onClick={() => setToDelete(st)} />
+            )}
           </>
         )}
         <DropdownMenuRoot>
@@ -125,7 +135,7 @@ export function LifecycleCard() {
                 <>
                   <DropdownMenuDelimiter bleed />
                   <DropdownMenuRadixItem icon={faPenOutline} label="Edit" onSelect={() => setModal({ column: st.column, status: st })} />
-                  <DropdownMenuRadixItem icon={faTrashOutline} label="Delete" destructive onSelect={() => setToDelete(st)} />
+                  <DropdownMenuRadixItem icon={faTrashOutline} label="Delete" destructive disabled={(st.contacts ?? 0) > 0} description={(st.contacts ?? 0) > 0 ? "Some contacts are using it" : undefined} onSelect={() => setToDelete(st)} />
                 </>
               )}
             </DropdownMenuList>
@@ -253,7 +263,7 @@ export function LifecycleCard() {
         onOpenChange={(v) => !v && setToDelete(null)}
         intent="alert"
         title={`Delete “${toDelete?.name}”?`}
-        description={toDelete ? `${mappedCount(toDelete.id) ? `${mappedCount(toDelete.id)} event group${mappedCount(toDelete.id) > 1 ? "s" : ""} will stop moving contacts. ` : ""}Contacts at this status keep it until their next event, then follow the mapping.` : ""}
+        description={toDelete ? `${mappedCount(toDelete.id) ? `${mappedCount(toDelete.id)} event group${mappedCount(toDelete.id) > 1 ? "s" : ""} will stop moving contacts. ` : ""}No contact has this status, so nothing else changes.` : ""}
         primaryLabel="Delete"
         cancelLabel="Cancel"
         onPrimaryAction={() => {
