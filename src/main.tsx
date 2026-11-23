@@ -12,6 +12,7 @@ import DuplicatesPage from "./projects/duplicate-rules/DuplicatesPage";
 import SignalsPage from "./projects/signals/SignalsPage";
 import PeopleDbPage from "./projects/people-db/PeopleDbPage";
 import CompaniesPage from "./projects/accounts-monitoring/CompaniesPage";
+import CrmMappingPage from "./projects/crm-activity-mapping/CrmMappingPage";
 
 const pages = [
   { path: "/", title: "Home" },
@@ -47,6 +48,7 @@ createRoot(document.getElementById("root")!).render(
           <Route path="/people-database" element={<PeopleDbPage />} />
           {/* Project: Accounts list monitoring — signals from a company list (projects/accounts-monitoring) */}
           <Route path="/companies" element={<CompaniesPage />} />
+          <Route path="/settings/crm" element={<CrmMappingPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
