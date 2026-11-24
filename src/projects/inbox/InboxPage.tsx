@@ -8,7 +8,6 @@ import { useListedConversations } from "./hooks";
 import { ConversationView } from "./components/ConversationView";
 import { ContactPanel } from "./components/ContactPanel";
 import { ProtoCommands } from "./components/ProtoCommands";
-import { LotsPanel } from "./components/LotsPanel";
 import { protoTitle } from "../../lib/proto-identity";
 import { inDays } from "./data";
 
@@ -29,7 +28,6 @@ function InboxLayout() {
   // Keyboard: ⌘⇧K proto commands (always). Lot 3 shortcuts.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.key.toLowerCase() === "k") { e.preventDefault(); s.setCommandsOpen(!s.commandsOpen); return; }
       const target = e.target as HTMLElement;
       if (target.closest("input, textarea, [contenteditable=true], [role=dialog], [role=menu]") || e.metaKey || e.ctrlKey || e.altKey) return;
       if (!s.has("shortcuts")) return;
@@ -60,7 +58,6 @@ function InboxLayout() {
       <ContactPanel />
       <ProtoCommands />
 
-      <LotsPanel />
 
       <div className="pointer-events-none fixed right-xl bottom-xl z-50 flex w-[380px] flex-col gap-base">
         {s.toasts.map((t) => (

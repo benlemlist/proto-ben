@@ -1,17 +1,16 @@
-// Hidden proto commands, for the PM, devs and designers (not part of the product).
-// Open: ⌘⇧K / Ctrl+Shift+K, or `?proto` in the URL. Also exposed on `window.proto` in the console.
+// Proto controls of Inbox, in the floating proto panel (⌘⇧K), for the PM, devs and designers (not part of the product).
+// Also `window.proto` in the console and `?lot=3` in the URL.
 import { useEffect } from "react";
-import { Modal, ModalContent, ModalHeader, ModalTitle, ModalDescription, ModalBody, ModalFooter, Button, Switch, Badge, Avatar, getAvatarTone, cn } from "@l3mpire/ui";
+import { ProtoPanelSection, ProtoGroup, ProtoChoice, ProtoToggle, ProtoAction } from "../../../lib/proto-panel";
+import { faBoltOutline } from "@l3mpire/icons";
 import { useInbox } from "../store";
 import { LOTS } from "../lots";
 import { SCENARIOS, team } from "../data";
-import { kbd } from "./meta";
 
 export function ProtoCommands() {
   const s = useInbox();
 
   useEffect(() => {
-    if (new URLSearchParams(window.location.search).has("proto")) s.setCommandsOpen(true);
     const lotParam = new URLSearchParams(window.location.search).get("lot");
     if (lotParam !== null && !Number.isNaN(Number(lotParam))) s.setLot(Number(lotParam));
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -44,92 +43,51 @@ export function ProtoCommands() {
     };
   });
 
-  const open = s.commandsOpen;
-  const close = () => s.setCommandsOpen(false);
-  const run = (fn: () => unknown) => () => { fn(); };
+  const reply = (body?: string, channel?: "linkedin" | "whatsapp") => () => s.simulate({ kind: "reply", body, channel });
+  const jump = (id: string) => {
+    s.setMe(id === "cv_sam_private" ? "usr_alice" : s.me);
+    s.setScope({ view: s.has("left_nav") ? "team" : "mine", channel: null, teammate: null, label: null });
+    s.select(id);
+  };
 
   return (
-    <Modal open={open} onOpenChange={s.setCommandsOpen}>
-      <ModalContent size="md">
-        <ModalHeader onClose={close}>
-          <ModalTitle>Proto commands</ModalTitle>
-          <ModalDescription>Hidden from users. <span className={kbd}>⌘</span> <span className={kbd}>⇧</span> <span className={kbd}>K</span> to toggle · <code>window.proto.help()</code> in the console · <code>?lot=3</code> in the URL.</ModalDescription>
-        </ModalHeader>
-        <ModalBody>
-          <div className="flex flex-col gap-2xl">
-            <Group title="Delivery lot" hint="Cumulative. Lot 0 approximates production today, with its bugs.">
-              <div className="grid grid-cols-2 gap-xs">
-                {LOTS.map((l) => (
-                  <Button key={l.lot} appearance={s.lot === l.lot ? "solid" : "outlined"} intent="brand" size="sm" className="justify-start" onClick={() => s.setLot(l.lot)}>
-                    {l.title}
-                  </Button>
-                ))}
-              </div>
-            </Group>
-
-            <Group title="Simulate incoming" hint="Applies to the open conversation unless stated. Watch the list: order, unread, snooze, AI.">
-              <div className="flex flex-wrap gap-xs">
-                <Button appearance="outlined" intent="brand" size="sm" onClick={run(() => s.simulate({ kind: "reply" }))}>Reply</Button>
-                <Button appearance="outlined" intent="brand" size="sm" onClick={run(() => s.simulate({ kind: "reply", body: "Not interested, please remove me from your list." }))}>Negative reply</Button>
-                <Button appearance="outlined" intent="brand" size="sm" onClick={run(() => s.simulate({ kind: "reply", body: "Merci, je reviens vers vous après le comité de jeudi." }))}>Ambiguous FR reply</Button>
-                <Button appearance="outlined" intent="brand" size="sm" onClick={run(() => s.simulate({ kind: "ooo" }))}>Out of office</Button>
-                <Button appearance="outlined" intent="brand" size="sm" onClick={run(() => s.simulate({ kind: "cc_reply" }))}>Reply from CC / colleague</Button>
-                <Button appearance="outlined" intent="brand" size="sm" onClick={run(() => s.simulate({ kind: "reply", channel: "linkedin" }))}>LinkedIn reply</Button>
-                <Button appearance="outlined" intent="brand" size="sm" onClick={run(() => s.simulate({ kind: "reply", channel: "whatsapp" }))}>WhatsApp reply</Button>
-                <Button appearance="outlined" intent="brand" size="sm" onClick={run(() => s.select(s.simulate({ kind: "unknown_linkedin" }) ?? null))}>Inbound LinkedIn · not a contact</Button>
-                <Button appearance="outlined" intent="brand" size="sm" onClick={run(() => s.select(s.simulate({ kind: "unknown_email" }) ?? null))}>Inbound email · not a contact</Button>
-                <Button appearance="outlined" intent="brand" size="sm" onClick={run(() => { s.select("cv_anna"); setTimeout(() => s.simulate({ kind: "reply", convId: "cv_anna", body: "Hallo Alice, ich bin zurück. Passt Donnerstag um 10 Uhr?" }), 50); })}>Snoozed conversation gets a reply</Button>
-              </div>
-            </Group>
-
-            <Group title="Signed in as" hint="See team unread, privacy and ownership from another seat.">
-              <div className="flex flex-wrap gap-xs">
-                {team.map((t) => (
-                  <Button key={t.id} appearance={s.me === t.id ? "solid" : "outlined"} intent="brand" size="sm" onClick={() => s.setMe(t.id)}>
-                    <span className="inline-flex items-center gap-xs"><Avatar size="sm" initials={t.initials} tone={getAvatarTone(t.id)} />{t.firstName} · {t.role}</span>
-                  </Button>
-                ))}
-              </div>
-            </Group>
-
-            <Group title="Jump to a scenario" hint="Each one maps to a theme of the user feedback.">
-              <div className="grid grid-cols-2 gap-xs">
-                {SCENARIOS.map((sc) => (
-                  <button key={sc.id} type="button" onClick={() => { s.setMe(sc.id === "cv_sam_private" ? "usr_alice" : s.me); s.setScope({ view: s.has("left_nav") ? "team" : "mine", channel: null, teammate: null, label: null }); s.select(sc.id); close(); }}
-                    className={cn("flex items-center justify-between gap-base rounded-base border border-[var(--core-border-main-subtle)] px-md py-sm text-left text-sm leading-sm text-[var(--core-text-main-primary)] hover:bg-[var(--core-bg-main-hover)]", s.selectedId === sc.id && "border-[var(--core-border-main-selected)]")}>
-                    <span>{sc.label}</span>
-                    <Badge type="neutral" size="sm">{sc.theme}</Badge>
-                  </button>
-                ))}
-              </div>
-            </Group>
-
-            <Group title="Display">
-              <div className="flex flex-col gap-base">
-                <Switch label="Dark mode" checked={s.theme === "dark"} onCheckedChange={(v) => s.setTheme(v ? "dark" : "light")} />
-                <Switch label="Desktop notifications (asks the browser)" checked={s.desktopNotifs} onCheckedChange={(v) => void s.setDesktopNotifs(v)} />
-                <Switch label="Contact panel" checked={s.panelOpen} onCheckedChange={s.setPanelOpen} />
-              </div>
-            </Group>
-          </div>
-        </ModalBody>
-        <ModalFooter infoMessage={`${s.convs.length} conversations · ${s.msgs.length} messages · saved in this browser`}>
-          <Button appearance="outlined" intent="alert" size="md" onClick={s.reset}>Reset data</Button>
-          <Button appearance="solid" intent="brand" size="md" onClick={close}>Close</Button>
-        </ModalFooter>
-      </ModalContent>
-    </Modal>
+    <ProtoPanelSection title="Inbox" onReset={s.reset}>
+      <ProtoGroup label="Delivery lot" hint="Cumulative: a lot includes the ones before. Prod approximates production today, with its bugs.">
+        <ProtoChoice value={String(s.lot)} onChange={(v) => s.setLot(Number(v))} options={LOTS.map((l) => ({ value: String(l.lot), label: LOT_LABEL[l.lot] ?? l.title }))} />
+      </ProtoGroup>
+      <ProtoGroup label="Simulate incoming" hint="On the open conversation unless stated.">
+        <ProtoAction icon={faBoltOutline} onClick={reply()}>Reply</ProtoAction>
+        <ProtoAction icon={faBoltOutline} onClick={reply("Not interested, please remove me from your list.")}>Negative reply</ProtoAction>
+        <ProtoAction icon={faBoltOutline} onClick={reply("Merci, je reviens vers vous après le comité de jeudi.")}>Ambiguous FR reply</ProtoAction>
+        <ProtoAction icon={faBoltOutline} onClick={() => s.simulate({ kind: "ooo" })}>Out of office</ProtoAction>
+        <ProtoAction icon={faBoltOutline} onClick={() => s.simulate({ kind: "cc_reply" })}>Reply from CC / colleague</ProtoAction>
+        <ProtoAction icon={faBoltOutline} onClick={reply(undefined, "linkedin")}>LinkedIn reply</ProtoAction>
+        <ProtoAction icon={faBoltOutline} onClick={reply(undefined, "whatsapp")}>WhatsApp reply</ProtoAction>
+        <ProtoAction icon={faBoltOutline} onClick={() => s.select(s.simulate({ kind: "unknown_linkedin" }) ?? null)}>Inbound LinkedIn · not a contact</ProtoAction>
+        <ProtoAction icon={faBoltOutline} onClick={() => s.select(s.simulate({ kind: "unknown_email" }) ?? null)}>Inbound email · not a contact</ProtoAction>
+        <ProtoAction icon={faBoltOutline} onClick={() => { s.select("cv_anna"); setTimeout(() => s.simulate({ kind: "reply", convId: "cv_anna", body: "Hallo Alice, ich bin zurück. Passt Donnerstag um 10 Uhr?" }), 50); }}>Snoozed conversation gets a reply</ProtoAction>
+      </ProtoGroup>
+      <ProtoGroup label="Signed in as" hint="See team unread, privacy and ownership from another seat.">
+        <ProtoChoice value={s.me} onChange={s.setMe} options={team.map((t) => ({ value: t.id, label: `${t.firstName} · ${t.role}` }))} />
+      </ProtoGroup>
+      <ProtoGroup label="Jump to a scenario" hint="Each one maps to a theme of the user feedback.">
+        {SCENARIOS.map((sc) => <ProtoAction key={sc.id} onClick={() => jump(sc.id)}>{sc.label} · {sc.theme}</ProtoAction>)}
+      </ProtoGroup>
+      <ProtoGroup label="Display">
+        <ProtoToggle label="Dark mode" checked={s.theme === "dark"} onChange={(v) => s.setTheme(v ? "dark" : "light")} />
+        <ProtoToggle label="Desktop notifications (asks the browser)" checked={s.desktopNotifs} onChange={(v) => void s.setDesktopNotifs(v)} />
+        <ProtoToggle label="Contact panel" checked={s.panelOpen} onChange={s.setPanelOpen} />
+      </ProtoGroup>
+    </ProtoPanelSection>
   );
 }
 
-function Group({ title, hint, children }: { title: string; hint?: string; children: React.ReactNode }) {
-  return (
-    <section className="flex flex-col gap-base">
-      <div className="flex flex-col">
-        <h3 className="text-base leading-base font-semibold text-[var(--core-text-main-primary)]">{title}</h3>
-        {hint && <span className="text-sm leading-sm text-[var(--core-text-main-tertiary)]">{hint}</span>}
-      </div>
-      {children}
-    </section>
-  );
-}
+const LOT_LABEL: Record<number, string> = {
+  0: "Prod",
+  1: "Lot 1 · Trust",
+  2: "Lot 2 · Reply without Gmail",
+  3: "Lot 3 · Triage",
+  4: "Lot 4 · All messages",
+  5: "Lot 5 · Team",
+  6: "Lot 6 · AI",
+};

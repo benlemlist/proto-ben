@@ -28,13 +28,6 @@ function Layout() {
   const scroller = useRef<HTMLDivElement>(null);
   useEffect(() => { document.title = protoTitle(list ? list.title : "People database"); }, [list]);
   useEffect(() => { scroller.current?.scrollTo({ top: 0 }); }, [s.openListId]);
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.key.toLowerCase() === "k") { e.preventDefault(); s.setCommandsOpen(!s.commandsOpen); }
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [s]);
 
   return (
     <div className="relative flex h-full min-h-0 bg-[var(--core-bg-main-primary)]">
@@ -67,9 +60,6 @@ function Layout() {
       <PrefsModal />
       <ProtoCommands />
 
-      <button type="button" onClick={() => s.setCommandsOpen(true)} className="absolute right-lg bottom-lg z-30" title="Proto commands (⌘⇧K)">
-        <Badge type="indigo" size="md">Proto · ⌘⇧K</Badge>
-      </button>
       <div className="pointer-events-none fixed right-xl bottom-[96px] z-[60] flex w-[380px] flex-col gap-base">
         {s.toasts.map((t) => (
           <div key={t.id} className="pointer-events-auto">

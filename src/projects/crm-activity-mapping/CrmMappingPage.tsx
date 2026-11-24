@@ -4,11 +4,11 @@
 // Shell = the prod settings full modal; CRM detail tabs mirror lemapp/client/settings/react/crm/crm-detail/crm-detail.tsx.
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { Button, EmptyState, InfoMessage, RadioGroup, RadioGroupItem, Tabs, TabList, TabTrigger } from "@l3mpire/ui";
-import { faXmarkOutline, faStarsOutline, faLinkOutline } from "@l3mpire/icons";
+import { Button, EmptyState, InfoMessage, Tabs, TabList, TabTrigger } from "@l3mpire/ui";
+import { faXmarkOutline, faStarsOutline, faArrowUpRightFromSquareOutline } from "@l3mpire/icons";
 import { SettingsModal } from "../../components/settings/SettingsModal";
 import { protoTitle } from "../../lib/proto-identity";
-import { ProtoPanelSection } from "../../lib/proto-panel";
+import { ProtoPanelSection, ProtoGroup, ProtoChoice, ProtoAction } from "../../lib/proto-panel";
 import { ACTIVITIES, EDOUARD_PROTO, LEGACY, NATURAL, objectOf, type Activity, type Mapping, type ObjectId } from "./data";
 import { FieldMappingTab } from "./components/FieldMappingTab";
 import { ActivitiesTab } from "./components/ActivitiesTab";
@@ -88,16 +88,13 @@ export default function CrmMappingPage() {
         </div>
       </div>
 
-      <ProtoPanelSection title="CRM activity mapping">
-        <div className="flex flex-col gap-base">
-          <span className="text-sm leading-sm text-[var(--core-text-main-tertiary)]">Team</span>
-          <RadioGroup value={team} onValueChange={(v) => reset(v as Team)}>
-            <RadioGroupItem value="new" label="New team (natural values)" />
-            <RadioGroupItem value="existing" label="Existing team (today's titles)" />
-          </RadioGroup>
-        </div>
-        <Button appearance="outlined" intent="brand" size="sm" onClick={() => reset(team)}>Reset the mapping</Button>
-        <Button appearance="ghost" intent="brand" size="sm" leftIcon={faLinkOutline} onClick={() => window.open(EDOUARD_PROTO, "_blank")}>Compare with Edouard's proto</Button>
+      <ProtoPanelSection title="CRM activity mapping" onReset={() => reset(team)}>
+        <ProtoGroup label="Team">
+          <ProtoChoice<Team> value={team} onChange={reset} options={[{ value: "new", label: "New team (natural values)" }, { value: "existing", label: "Existing team (today's titles)" }]} />
+        </ProtoGroup>
+        <ProtoGroup label="Compare">
+          <ProtoAction icon={faArrowUpRightFromSquareOutline} href={EDOUARD_PROTO}>Edouard's proto</ProtoAction>
+        </ProtoGroup>
       </ProtoPanelSection>
     </SettingsModal>
   );

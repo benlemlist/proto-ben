@@ -26,13 +26,6 @@ export default function SignalsPage() {
 function Layout() {
   const s = useSig();
   useEffect(() => { document.title = protoTitle("Signals"); }, []);
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.key.toLowerCase() === "k") { e.preventDefault(); s.setCommandsOpen(!s.commandsOpen); }
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [s]);
 
   const newCount = s.signals.filter((x) => x.status === "new").length;
 
@@ -58,9 +51,6 @@ function Layout() {
       <SignalPanel />
       <ProtoCommands />
 
-      <button type="button" onClick={() => s.setCommandsOpen(true)} className="absolute bottom-lg left-lg z-30" title="Proto commands (⌘⇧K)">
-        <Badge type="indigo" size="md">Proto · ⌘⇧K</Badge>
-      </button>
       <div className="pointer-events-none fixed right-xl bottom-[96px] z-[60] flex w-[380px] flex-col gap-base">
         {s.toasts.map((t) => (
           <div key={t.id} className="pointer-events-auto">

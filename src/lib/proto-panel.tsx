@@ -9,7 +9,8 @@
 // Corner and folded state are remembered per browser (localStorage).
 import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
-import { Icon, faGripDotsVerticalOutline, faSlidersOutline, faChevronDownOutline, faChevronUpOutline } from "@l3mpire/icons";
+import { Checkbox, Link, RadioGroup, RadioGroupItem } from "@l3mpire/ui";
+import { Icon, faGripDotsVerticalOutline, faSlidersOutline, faChevronDownOutline, faChevronUpOutline, faRefreshOutline, type IconDefinition } from "@l3mpire/icons";
 
 type Corner = "top-left" | "top-right" | "bottom-left" | "bottom-right";
 
@@ -41,7 +42,7 @@ const PanelContext = createContext<Ctx | null>(null);
 export function ProtoPanelProvider({ children }: { children: ReactNode }) {
   const [slot, setSlot] = useState<HTMLDivElement | null>(null);
   const [count, setCount] = useState(0);
-  const [prefs, setPrefs] = useState<PanelPrefs>(loadPrefs);
+  const [prefs, setPrefs] = useState<PanelPrefs>(() => { const p = loadPrefs(); return new URLSearchParams(window.location.search).has("proto") ? { ...p, folded: false } : p; });
   // While dragging: the panel's top-left point (px) and the corner it will snap to.
   const [drag, setDrag] = useState<{ x: number; y: number; w: number; h: number; target: Corner } | null>(null);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -50,6 +51,18 @@ export function ProtoPanelProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs)); } catch { /* ignore */ }
   }, [prefs]);
+
+  // ⌘⇧K / Ctrl+Shift+K opens or folds the panel on every page; `?proto` in the URL opens it.
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        setPrefs((p) => ({ ...p, folded: !p.folded }));
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
 
   const register = useCallback(() => {
     setCount((c) => c + 1);
@@ -130,24 +143,86 @@ export function ProtoPanelProvider({ children }: { children: ReactNode }) {
 
         <div
           ref={setSlot}
-          className={`${prefs.folded ? "hidden" : "flex"} ${isTop ? "mt-xs" : "mb-xs"} max-h-[calc(100vh-120px)] w-[280px] flex-col gap-lg overflow-auto rounded-lg border border-[var(--core-border-main-primary)] bg-[var(--core-bg-main-primary)] p-lg text-[var(--core-text-main-primary)] shadow-lg`}
+          className={`${prefs.folded ? "hidden" : "flex"} ${isTop ? "mt-xs" : "mb-xs"} max-h-[calc(100vh-120px)] w-[300px] flex-col gap-xl overflow-auto rounded-lg border border-[var(--core-border-main-primary)] bg-[var(--core-bg-main-primary)] p-lg text-[var(--core-text-main-primary)] shadow-lg`}
         />
       </div>
     </PanelContext.Provider>
   );
 }
 
-/** A block of options for the current page, shown in the floating proto panel. */
-export function ProtoPanelSection({ title, children }: { title: string; children: ReactNode }) {
+// ── The panel's vocabulary. Every feature builds its controls from these, so the panel
+// looks and behaves the same from one feature to the next:
+//   ProtoPanelSection  one per page: the feature's name, its groups, then « Reset data » last
+//   ProtoGroup         a labelled block (label + optional hint)
+//   ProtoChoice        one value among several (radio)
+//   ProtoToggle        on / off (checkbox)
+//   ProtoAction        a one-shot command or a link (brand link, one per line)
+
+/** The page's block in the floating proto panel. `onReset` adds the standard « Reset data » at the bottom. */
+export function ProtoPanelSection({ title, onReset, resetLabel = "Reset data", children }: {
+  title: string; onReset?: () => void; resetLabel?: string; children: ReactNode;
+}) {
   const ctx = useContext(PanelContext);
   const register = ctx?.register;
   useEffect(() => register?.(), [register]);
   if (!ctx?.slot) return null;
   return createPortal(
-    <section className="flex flex-col gap-md">
-      <h3 className="text-xs leading-xs font-semibold tracking-wide text-[var(--core-text-main-tertiary)] uppercase">{title}</h3>
+    <section className="flex flex-col gap-xl">
+      <h3 className="text-base leading-base font-semibold text-[var(--core-text-main-primary)]">{title}</h3>
       {children}
+      {onReset && (
+        <div className="border-t border-[var(--core-border-main-subtle)] pt-lg">
+          <ProtoAction icon={faRefreshOutline} intent="alert" onClick={onReset}>{resetLabel}</ProtoAction>
+        </div>
+      )}
     </section>,
     ctx.slot,
+  );
+}
+
+export function ProtoGroup({ label, hint, children }: { label: string; hint?: string; children: ReactNode }) {
+  return (
+    <div className="flex flex-col gap-base">
+      <div className="flex flex-col gap-2xs">
+        <span className="text-xs leading-xs font-semibold tracking-wide text-[var(--core-text-main-tertiary)] uppercase">{label}</span>
+        {hint && <span className="text-sm leading-sm text-[var(--core-text-main-tertiary)]">{hint}</span>}
+      </div>
+      <div className="flex flex-col gap-sm">{children}</div>
+    </div>
+  );
+}
+
+export function ProtoChoice<T extends string>({ value, onChange, options }: {
+  value: T; onChange: (v: T) => void; options: { value: T; label: string }[];
+}) {
+  return (
+    <RadioGroup value={value} onValueChange={(v) => onChange(v as T)}>
+      {options.map((o) => <RadioGroupItem key={o.value} value={o.value} label={o.label} />)}
+    </RadioGroup>
+  );
+}
+
+export function ProtoToggle({ label, checked, onChange, disabled }: {
+  label: string; checked: boolean; onChange: (v: boolean) => void; disabled?: boolean;
+}) {
+  return <Checkbox label={label} checked={checked} disabled={disabled} onCheckedChange={(v) => onChange(v === true)} />;
+}
+
+export function ProtoAction({ onClick, href, icon, intent = "brand", children }: {
+  onClick?: () => void; href?: string; icon?: IconDefinition; intent?: "brand" | "alert"; children: ReactNode;
+}) {
+  return (
+    <Link
+      intent={intent}
+      size="sm"
+      leftIcon={icon}
+      className="self-start text-left"
+      href={href ?? "#"}
+      target={href ? "_blank" : undefined}
+      rel={href ? "noreferrer" : undefined}
+      onClick={(e) => { if (!href) e.preventDefault(); onClick?.(); }}
+    >
+      {children}
+    </Link>
   );
 }

@@ -1,6 +1,6 @@
 // Accounts monitoring options in the floating proto panel: V1 (Maxime L, Figma) ↔ V2 (Ben) + scenarios.
-import { Link, RadioGroup, RadioGroupItem } from "@l3mpire/ui";
-import { ProtoPanelSection } from "../../../lib/proto-panel";
+import { faBoltOutline } from "@l3mpire/icons";
+import { ProtoPanelSection, ProtoGroup, ProtoChoice, ProtoAction } from "../../../lib/proto-panel";
 import { useMonitoring, type Version } from "../store";
 
 const NOTE: Record<Version, string> = {
@@ -10,25 +10,21 @@ const NOTE: Record<Version, string> = {
 
 export function VersionPanel() {
   const s = useMonitoring();
-  const act = (fn: () => void) => (e: React.MouseEvent) => { e.preventDefault(); fn(); };
   return (
-    <ProtoPanelSection title="Accounts monitoring · version">
-      <RadioGroup value={s.version} onValueChange={(v: string) => s.setVersion(v as Version)}>
-        <RadioGroupItem value="v1" label="V1 · Maxime L (Figma)" />
-        <RadioGroupItem value="v2" label="V2 · Ben" />
-      </RadioGroup>
-      <span className="text-sm leading-sm text-[var(--core-text-main-tertiary)]">{NOTE[s.version]}</span>
-      <div className="flex flex-col items-start gap-xs">
+    <ProtoPanelSection title="Accounts list monitoring" onReset={s.reset}>
+      <ProtoGroup label="Version" hint={NOTE[s.version]}>
+        <ProtoChoice<Version> value={s.version} onChange={s.setVersion} options={[{ value: "v1", label: "V1 · Maxime L (Figma)" }, { value: "v2", label: "V2 · Ben" }]} />
+      </ProtoGroup>
+      <ProtoGroup label="Simulate">
         {s.version === "v2" ? (
           <>
-            <Link intent="brand" size="sm" href="#" onClick={act(() => s.startRun("list", "tier1"))}>Monitor “Tier 1 accounts”</Link>
-            <Link intent="brand" size="sm" href="#" onClick={act(s.simulateSignals)}>Next morning: first signals found</Link>
+            <ProtoAction icon={faBoltOutline} onClick={() => s.startRun("list", "tier1")}>Monitor “Tier 1 accounts”</ProtoAction>
+            <ProtoAction icon={faBoltOutline} onClick={s.simulateSignals}>Next morning: first signals found</ProtoAction>
           </>
         ) : (
-          <Link intent="brand" size="sm" href="#" onClick={act(s.openV1)}>Open the agent panel</Link>
+          <ProtoAction icon={faBoltOutline} onClick={s.openV1}>Open the agent panel</ProtoAction>
         )}
-        <Link intent="neutral" size="sm" href="#" onClick={act(s.reset)}>Reset data</Link>
-      </div>
+      </ProtoGroup>
     </ProtoPanelSection>
   );
 }

@@ -1,16 +1,12 @@
-// Hidden proto commands (⌘⇧K or ?proto): company profile, first open (lazy generation), today's signals, empty signals, panel, dark mode, reset.
+// Proto controls of PeopleDB suggested lists, in the floating proto panel (⌘⇧K). Also `window.proto` in the console.
 import { useEffect } from "react";
-import { Modal, ModalContent, ModalHeader, ModalTitle, ModalDescription, ModalBody, ModalFooter, Button, Switch } from "@l3mpire/ui";
+import { ProtoPanelSection, ProtoGroup, ProtoChoice, ProtoToggle, ProtoAction } from "../../../lib/proto-panel";
+import { faBoltOutline } from "@l3mpire/icons";
 import { usePdb } from "../store";
 import { PROFILES } from "../data";
 
 export function ProtoCommands() {
   const s = usePdb();
-
-  useEffect(() => {
-    if (new URLSearchParams(window.location.search).has("proto")) s.setCommandsOpen(true);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   useEffect(() => {
     (window as unknown as { proto: unknown }).proto = {
@@ -33,47 +29,20 @@ export function ProtoCommands() {
     };
   });
 
-  const close = () => s.setCommandsOpen(false);
-
   return (
-    <Modal open={s.commandsOpen} onOpenChange={s.setCommandsOpen}>
-      <ModalContent size="sm">
-        <ModalHeader onClose={close}>
-          <ModalTitle>Proto commands</ModalTitle>
-          <ModalDescription>Hidden from users. ⌘ ⇧ K to toggle · <code>window.proto.help()</code> · <code>?list=…</code> opens a list.</ModalDescription>
-        </ModalHeader>
-        <ModalBody>
-          <div className="flex flex-col gap-2xl">
-            <section className="flex flex-col gap-base">
-              <span className="text-base leading-base font-semibold">Company profile</span>
-              <div className="flex flex-wrap gap-xs">
-                {PROFILES.map((p) => (
-                  <Button key={p.id} appearance={s.profileId === p.id ? "solid" : "outlined"} intent="brand" size="xs" onClick={() => { close(); s.setProfile(p.id); }}>
-                    {p.company} · {p.pitch.split(" for ")[0]}
-                  </Button>
-                ))}
-              </div>
-            </section>
-            <section className="flex flex-col gap-base">
-              <span className="text-base leading-base font-semibold">Scenarios</span>
-              <div className="flex flex-wrap gap-xs">
-                <Button appearance="outlined" intent="brand" size="xs" onClick={() => { close(); s.firstOpen(); }}>First open (lists generating)</Button>
-                <Button appearance="outlined" intent="brand" size="xs" onClick={() => { close(); s.deliverFresh(); }}>Next morning: new signals</Button>
-              </div>
-              <Switch label="No fresh signal today" checked={s.signalsEmpty} onCheckedChange={s.setSignalsEmpty} />
-            </section>
-            <section className="flex flex-col gap-base">
-              <span className="text-base leading-base font-semibold">Display</span>
-              <Switch label="lemAgent panel" checked={s.agentPanel} onCheckedChange={s.setAgentPanel} />
-              <Switch label="Dark mode" checked={s.theme === "dark"} onCheckedChange={(v) => s.setTheme(v ? "dark" : "light")} />
-            </section>
-          </div>
-        </ModalBody>
-        <ModalFooter infoMessage="Saved in this browser">
-          <Button appearance="outlined" intent="alert" size="md" onClick={() => { s.reset(); close(); }}>Reset data</Button>
-          <Button appearance="solid" intent="brand" size="md" onClick={close}>Close</Button>
-        </ModalFooter>
-      </ModalContent>
-    </Modal>
+    <ProtoPanelSection title="PeopleDB suggested lists" onReset={s.reset}>
+      <ProtoGroup label="Company profile">
+        <ProtoChoice value={s.profileId} onChange={s.setProfile} options={PROFILES.map((p) => ({ value: p.id, label: `${p.company} · ${p.pitch.split(" for ")[0]}` }))} />
+      </ProtoGroup>
+      <ProtoGroup label="Simulate">
+        <ProtoAction icon={faBoltOutline} onClick={s.firstOpen}>First open (lists generating)</ProtoAction>
+        <ProtoAction icon={faBoltOutline} onClick={s.deliverFresh}>Next morning: new signals</ProtoAction>
+        <ProtoToggle label="No fresh signal today" checked={s.signalsEmpty} onChange={s.setSignalsEmpty} />
+      </ProtoGroup>
+      <ProtoGroup label="Display">
+        <ProtoToggle label="lemAgent panel" checked={s.agentPanel} onChange={s.setAgentPanel} />
+        <ProtoToggle label="Dark mode" checked={s.theme === "dark"} onChange={(v) => s.setTheme(v ? "dark" : "light")} />
+      </ProtoGroup>
+    </ProtoPanelSection>
   );
 }

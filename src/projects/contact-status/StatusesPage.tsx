@@ -2,10 +2,9 @@
 // Shell = the prod settings full modal (src/components/settings/SettingsModal.tsx).
 // Inside: data management tabs | object cards | lifecycle | events | save bar.
 import { useEffect, useState } from "react";
-import { Badge, Button, Toast, EmptyState, cn } from "@l3mpire/ui";
+import { Button, Toast, EmptyState, cn } from "@l3mpire/ui";
 import { faBuildingsOutline, faCoinOutline, faStarsOutline } from "@l3mpire/icons";
 import { ContactStatusProvider, useCS } from "./store";
-import { SCENARIOS } from "./data";
 import { LifecycleCard } from "./components/LifecycleCard";
 import { EventsCard } from "./components/EventsCard";
 import { FeatureSwitch } from "./components/FeatureSwitch";
@@ -38,22 +37,10 @@ function Layout() {
   const [saveOpen, setSaveOpen] = useState(false);
 
   useEffect(() => { document.title = protoTitle("Contact status"); }, []);
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.key.toLowerCase() === "k") { e.preventDefault(); s.setCommandsOpen(!s.commandsOpen); }
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [s]);
-
-  const scenario = SCENARIOS.find((x) => x.id === s.scenario)!;
   const tabLabel = DATA_MANAGEMENT_TABS.find((t) => t.id === tab)?.label ?? tab;
 
   const overlays = (
     <>
-      <button type="button" onClick={() => s.setCommandsOpen(true)} className={cn("absolute left-2xl z-30", s.dirty ? "bottom-[80px]" : "bottom-2xl")} title="Proto: team shown (⌘⇧K)">
-        <Badge type="indigo" size="md">{scenario.label}</Badge>
-      </button>
       <div className="pointer-events-none absolute right-2xl bottom-[96px] z-40 flex w-[380px] flex-col gap-base">
         {s.toasts.map((t) => (
           <div key={t.id} className="pointer-events-auto">
