@@ -8,7 +8,7 @@ import {
 import { faPenOutline, faListCheckOutline, faTextOutline } from "@l3mpire/icons";
 import { LEMLIST_FIELDS, LEMLIST_GROUPS, isCompatible, lemlistField, type SfField, type Source } from "../data";
 
-function sourceLabel(source: Source, activityCount: number): string | undefined {
+function sourceLabel(source: Source): string | undefined {
   switch (source.kind) {
     case "field": return lemlistField(source.field)?.label;
     case "fixed": return "Fixed value";
@@ -20,7 +20,7 @@ function sourceLabel(source: Source, activityCount: number): string | undefined 
   }
 }
 
-export function ValuePicker({ sf, source, activityCount, onChange, disabled }: {
+export function ValuePicker({ sf, source, onChange, disabled }: {
   sf: SfField; source: Source; activityCount: number; onChange: (s: Source) => void; disabled?: boolean;
 }) {
   const [open, setOpen] = useState(false);
@@ -32,7 +32,7 @@ export function ValuePicker({ sf, source, activityCount, onChange, disabled }: {
   return (
     <Select
       size="md"
-      value={sourceLabel(source, activityCount)}
+      value={sourceLabel(source)}
       placeholder="Choose a value"
       icon={icon}
       isOpen={open}

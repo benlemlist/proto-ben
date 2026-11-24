@@ -2,16 +2,63 @@
 // contact did can move a contact status; team actions and technical failures never do.
 import { Button, Badge, InfoMessage, Tooltip, TooltipTrigger, TooltipContent, TooltipProvider, Select, cn } from "@l3mpire/ui";
 import { Icon, faBoltOutline, faStarsOutline, faUserOutline, faPlayOutline, faCircleSmallSolid, faChevronDownOutline, faChevronUpOutline } from "@l3mpire/icons";
-import { useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { useCS } from "../store";
 import { MOVING_OUTCOMES, STILL_OUTCOMES, CRM_FIELDS, suggestFor, type Outcome } from "../data";
 import { Card, Muted, StatusSelect } from "./shared";
 
-// Settings page: every event is shown, no "+N" overflow, so the admin sees exactly what a row covers.
+const MAX_LINES = 3;
+
+// At most 3 lines of event badges; the rest folds into a "+N" badge whose tooltip lists them one per line.
+// A hidden copy of every badge measures where lines break, so the cut follows the column width.
 function EventChips({ events }: { events: string[] }) {
+  const measureRef = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(events.length);
+
+  useLayoutEffect(() => {
+    const box = measureRef.current;
+    if (!box) return;
+    const compute = () => {
+      const chips = Array.from(box.querySelectorAll<HTMLElement>("[data-chip]"));
+      const plus = box.querySelector<HTMLElement>("[data-plus]");
+      const tops = [...new Set(chips.map((c) => c.offsetTop))].sort((a, b) => a - b);
+      if (tops.length <= MAX_LINES || !plus) { setVisible(events.length); return; }
+      const lastTop = tops[MAX_LINES - 1];
+      const gap = parseFloat(getComputedStyle(box).columnGap) || 0;
+      let fit = chips.filter((c) => c.offsetTop < lastTop).length;
+      // On the last line, keep a chip only if the "+N" badge still fits after it.
+      for (const c of chips.filter((c) => c.offsetTop === lastTop)) {
+        if (c.offsetLeft + c.offsetWidth + gap + plus.offsetWidth > box.clientWidth) break;
+        fit++;
+      }
+      setVisible(fit);
+    };
+    compute();
+    const ro = new ResizeObserver(compute);
+    ro.observe(box);
+    return () => ro.disconnect();
+  }, [events]);
+
+  const hidden = events.slice(visible);
   return (
-    <div className="flex flex-wrap gap-xs">
-      {events.map((e) => <Badge key={e} type="neutral" size="sm">{e}</Badge>)}
+    <div className="relative min-w-0">
+      <div ref={measureRef} aria-hidden className="invisible absolute inset-x-0 top-0 flex flex-wrap gap-xs">
+        {events.map((e) => <span key={e} data-chip><Badge type="neutral" size="sm">{e}</Badge></span>)}
+        <span data-plus><Badge type="neutral" size="sm">+{events.length}</Badge></span>
+      </div>
+      <div className="flex flex-wrap gap-xs">
+        {events.slice(0, visible).map((e) => <Badge key={e} type="neutral" size="sm">{e}</Badge>)}
+        {hidden.length > 0 && (
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <span tabIndex={0} className="cursor-default"><Badge type="neutral" size="sm">+{hidden.length}</Badge></span>
+            </TooltipTrigger>
+            <TooltipContent side="bottom" className="max-w-[260px]">
+              <ul className="flex flex-col">{hidden.map((e) => <li key={e}>{e}</li>)}</ul>
+            </TooltipContent>
+          </Tooltip>
+        )}
+      </div>
     </div>
   );
 }
