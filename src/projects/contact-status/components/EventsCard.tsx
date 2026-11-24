@@ -43,15 +43,15 @@ function EventChips({ events }: { events: string[] }) {
   return (
     <div className="relative min-w-0">
       <div ref={measureRef} aria-hidden className="invisible absolute inset-x-0 top-0 flex flex-wrap gap-xs">
-        {events.map((e) => <span key={e} data-chip><Badge type="neutral" size="sm">{e}</Badge></span>)}
-        <span data-plus><Badge type="neutral" size="sm">+{events.length}</Badge></span>
+        {events.map((e) => <span key={e} data-chip className="inline-flex"><Badge type="neutral" size="sm">{e}</Badge></span>)}
+        <span data-plus className="inline-flex"><Badge type="neutral" size="sm">+{events.length}</Badge></span>
       </div>
       <div className="flex flex-wrap gap-xs">
         {events.slice(0, visible).map((e) => <Badge key={e} type="neutral" size="sm">{e}</Badge>)}
         {hidden.length > 0 && (
           <Tooltip>
             <TooltipTrigger asChild>
-              <span tabIndex={0} className="cursor-default"><Badge type="neutral" size="sm">+{hidden.length}</Badge></span>
+              <span tabIndex={0} className="inline-flex cursor-default"><Badge type="neutral" size="sm">+{hidden.length}</Badge></span>
             </TooltipTrigger>
             <TooltipContent side="bottom" className="max-w-[260px]">
               <ul className="flex flex-col">{hidden.map((e) => <li key={e}>{e}</li>)}</ul>
